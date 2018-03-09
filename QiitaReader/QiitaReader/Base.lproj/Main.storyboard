@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G19009" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G19009" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="OfO-ao-EPV">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -60,7 +60,7 @@
             </objects>
             <point key="canvasLocation" x="1406" y="-53"/>
         </scene>
-        <!--Item-->
+        <!--新着-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ShinchakuViewController" customModule="QiitaReader" customModuleProvider="target" sceneMemberID="viewController">
@@ -79,27 +79,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TGU-lW-LgQ">
-                                <frame key="frameInset" minX="56" minY="140" width="31" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="新着"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9CW-ND-t0U">
-                                <frame key="frameInset" minX="156" minY="140" width="62" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="トレンド"/>
-                                <connections>
-                                    <segue destination="t6n-9h-mT9" kind="presentation" id="bBh-qs-Xzn"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5fu-aH-cBc">
-                                <frame key="frameInset" minX="263" minY="140" width="77" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="あとで読む"/>
-                                <connections>
-                                    <segue destination="maU-44-qF5" kind="presentation" id="aRv-wT-hmi"/>
-                                </connections>
-                            </button>
                             <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HxM-65-1kh">
                                 <frame key="frameInset" minX="12" minY="73" height="44" maxX="12"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -112,11 +91,11 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="vpP-od-jGM"/>
+                    <tabBarItem key="tabBarItem" title="新着" image="ic_new_releases_white.png" id="vpP-od-jGM"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="605.60000000000002" y="824.43778110944538"/>
+            <point key="canvasLocation" x="1544.8" y="824.43778110944538"/>
         </scene>
         <!--Reader View Controller-->
         <scene sceneID="xet-bz-58e">
@@ -161,7 +140,7 @@
             </objects>
             <point key="canvasLocation" x="1406" y="1809"/>
         </scene>
-        <!--Trend View Controller-->
+        <!--トレンド-->
         <scene sceneID="VUz-gS-Viu">
             <objects>
                 <viewController id="t6n-9h-mT9" customClass="TrendViewController" customModule="QiitaReader" customModuleProvider="target" sceneMemberID="viewController">
@@ -180,45 +159,25 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Xt-wL-ICY">
-                                <frame key="frameInset" minX="156" minY="136" width="62" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="トレンド"/>
-                            </button>
                             <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5hE-xr-YCo">
                                 <frame key="frameInset" minX="12" minY="72" height="44" maxX="12"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BlB-h7-wMV">
-                                <frame key="frameInset" minX="43" minY="136" width="31" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="新着"/>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" id="kIj-U4-XC9"/>
-                                </connections>
-                            </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="owk-Lh-jUT">
                                 <frame key="frameInset" minY="191" width="375" height="476"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GyT-Nd-Cl8">
-                                <frame key="frameInset" minX="269" minY="136" width="77" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="あとで読む"/>
-                                <connections>
-                                    <segue destination="maU-44-qF5" kind="presentation" id="ZvK-On-md9"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" tag="1" title="トレンド" image="ic_trending_up_white.png" id="HR5-CY-gSx"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VSP-3c-1VN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1407" y="824"/>
+            <point key="canvasLocation" x="2344.8000000000002" y="823.53823088455783"/>
         </scene>
-        <!--Atodemiru View Controller-->
+        <!--あとで読む-->
         <scene sceneID="aIv-jo-jyk">
             <objects>
                 <viewController id="maU-44-qF5" customClass="AtodemiruViewController" customModule="QiitaReader" customModuleProvider="target" sceneMemberID="viewController">
@@ -246,39 +205,38 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XSb-Wn-95w">
-                                <frame key="frameInset" minX="156" minY="134" width="62" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="トレンド"/>
-                                <connections>
-                                    <segue destination="t6n-9h-mT9" kind="presentation" id="p5P-nJ-pnv"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BUx-MQ-fpv">
-                                <frame key="frameInset" minX="44" minY="134" width="31" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="新着"/>
-                                <connections>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" id="Y79-Qg-Cr9"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dtu-mK-O1Z">
-                                <frame key="frameInset" minX="269" minY="134" width="77" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="あとで読む"/>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <tabBarItem key="tabBarItem" tag="3" title="あとで読む" image="ic_access_time_white.png" id="qqi-EW-2e1"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="86w-7Q-fIa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2183" y="824"/>
+            <point key="canvasLocation" x="3120.8000000000002" y="823.53823088455783"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="29A-dS-g47">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="OfO-ao-EPV" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="jgg-EJ-YtJ">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="oTC-7H-iyQ"/>
+                        <segue destination="t6n-9h-mT9" kind="relationship" relationship="viewControllers" id="6Ou-CI-dvg"/>
+                        <segue destination="maU-44-qF5" kind="relationship" relationship="viewControllers" id="KjO-pk-qLj"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hV8-no-Q8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="605.60000000000002" y="824.43778110944538"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="aRv-wT-hmi"/>
-        <segue reference="Y79-Qg-Cr9"/>
-        <segue reference="bBh-qs-Xzn"/>
-    </inferredMetricsTieBreakers>
+    <resources>
+        <image name="ic_access_time_white.png" width="24" height="24"/>
+        <image name="ic_new_releases_white.png" width="24" height="24"/>
+        <image name="ic_trending_up_white.png" width="24" height="24"/>
+    </resources>
 </document>
