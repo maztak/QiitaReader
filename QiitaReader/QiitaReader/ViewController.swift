@@ -16,6 +16,10 @@ class ViewController: UIViewController {
   //      let requestUrl = "https://qiita.com/api/v2/items"
         //新着記事データをテーブルビューに表示
     }
+    
+    override func viewWillAppear() {
+        
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
