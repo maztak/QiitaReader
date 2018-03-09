@@ -60,7 +60,7 @@
             </objects>
             <point key="canvasLocation" x="1406" y="-53"/>
         </scene>
-        <!--新着-->
+        <!--Shinchaku View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ShinchakuViewController" customModule="QiitaReader" customModuleProvider="target" sceneMemberID="viewController">
@@ -72,44 +72,54 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Qiita Reader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REv-zM-tfX">
-                                <frame key="frameInset" minX="16" minY="20" width="147" height="53"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HxM-65-1kh">
-                                <frame key="frameInset" minX="12" minY="73" height="44" maxX="12"/>
+                                <frame key="frameInset" minX="12" minY="131" height="44" maxX="12"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Y81-L6-Ul2">
                                 <frame key="frameInset" minY="191" width="375" height="476"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hgV-ZB-nWu">
+                                        <rect key="frame" x="133" y="197" width="108" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="新着記事詳細へ"/>
+                                        <connections>
+                                            <segue destination="Brp-Of-eWK" kind="push" id="TI2-YY-tuA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                             </scrollView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Qiita Reader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REv-zM-tfX">
+                                <frame key="frameInset" minX="16" minY="64" width="147" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="新着" image="ic_new_releases_white.png" id="vpP-od-jGM"/>
+                    <navigationItem key="navigationItem" id="wnm-NR-4mF"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1544.8" y="824.43778110944538"/>
+            <point key="canvasLocation" x="2084" y="1666.4167916041981"/>
         </scene>
-        <!--Reader View Controller-->
-        <scene sceneID="xet-bz-58e">
+        <!--View Controller-->
+        <scene sceneID="eKH-uS-F0e">
             <objects>
-                <viewController id="xnr-NL-5iq" customClass="ReaderViewController" customModule="QiitaReader" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Brp-Of-eWK" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="al3-i8-CKF"/>
-                        <viewControllerLayoutGuide type="bottom" id="bGJ-RP-FwY"/>
+                        <viewControllerLayoutGuide type="top" id="Uhx-vx-4qc"/>
+                        <viewControllerLayoutGuide type="bottom" id="OQc-ty-TVE"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="oYX-iC-loB">
+                    <view key="view" contentMode="scaleToFill" id="pE1-1V-8M4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="FEm-2v-htb">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bn9-E3-2CF">
                                 <frame key="frameInset" minY="151" width="375" height="516"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -117,30 +127,74 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tjB-9H-G76">
-                                <frame key="frameInset" minX="-16" minY="28" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="＜戻る" id="aUq-u5-Hbw">
-                                        <barButtonItem key="rightBarButtonItem" style="plain" id="pmd-1O-V7X">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Loq-C1-E5Z">
-                                                <rect key="frame" x="285" y="7" width="86" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="あとで読む"/>
-                                            </button>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="wzT-G7-0qV"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Aqm-1r-veL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dFT-0X-6n3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1406" y="1809"/>
+            <point key="canvasLocation" x="2084" y="2490"/>
         </scene>
-        <!--トレンド-->
+        <!--View Controller-->
+        <scene sceneID="Y9s-Ve-mlZ">
+            <objects>
+                <viewController id="cK8-7G-DL5" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uRd-0C-XK9"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Rn-9L-lS4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CB3-NR-DQA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="jEn-dN-ity">
+                                <frame key="frameInset" minY="151" width="375" height="516"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="1Js-tN-073"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g4V-0A-Pmj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3070" y="2490"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="w2x-PQ-lwp">
+            <objects>
+                <viewController id="rlZ-QP-kJF" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1cA-xu-dHH"/>
+                        <viewControllerLayoutGuide type="bottom" id="abJ-HX-ANz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="e0W-hI-zXb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wFU-2O-bqU">
+                                <frame key="frameInset" minY="151" width="375" height="516"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Px0-k5-9nM"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lFK-kx-c4G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4125" y="2490"/>
+        </scene>
+        <!--Trend View Controller-->
         <scene sceneID="VUz-gS-Viu">
             <objects>
                 <viewController id="t6n-9h-mT9" customClass="TrendViewController" customModule="QiitaReader" customModuleProvider="target" sceneMemberID="viewController">
@@ -152,32 +206,42 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Qiita Reader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ky4-Pq-Ku2">
-                                <frame key="frameInset" minX="16" minY="9" width="147" height="53"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="owk-Lh-jUT">
+                                <frame key="frameInset" minY="191" width="375" height="476"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Oz-hA-AkK">
+                                        <rect key="frame" x="118" y="136" width="138" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="トレンド記事詳細へ"/>
+                                        <connections>
+                                            <segue destination="cK8-7G-DL5" kind="push" id="Gt1-yg-4Wx"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </scrollView>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5hE-xr-YCo">
+                                <frame key="frameInset" minX="12" minY="129" height="44" maxX="12"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Qiita Reader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yfd-an-fNE">
+                                <frame key="frameInset" minY="64" width="147" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5hE-xr-YCo">
-                                <frame key="frameInset" minX="12" minY="72" height="44" maxX="12"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="owk-Lh-jUT">
-                                <frame key="frameInset" minY="191" width="375" height="476"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="1" title="トレンド" image="ic_trending_up_white.png" id="HR5-CY-gSx"/>
+                    <navigationItem key="navigationItem" id="3Ta-av-0Sg"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VSP-3c-1VN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2344.8000000000002" y="823.53823088455783"/>
+            <point key="canvasLocation" x="3070" y="1666"/>
         </scene>
-        <!--あとで読む-->
+        <!--Atodemiru View Controller-->
         <scene sceneID="aIv-jo-jyk">
             <objects>
                 <viewController id="maU-44-qF5" customClass="AtodemiruViewController" customModule="QiitaReader" customModuleProvider="target" sceneMemberID="viewController">
@@ -192,14 +256,24 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0S1-80-BIq">
                                 <frame key="frameInset" minY="191" width="375" height="476"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWi-d8-KdC">
+                                        <rect key="frame" x="111" y="133" width="153" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="あとで読む記事詳細へ"/>
+                                        <connections>
+                                            <segue destination="rlZ-QP-kJF" kind="push" id="Pc9-bO-P28"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                             </scrollView>
                             <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ubd-RU-5jI">
-                                <frame key="frameInset" minX="12" minY="70" height="44" maxX="12"/>
+                                <frame key="frameInset" minX="12" minY="131" height="44" maxX="12"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Qiita Reader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kk5-Zn-IzD">
-                                <frame key="frameInset" minX="16" minY="8" width="147" height="53"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Qiita Reader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g3U-7u-i7U">
+                                <frame key="frameInset" minY="64" width="147" height="61"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -208,11 +282,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" tag="3" title="あとで読む" image="ic_access_time_white.png" id="qqi-EW-2e1"/>
+                    <navigationItem key="navigationItem" id="JIG-1h-UzZ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="86w-7Q-fIa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3120.8000000000002" y="823.53823088455783"/>
+            <point key="canvasLocation" x="4118" y="1666"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="29A-dS-g47">
@@ -224,14 +298,71 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="oTC-7H-iyQ"/>
-                        <segue destination="t6n-9h-mT9" kind="relationship" relationship="viewControllers" id="6Ou-CI-dvg"/>
-                        <segue destination="maU-44-qF5" kind="relationship" relationship="viewControllers" id="KjO-pk-qLj"/>
+                        <segue destination="abT-SE-OYE" kind="relationship" relationship="viewControllers" id="oTC-7H-iyQ"/>
+                        <segue destination="9xE-16-qxt" kind="relationship" relationship="viewControllers" id="6Ou-CI-dvg"/>
+                        <segue destination="3UT-BX-srw" kind="relationship" relationship="viewControllers" id="KjO-pk-qLj"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hV8-no-Q8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="605.60000000000002" y="824.43778110944538"/>
+            <point key="canvasLocation" x="3071" y="-222"/>
+        </scene>
+        <!--新着-->
+        <scene sceneID="YCI-Z3-5qv">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="abT-SE-OYE" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="新着" image="ic_new_releases_white.png" id="vpP-od-jGM"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="LGl-Rv-y9y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="aZD-Ic-IV1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W2z-Zm-Zhm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2084" y="824"/>
+        </scene>
+        <!--トレンド-->
+        <scene sceneID="ib8-97-Yuj">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9xE-16-qxt" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="1" title="トレンド" image="ic_trending_up_white.png" id="HR5-CY-gSx"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HBB-Gd-ric">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="t6n-9h-mT9" kind="relationship" relationship="rootViewController" id="O9a-L6-esD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="myH-Tt-KN7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3070" y="824"/>
+        </scene>
+        <!--あとで読む-->
+        <scene sceneID="ggA-1g-Ykk">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3UT-BX-srw" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" tag="3" title="あとで読む" image="ic_access_time_white.png" id="qqi-EW-2e1"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bkd-Cj-Jjz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="maU-44-qF5" kind="relationship" relationship="rootViewController" id="CGq-h0-ohp"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="coS-4h-8LL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4117.6000000000004" y="823.53823088455783"/>
         </scene>
     </scenes>
     <resources>
