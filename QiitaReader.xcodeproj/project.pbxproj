@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		916D264120566137007BC178 /* TrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916D264020566137007BC178 /* TrendViewController.swift */; };
 		B06CFC0320521EE100C55BB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CFC0220521EE100C55BB9 /* AppDelegate.swift */; };
 		B06CFC0520521EE100C55BB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CFC0420521EE100C55BB9 /* ViewController.swift */; };
 		B06CFC0820521EE100C55BB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B06CFC0620521EE100C55BB9 /* Main.storyboard */; };
 		B06CFC0A20521EE100C55BB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B06CFC0920521EE100C55BB9 /* Assets.xcassets */; };
 		B06CFC0D20521EE100C55BB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B06CFC0B20521EE100C55BB9 /* LaunchScreen.storyboard */; };
 		B06CFC442052374000C55BB9 /* AtodemiruViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CFC432052374000C55BB9 /* AtodemiruViewController.swift */; };
-		B06CFC46205237AB00C55BB9 /* TrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CFC45205237AB00C55BB9 /* TrendViewController.swift */; };
 		B06CFC48205237FF00C55BB9 /* KensakuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CFC47205237FE00C55BB9 /* KensakuViewController.swift */; };
 		B0B131E720528D78009C2BD1 /* ArticleStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B131E620528D78009C2BD1 /* ArticleStruct.swift */; };
 		B0B131E920528D82009C2BD1 /* ArticleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B131E820528D82009C2BD1 /* ArticleData.swift */; };
@@ -26,7 +26,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		B06CFBFF20521EE100C55BB9 /* QiitaReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiitaReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		916D264020566137007BC178 /* TrendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendViewController.swift; sourceTree = "<group>"; };
+		B06CFBFF20521EE100C55BB9 /* QiitaReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = QiitaReader.app; path = "/Users/hikaruwada/iOSProjects/QiitaReader/build/Debug-iphoneos/QiitaReader.app"; sourceTree = "<absolute>"; };
 		B06CFC0220521EE100C55BB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B06CFC0420521EE100C55BB9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B06CFC0720521EE100C55BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -34,7 +35,6 @@
 		B06CFC0C20521EE100C55BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B06CFC0E20521EE100C55BB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B06CFC432052374000C55BB9 /* AtodemiruViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtodemiruViewController.swift; sourceTree = "<group>"; };
-		B06CFC45205237AB00C55BB9 /* TrendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrendViewController.swift; path = ../TrendViewController.swift; sourceTree = "<group>"; };
 		B06CFC47205237FE00C55BB9 /* KensakuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KensakuViewController.swift; sourceTree = "<group>"; };
 		B0B131E620528D78009C2BD1 /* ArticleStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleStruct.swift; sourceTree = "<group>"; };
 		B0B131E820528D82009C2BD1 /* ArticleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleData.swift; sourceTree = "<group>"; };
@@ -61,16 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				B06CFC0120521EE100C55BB9 /* QiitaReader */,
-				B06CFC0020521EE100C55BB9 /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		B06CFC0020521EE100C55BB9 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				B06CFBFF20521EE100C55BB9 /* QiitaReader.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		B06CFC0120521EE100C55BB9 /* QiitaReader */ = {
@@ -78,9 +69,9 @@
 			children = (
 				B06CFC0220521EE100C55BB9 /* AppDelegate.swift */,
 				B06CFC0420521EE100C55BB9 /* ViewController.swift */,
+				916D264020566137007BC178 /* TrendViewController.swift */,
 				B06CFC0620521EE100C55BB9 /* Main.storyboard */,
 				B0C7A44220523C4A0066C01E /* ShinchakuViewController.swift */,
-				B06CFC45205237AB00C55BB9 /* TrendViewController.swift */,
 				B06CFC432052374000C55BB9 /* AtodemiruViewController.swift */,
 				B06CFC47205237FE00C55BB9 /* KensakuViewController.swift */,
 				B0C7A44B20523C740066C01E /* ReaderViewController.swift */,
@@ -142,7 +133,7 @@
 				Base,
 			);
 			mainGroup = B06CFBF620521EE000C55BB9;
-			productRefGroup = B06CFC0020521EE100C55BB9 /* Products */;
+			productRefGroup = B06CFBF620521EE000C55BB9;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -173,8 +164,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B06CFC46205237AB00C55BB9 /* TrendViewController.swift in Sources */,
 				B0B131E920528D82009C2BD1 /* ArticleData.swift in Sources */,
+				916D264120566137007BC178 /* TrendViewController.swift in Sources */,
 				B06CFC48205237FF00C55BB9 /* KensakuViewController.swift in Sources */,
 				B0C7A44C20523C740066C01E /* ReaderViewController.swift in Sources */,
 				B06CFC442052374000C55BB9 /* AtodemiruViewController.swift in Sources */,

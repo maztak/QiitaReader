@@ -15,7 +15,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //Table View　のDataSouce参照先指定
+        //Table View　のDataSouce参照先指定R
         table.dataSouce = self
         //Table Viewタップ時のdelegate先を指定
         table.delegate = self
