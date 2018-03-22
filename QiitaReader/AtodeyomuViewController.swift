@@ -1,5 +1,5 @@
 //
-//  KensakuViewController.swift
+//  AtodeyomuViewController.swift
 //  QiitaReader
 //
 //  Created by Takuya Matsuda on 2018/03/09.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class KensakuViewController: UIViewController {
+class AtodeyomuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
