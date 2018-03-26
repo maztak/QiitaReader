@@ -19,6 +19,7 @@ struct Article {
     var articleText: String
 }
 
+
 var article1 = Article (
     title: "初心者がオリジナルのiOSアプリを開発できるようになるまで",
     authorName: "justin999",
@@ -30,4 +31,13 @@ var article1 = Article (
     articleText: "私はiOSアプリのフロント側を趣味や仕事で開発しています。そんな中、時折聞かれるのが「iOSアプリってどうやって開発するの？"
 )
 
-
+var article2 = Article (
+    title: "Rails Developers Meetup 2018 スライドまとめ",
+    authorName: "dyoshimitsu",
+    authorIcon: ".../images/1473687346.jpeg",
+    tag1: "Ruby",
+    tag2: "Rails",
+    tag3: "RubyOnRails",
+    goodCnt: "137",
+    articleText: "時間 トラックA トラックB 11:10〜 安全かつ高速に進めるマイクロサービス化    Rails on Kubernetes on AWS"
+)

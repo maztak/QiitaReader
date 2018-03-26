@@ -34,15 +34,17 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルに表示する値を設定する
 //        cell.textLabel!.text = fruits[indexPath.row]
-        cell.title.text = fruits[indexPath.row]
-        cell.author.text = fruits[indexPath.row]
+//        cell.title.text = article1.title
+//        cell.author.text = article1.authorName
+            cell.title.text = fruits[indexPath.row].title
+            cell.author.text = fruits[indexPath.row].authorName
         
         return cell
     }
 
     //配列fruitsを設定
-    let fruits = ["初心者がオリジナルのiOSアプリを開発できるようになるまで", "orange", "melon", "banana", "pineapple"]
-    
+//    let fruits = ["apple", "orange", "melon", "banana", "pineapple"]
+    let fruits = [article1, article2]
 
     /*
     // MARK: - Navigation
