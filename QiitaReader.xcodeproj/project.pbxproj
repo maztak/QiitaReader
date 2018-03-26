@@ -13,6 +13,8 @@
 		B06CFC0A20521EE100C55BB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B06CFC0920521EE100C55BB9 /* Assets.xcassets */; };
 		B06CFC0D20521EE100C55BB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B06CFC0B20521EE100C55BB9 /* LaunchScreen.storyboard */; };
 		B06CFC442052374000C55BB9 /* AtodeyomuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CFC432052374000C55BB9 /* AtodeyomuViewController.swift */; };
+		B09F48652068AE6C005C0064 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B09F48632068AE6C005C0064 /* FeedTableViewCell.swift */; };
+		B09F48662068AE6C005C0064 /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B09F48642068AE6C005C0064 /* FeedTableViewCell.xib */; };
 		B0B131E920528D82009C2BD1 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B131E820528D82009C2BD1 /* SampleData.swift */; };
 		B0B131EF20529284009C2BD1 /* ic_new_releases_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B131EE20529284009C2BD1 /* ic_new_releases_white.png */; };
 		B0B131F120529296009C2BD1 /* ic_trending_up_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B131F020529296009C2BD1 /* ic_trending_up_white.png */; };
@@ -20,10 +22,12 @@
 		B0B131F52052932F009C2BD1 /* taro_150916dislike01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B0B131F42052932F009C2BD1 /* taro_150916dislike01.jpg */; };
 		B0C7A44320523C4A0066C01E /* ShinchakuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C7A44220523C4A0066C01E /* ShinchakuViewController.swift */; };
 		B0C7A44C20523C740066C01E /* ReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C7A44B20523C740066C01E /* ReaderViewController.swift */; };
+		DF703E7E063ABE29C55E34CA /* Pods_QiitaReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C4A02E07CA39BCC63173AB54 /* Pods_QiitaReader.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		916D264020566137007BC178 /* TrendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendViewController.swift; sourceTree = "<group>"; };
+		A18E41D84AE0301A0ECD3F3D /* Pods-QiitaReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiitaReader.release.xcconfig"; path = "Pods/Target Support Files/Pods-QiitaReader/Pods-QiitaReader.release.xcconfig"; sourceTree = "<group>"; };
 		B050AAFF206398DD00C6DA7C /* QiitaReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiitaReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B06CFC0220521EE100C55BB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B06CFC0720521EE100C55BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -31,6 +35,8 @@
 		B06CFC0C20521EE100C55BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B06CFC0E20521EE100C55BB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B06CFC432052374000C55BB9 /* AtodeyomuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtodeyomuViewController.swift; sourceTree = "<group>"; };
+		B09F48632068AE6C005C0064 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
+		B09F48642068AE6C005C0064 /* FeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
 		B0B131E820528D82009C2BD1 /* SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		B0B131EE20529284009C2BD1 /* ic_new_releases_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_new_releases_white.png; sourceTree = "<group>"; };
 		B0B131F020529296009C2BD1 /* ic_trending_up_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_trending_up_white.png; sourceTree = "<group>"; };
@@ -38,6 +44,8 @@
 		B0B131F42052932F009C2BD1 /* taro_150916dislike01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = taro_150916dislike01.jpg; sourceTree = "<group>"; };
 		B0C7A44220523C4A0066C01E /* ShinchakuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShinchakuViewController.swift; sourceTree = "<group>"; };
 		B0C7A44B20523C740066C01E /* ReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReaderViewController.swift; sourceTree = "<group>"; };
+		C4A02E07CA39BCC63173AB54 /* Pods_QiitaReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QiitaReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FED5F17BA31E09048AF129AA /* Pods-QiitaReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiitaReader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QiitaReader/Pods-QiitaReader.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,17 +53,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF703E7E063ABE29C55E34CA /* Pods_QiitaReader.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		67C2CB760648E5784E24D4DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C4A02E07CA39BCC63173AB54 /* Pods_QiitaReader.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B06CFBF620521EE000C55BB9 = {
 			isa = PBXGroup;
 			children = (
 				B06CFC0120521EE100C55BB9 /* QiitaReader */,
 				B050AAFF206398DD00C6DA7C /* QiitaReader.app */,
+				FE838EA26968D616BA0014A0 /* Pods */,
+				67C2CB760648E5784E24D4DA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,21 +82,32 @@
 			isa = PBXGroup;
 			children = (
 				B06CFC0220521EE100C55BB9 /* AppDelegate.swift */,
-				916D264020566137007BC178 /* TrendViewController.swift */,
 				B06CFC0620521EE100C55BB9 /* Main.storyboard */,
 				B0C7A44220523C4A0066C01E /* ShinchakuViewController.swift */,
+				916D264020566137007BC178 /* TrendViewController.swift */,
 				B06CFC432052374000C55BB9 /* AtodeyomuViewController.swift */,
-				B0C7A44B20523C740066C01E /* ReaderViewController.swift */,
 				B0B131E820528D82009C2BD1 /* SampleData.swift */,
 				B06CFC0920521EE100C55BB9 /* Assets.xcassets */,
+				B09F48632068AE6C005C0064 /* FeedTableViewCell.swift */,
+				B09F48642068AE6C005C0064 /* FeedTableViewCell.xib */,
 				B0B131F2205292A7009C2BD1 /* ic_access_time_white.png */,
 				B0B131EE20529284009C2BD1 /* ic_new_releases_white.png */,
 				B0B131F020529296009C2BD1 /* ic_trending_up_white.png */,
 				B0B131F42052932F009C2BD1 /* taro_150916dislike01.jpg */,
 				B06CFC0B20521EE100C55BB9 /* LaunchScreen.storyboard */,
+				B0C7A44B20523C740066C01E /* ReaderViewController.swift */,
 				B06CFC0E20521EE100C55BB9 /* Info.plist */,
 			);
 			path = QiitaReader;
+			sourceTree = "<group>";
+		};
+		FE838EA26968D616BA0014A0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				FED5F17BA31E09048AF129AA /* Pods-QiitaReader.debug.xcconfig */,
+				A18E41D84AE0301A0ECD3F3D /* Pods-QiitaReader.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -87,9 +117,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B06CFC1120521EE100C55BB9 /* Build configuration list for PBXNativeTarget "QiitaReader" */;
 			buildPhases = (
+				B3500E211446D7B84DC01ABD /* [CP] Check Pods Manifest.lock */,
 				B06CFBFB20521EE000C55BB9 /* Sources */,
 				B06CFBFC20521EE000C55BB9 /* Frameworks */,
 				B06CFBFD20521EE000C55BB9 /* Resources */,
+				1D716A783592EF79365D42CA /* [CP] Embed Pods Frameworks */,
+				42D67570A9B73D12A0EBCE38 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -145,12 +178,77 @@
 				B0B131F52052932F009C2BD1 /* taro_150916dislike01.jpg in Resources */,
 				B06CFC0820521EE100C55BB9 /* Main.storyboard in Resources */,
 				B0B131F120529296009C2BD1 /* ic_trending_up_white.png in Resources */,
+				B09F48662068AE6C005C0064 /* FeedTableViewCell.xib in Resources */,
 				B0B131EF20529284009C2BD1 /* ic_new_releases_white.png in Resources */,
 				B0B131F3205292A7009C2BD1 /* ic_access_time_white.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1D716A783592EF79365D42CA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-QiitaReader/Pods-QiitaReader-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/HTMLReader/HTMLReader.framework",
+				"${BUILT_PRODUCTS_DIR}/PageMenu/PageMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TOWebViewController/TOWebViewController.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HTMLReader.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PageMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TOWebViewController.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QiitaReader/Pods-QiitaReader-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		42D67570A9B73D12A0EBCE38 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QiitaReader/Pods-QiitaReader-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B3500E211446D7B84DC01ABD /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QiitaReader-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B06CFBFB20521EE000C55BB9 /* Sources */ = {
@@ -159,6 +257,7 @@
 			files = (
 				B0B131E920528D82009C2BD1 /* SampleData.swift in Sources */,
 				916D264120566137007BC178 /* TrendViewController.swift in Sources */,
+				B09F48652068AE6C005C0064 /* FeedTableViewCell.swift in Sources */,
 				B0C7A44C20523C740066C01E /* ReaderViewController.swift in Sources */,
 				B06CFC442052374000C55BB9 /* AtodeyomuViewController.swift in Sources */,
 				B0C7A44320523C4A0066C01E /* ShinchakuViewController.swift in Sources */,
@@ -295,6 +394,7 @@
 		};
 		B06CFC1220521EE100C55BB9 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FED5F17BA31E09048AF129AA /* Pods-QiitaReader.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = QiitaReader/Info.plist;
@@ -308,6 +408,7 @@
 		};
 		B06CFC1320521EE100C55BB9 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A18E41D84AE0301A0ECD3F3D /* Pods-QiitaReader.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = QiitaReader/Info.plist;
