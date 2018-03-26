@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct article {
+struct Article {
     var title: String
     var authorName: String
     var authorIcon: String
@@ -19,7 +19,7 @@ struct article {
     var articleText: String
 }
 
-var article1 = article (
+var article1 = Article (
     title: "初心者がオリジナルのiOSアプリを開発できるようになるまで",
     authorName: "justin999",
     authorIcon: ".../images/1473687346.jpeg",

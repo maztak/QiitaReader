@@ -9,7 +9,7 @@
 import UIKit
 
 class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    @IBOutlet weak var TableView: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     
     //配列fruitsを設定
     let fruits = ["apple", "orange", "melon", "banana", "pineapple"]
@@ -17,7 +17,6 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
