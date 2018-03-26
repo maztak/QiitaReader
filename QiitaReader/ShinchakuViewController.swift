@@ -8,15 +8,11 @@
 
 import UIKit
 
-class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
- {
-
-    
+class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var picture1: UIImageView!
     @IBOutlet weak var title1: UILabel!
-
     @IBOutlet weak var goodCnt1: UILabel!
     @IBOutlet weak var author1: UILabel!
     @IBOutlet weak var tag1_1: UILabel!
@@ -25,7 +21,6 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @IBAction func atodeYomu1(_ sender: Any) {
     }
-    
     @IBAction func yomikomi(_ sender: Any) {
         title1.text = article1.title
         print(title1.text ?? "title")
@@ -42,6 +37,7 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,7 +51,7 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
-        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "SampleCell", for: indexPath)
+        let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         
         // セルに表示する値を設定する
         cell.textLabel!.text = fruits[indexPath.row]

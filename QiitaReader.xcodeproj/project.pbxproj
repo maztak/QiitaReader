@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		916D264120566137007BC178 /* TrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916D264020566137007BC178 /* TrendViewController.swift */; };
+		B04F805E2068F58100E43A62 /* ArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B04F805D2068F58000E43A62 /* ArticleCell.xib */; };
+		B04F80602068F5B600E43A62 /* ArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04F805F2068F5B600E43A62 /* ArticleCell.swift */; };
 		B06CFC0320521EE100C55BB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CFC0220521EE100C55BB9 /* AppDelegate.swift */; };
 		B06CFC0820521EE100C55BB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B06CFC0620521EE100C55BB9 /* Main.storyboard */; };
 		B06CFC0A20521EE100C55BB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B06CFC0920521EE100C55BB9 /* Assets.xcassets */; };
@@ -24,6 +26,8 @@
 
 /* Begin PBXFileReference section */
 		916D264020566137007BC178 /* TrendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendViewController.swift; sourceTree = "<group>"; };
+		B04F805D2068F58000E43A62 /* ArticleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleCell.xib; sourceTree = "<group>"; };
+		B04F805F2068F5B600E43A62 /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
 		B050AAFF206398DD00C6DA7C /* QiitaReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiitaReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B06CFC0220521EE100C55BB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B06CFC0720521EE100C55BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -65,6 +69,8 @@
 				B06CFC0220521EE100C55BB9 /* AppDelegate.swift */,
 				916D264020566137007BC178 /* TrendViewController.swift */,
 				B06CFC0620521EE100C55BB9 /* Main.storyboard */,
+				B04F805D2068F58000E43A62 /* ArticleCell.xib */,
+				B04F805F2068F5B600E43A62 /* ArticleCell.swift */,
 				B0C7A44220523C4A0066C01E /* ShinchakuViewController.swift */,
 				B06CFC432052374000C55BB9 /* AtodeyomuViewController.swift */,
 				B0C7A44B20523C740066C01E /* ReaderViewController.swift */,
@@ -142,6 +148,7 @@
 			files = (
 				B06CFC0D20521EE100C55BB9 /* LaunchScreen.storyboard in Resources */,
 				B06CFC0A20521EE100C55BB9 /* Assets.xcassets in Resources */,
+				B04F805E2068F58100E43A62 /* ArticleCell.xib in Resources */,
 				B0B131F52052932F009C2BD1 /* taro_150916dislike01.jpg in Resources */,
 				B06CFC0820521EE100C55BB9 /* Main.storyboard in Resources */,
 				B0B131F120529296009C2BD1 /* ic_trending_up_white.png in Resources */,
@@ -161,6 +168,7 @@
 				916D264120566137007BC178 /* TrendViewController.swift in Sources */,
 				B0C7A44C20523C740066C01E /* ReaderViewController.swift in Sources */,
 				B06CFC442052374000C55BB9 /* AtodeyomuViewController.swift in Sources */,
+				B04F80602068F5B600E43A62 /* ArticleCell.swift in Sources */,
 				B0C7A44320523C4A0066C01E /* ShinchakuViewController.swift in Sources */,
 				B06CFC0320521EE100C55BB9 /* AppDelegate.swift in Sources */,
 			);
