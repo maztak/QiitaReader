@@ -9,9 +9,11 @@
 import UIKit
 
 class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var TableView: UITableView!
     
-   
+    //配列fruitsを設定
+    let fruits = ["apple", "orange", "melon", "banana", "pineapple"]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +40,6 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("cell：(indexPath.row) fruits：(fruits[indexPath.row])")
-    }
 
     /*
     // MARK: - Navigation
