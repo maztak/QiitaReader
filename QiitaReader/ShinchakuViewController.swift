@@ -13,9 +13,9 @@ class ShinchakuViewController: UIViewController {
     
     @IBOutlet weak var picture1: UIImageView!
     @IBOutlet weak var title1: UILabel!
-    @IBOutlet weak var author1: UILabel!
+
     @IBOutlet weak var goodCnt1: UILabel!
-  
+    @IBOutlet weak var author1: UILabel!
     @IBOutlet weak var tag1_1: UILabel!
     @IBOutlet weak var tag1_2: UILabel!
     @IBOutlet weak var tag1_3: UILabel!
@@ -25,6 +25,7 @@ class ShinchakuViewController: UIViewController {
     
     @IBAction func yomikomi(_ sender: Any) {
         title1.text = article1.title
+        print(title1.text)
         author1.text = article1.authorName
         goodCnt1.text = article1.goodCnt
         tag1_1.text = article1.tag1
