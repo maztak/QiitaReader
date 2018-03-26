@@ -10,11 +10,7 @@ import UIKit
 
 class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
-    
-    //配列fruitsを設定
-    let fruits = ["apple", "orange", "melon", "banana", "pineapple"]
-    
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,13 +32,16 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
         let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
-        
         // セルに表示する値を設定する
-        cell.textLabel!.text = fruits[indexPath.row]
+//        cell.textLabel!.text = fruits[indexPath.row]
+        cell.title.text = fruits[indexPath.row]
+        cell.author.text = fruits[indexPath.row]
         
         return cell
     }
 
+    //配列fruitsを設定
+    let fruits = ["初心者がオリジナルのiOSアプリを開発できるようになるまで", "orange", "melon", "banana", "pineapple"]
     
 
     /*

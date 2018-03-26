@@ -11,22 +11,22 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArticleCell" rowHeight="108" id="sVL-f0-5NT" customClass="ArticleCell" customModule="QiitaReader" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="108"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArticleCell" rowHeight="151" id="sVL-f0-5NT" customClass="ArticleCell" customModule="QiitaReader" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="478" height="151"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sVL-f0-5NT" id="5Tk-i0-U68">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="107.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="478" height="150.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HhG-4M-ofg">
-                        <rect key="frame" x="91" y="17" width="268" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HhG-4M-ofg">
+                        <rect key="frame" x="0.0" y="0.0" width="212" height="40"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bre-Nq-eC4">
-                        <rect key="frame" x="91" y="63" width="50" height="21"/>
+                        <rect key="frame" x="220" y="-1" width="258" height="41"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -38,7 +38,7 @@
                 <outlet property="author" destination="bre-Nq-eC4" id="fut-bi-FH4"/>
                 <outlet property="title" destination="HhG-4M-ofg" id="vfi-6q-jzC"/>
             </connections>
-            <point key="canvasLocation" x="-87.5" y="140"/>
+            <point key="canvasLocation" x="-36" y="161.5"/>
         </tableViewCell>
     </objects>
 </document>
