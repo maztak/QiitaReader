@@ -8,8 +8,11 @@
 
 import UIKit
 
-class ShinchakuViewController: UIViewController {
+class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
+ {
 
+    
+    @IBOutlet weak var tableView: UITableView!
     
     @IBOutlet weak var picture1: UIImageView!
     @IBOutlet weak var title1: UILabel!
@@ -25,13 +28,16 @@ class ShinchakuViewController: UIViewController {
     
     @IBAction func yomikomi(_ sender: Any) {
         title1.text = article1.title
-        print(title1.text)
+        print(title1.text ?? "title")
         author1.text = article1.authorName
         goodCnt1.text = article1.goodCnt
         tag1_1.text = article1.tag1
         tag1_2.text = article1.tag2
         tag1_3.text = article1.tag3
     }
+    
+    //配列fruitsを設定
+    let fruits = ["apple", "orange", "melon", "banana", "pineapple"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +47,20 @@ class ShinchakuViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fruits.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // セルを取得する
+        let cell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "SampleCell", for: indexPath)
+        
+        // セルに表示する値を設定する
+        cell.textLabel!.text = fruits[indexPath.row]
+        
+        return cell
     }
 
     
