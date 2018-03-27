@@ -10,7 +10,10 @@ import UIKit
 
 class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
-
+    //配列fruitsを設定
+    //    let fruits = ["apple", "orange", "melon", "banana", "pineapple"]
+    let fruits = [article1, article2]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,13 +41,23 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
 //        cell.author.text = article1.authorName
             cell.title.text = fruits[indexPath.row].title
             cell.author.text = fruits[indexPath.row].authorName
-        
         return cell
     }
+    
+    //タップされたcellをprintするメソッドを追加
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("cell：\(indexPath.row) article：\(fruits[indexPath.row].title) URL:\(fruits[indexPath.row].url)")
+        }
+        
+    }
+    
+    
 
-    //配列fruitsを設定
-//    let fruits = ["apple", "orange", "melon", "banana", "pineapple"]
-    let fruits = [article1, article2]
+    
+    
+    
+    
+  
 
     /*
     // MARK: - Navigation
@@ -56,4 +69,4 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     */
 
-}
+
