@@ -12,7 +12,6 @@ import SwiftyJSON   //SwiftyJSONをimport
 
 class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
-//    let fruits = [article1, article2]
     var articles: [[String: String?]] = []  //記事を入れるプロパティarticlesを定義
     
     //////////////////////////////////////////////////////////////////////////
@@ -45,7 +44,6 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
                     self.articles.append(article) //配列に入れる
                 }
                 self.tableView.reloadData() //TableViewを更新
-//                print(self.articles) //全ての記事が保存できたら配列を確認
         }
     }
     
@@ -60,8 +58,6 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         // セルを取得する
         let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルに表示する値を設定する
-//        cell.title.text = fruits[indexPath.row].title
-//        cell.author.text = fruits[indexPath.row].authorName
         let article = articles[indexPath.row]   //○行目の記事を取得し、定数article[辞書型]に代入
         cell.title.text = article["title"]!      //記事のtitleをxibで作ったtitleラベルのtextプロパティにセット
         cell.author.text = article["userId"]!      //記事のuserIdをauthorラベルのtextプロパティにセット
@@ -70,11 +66,20 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     
     //タップされたcellをprintするメソッドを追加
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        print("cell：\(indexPath.row) article：\(fruits[indexPath.row].title) URL:\(fruits[indexPath.row].url)")
+        //処理
+        //print("cell：\(indexPath.row) article：\(fruits[indexPath.row].title) URL:\(fruits[indexPath.row].url)")
+    }
+    
+    
+    /*記事詳細detailViewに遷移するメソッド*/
+    override func tableView( tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailViewController = DetailViewController()
+        detailViewController.entry = self.articles[indexPath.row]
+        parent!.navigationController!.pushViewController(detailViewController , animated: true)
     }
 }
     
-    
+    //参考：http://webfood.info/swift-rss-reader/#tableview
 
     
     

@@ -4,18 +4,23 @@ PODS:
     - Result (~> 3.0)
   - Result (3.2.4)
   - SwiftyJSON (4.0.0)
+  - TOWebViewController (2.2.7):
+    - TOWebViewController/Core (= 2.2.7)
+  - TOWebViewController/Core (2.2.7)
 
 DEPENDENCIES:
   - Alamofire
   - APIKit (~> 3.1)
   - SwiftyJSON
+  - TOWebViewController
 
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
   APIKit: a39ff72ac44efc15513fd1b98800f63c525be61b
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
+  TOWebViewController: 5c17cc65312df4d596229e524ce1d0b3bcba5dd0
 
-PODFILE CHECKSUM: c6605052a8dbbcd852a602988bd45fd5be2ef4fd
+PODFILE CHECKSUM: b100eaf1599e380020b8f3ae9c30f160bbc046b5
 
 COCOAPODS: 1.4.0
