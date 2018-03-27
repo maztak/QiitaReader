@@ -7,17 +7,17 @@
 //
 
 import UIKit
+import Alamofire    //Alamofireをimport
 
 class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
-    //配列fruitsを設定
-    //    let fruits = ["apple", "orange", "melon", "banana", "pineapple"]
     let fruits = [article1, article2]
     
-    
+    //////////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        getArticles()
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
     }
 
@@ -25,9 +25,18 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    //////////////////////////////////////////////////////////////////////////
+    /*記事を取得する*/
+    func getArticles() {
+        Alamofire.request("https://qiita.com/api/v2/items") //APIへリクエストを送信
+            .responseJSON { response in
+                print(response.result.value) // responseのresultプロパティのvalueプロパティをコンソールに出力
+        }
+    }
     
     
     
+    /*記事をTableViewに表示する*/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fruits.count
     }
@@ -36,20 +45,16 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         // セルを取得する
         let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルに表示する値を設定する
-//        cell.textLabel!.text = fruits[indexPath.row]
-//        cell.title.text = article1.title
-//        cell.author.text = article1.authorName
-            cell.title.text = fruits[indexPath.row].title
-            cell.author.text = fruits[indexPath.row].authorName
+        cell.title.text = fruits[indexPath.row].title
+        cell.author.text = fruits[indexPath.row].authorName
         return cell
     }
     
     //タップされたcellをprintするメソッドを追加
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("cell：\(indexPath.row) article：\(fruits[indexPath.row].title) URL:\(fruits[indexPath.row].url)")
-        }
-        
     }
+}
     
     
 
