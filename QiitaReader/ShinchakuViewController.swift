@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire    //Alamofireをimport
+import SwiftyJSON   //SwiftyJSONをimport
 
 class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
@@ -30,7 +31,17 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     func getArticles() {
         Alamofire.request("https://qiita.com/api/v2/items") //APIへリクエストを送信
             .responseJSON { response in
-                print(response.result.value) // responseのresultプロパティのvalueプロパティをコンソールに出力
+                guard let object = response.result.value else {
+                    return
+                }
+                
+                let json = JSON(object)
+                json.forEach { (_, json) in
+                    json["title"].string
+                    json["user"]["id"].string
+                }
+                
+//                print(response.result.value) // responseのresultプロパティのvalueプロパティをコンソールに出力
         }
     }
     
