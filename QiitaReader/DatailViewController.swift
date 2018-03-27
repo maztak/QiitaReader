@@ -11,7 +11,7 @@ import TOWebViewController
 
 class DetailViewController: TOWebViewController {
     var webview: UIWebView = UIWebView()
-    var entry: Article?
+    var entry: Article? //Articleは構造体
     
     override func viewDidLoad() {
         super.viewDidLoad()

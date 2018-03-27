@@ -12,7 +12,7 @@ import SwiftyJSON   //SwiftyJSONをimport
 
 class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
-    var articles: [[String: String?]] = []  //記事を入れるプロパティarticlesを定義
+    var articles: [[String: String?]] = []  //記事を入れるプロパティarticles:辞書の配列　を定義
     
     //////////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
@@ -27,11 +27,11 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         // Dispose of any resources that can be recreated.
     }
     //////////////////////////////////////////////////////////////////////////
-    /*記事を取得する*/
+    /*記事を取得する -> これをstructに変換したい*/
     func getArticles() {
         Alamofire.request("https://qiita.com/api/v2/items") //APIへリクエストを送信
             .responseJSON { response in
-                guard let object = response.result.value else {
+                guard let object = response.result.value else { //guard letでnil剥がし
                     return
                 }
                 
@@ -65,16 +65,20 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     //タップされたcellをprintするメソッドを追加
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //処理
         //print("cell：\(indexPath.row) article：\(fruits[indexPath.row].title) URL:\(fruits[indexPath.row].url)")
-    }
+//    }
     
+    /*①httpリクエストで記事のJSONを取得する -> OK
+     ②JSONをstructに変換する*/
+    /*配列articles:[["title": "初心者が〜", "userId": "justin999", ,,,]]をJSON型に変換？*/
     
     /*記事詳細detailViewに遷移するメソッド*/
-    override func tableView( tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
-        detailViewController.entry = self.articles[indexPath.row]
+        detailViewController.entry = articles[indexPath.row]["title"].
+        //entryはArticle型（構造体）
         parent!.navigationController!.pushViewController(detailViewController , animated: true)
     }
 }
