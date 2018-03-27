@@ -12,7 +12,8 @@ import SwiftyJSON   //SwiftyJSONをimport
 
 class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
-    let fruits = [article1, article2]
+//    let fruits = [article1, article2]
+    var articles: [[String: String?]] = []  //記事を入れるプロパティarticlesを定義
     
     //////////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
@@ -37,11 +38,13 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
                 
                 let json = JSON(object)
                 json.forEach { (_, json) in
-                    json["title"].string
-                    json["user"]["id"].string
+                    let article: [String: String?] = [
+                        "title": json["title"].string,
+                        "useId": json["user"]["id"].string
+                    ] //1つの記事を表す辞書型を作る
+                    self.articles.append(article) //配列に入れる
                 }
-                
-//                print(response.result.value) // responseのresultプロパティのvalueプロパティをコンソールに出力
+                print(self.articles) //全ての記事が保存できたら配列を確認
         }
     }
     
@@ -49,21 +52,21 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     
     /*記事をTableViewに表示する*/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fruits.count
+        return articles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
         let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルに表示する値を設定する
-        cell.title.text = fruits[indexPath.row].title
-        cell.author.text = fruits[indexPath.row].authorName
+//        cell.title.text = fruits[indexPath.row].title
+//        cell.author.text = fruits[indexPath.row].authorName
         return cell
     }
     
     //タップされたcellをprintするメソッドを追加
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("cell：\(indexPath.row) article：\(fruits[indexPath.row].title) URL:\(fruits[indexPath.row].url)")
+//        print("cell：\(indexPath.row) article：\(fruits[indexPath.row].title) URL:\(fruits[indexPath.row].url)")
     }
 }
     
