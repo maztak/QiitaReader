@@ -40,11 +40,12 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
                 json.forEach { (_, json) in
                     let article: [String: String?] = [
                         "title": json["title"].string,
-                        "useId": json["user"]["id"].string
+                        "userId": json["user"]["id"].string
                     ] //1つの記事を表す辞書型を作る
                     self.articles.append(article) //配列に入れる
                 }
-                print(self.articles) //全ての記事が保存できたら配列を確認
+                self.tableView.reloadData() //TableViewを更新
+//                print(self.articles) //全ての記事が保存できたら配列を確認
         }
     }
     
@@ -61,6 +62,9 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         // セルに表示する値を設定する
 //        cell.title.text = fruits[indexPath.row].title
 //        cell.author.text = fruits[indexPath.row].authorName
+        let article = articles[indexPath.row]   //○行目の記事を取得し、定数article[辞書型]に代入
+        cell.title.text = article["title"]!      //記事のtitleをxibで作ったtitleラベルのtextプロパティにセット
+        cell.author.text = article["userId"]!      //記事のuserIdをauthorラベルのtextプロパティにセット
         return cell
     }
     
