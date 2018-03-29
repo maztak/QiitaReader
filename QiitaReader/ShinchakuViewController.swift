@@ -28,7 +28,8 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     //////////////////////////////////////////////////////////////////////////
     /*記事を取得する -> これをstructに変換したい*/
     
-    var articles: [[String: String?]] = []  //記事を入れるプロパティarticles:辞書の配列
+//    var articles: [[String: String?]] = []  //記事を入れるプロパティarticles:辞書の配列
+    var articles: [Article] = []
     
     func getArticles() {
         Alamofire.request("https://qiita.com/api/v2/items").responseJSON { response in
@@ -38,10 +39,15 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
                 
                 let json = JSON(object) //object（1つの記事）をJSON型に変換？し、定数jsonに入れる
                 json.forEach { (_, json) in //JOSN型の定数jsonをforEachで
-                    let article: [String: String?] = [  //新たに定数article:辞書を宣言していき
-                        "title": json["title"].string,  //初期値として各keyに内容（string）を割り当てていく
-                        "userId": json["user"]["id"].string
-                    ]
+//                    let article: [String: String?] = [  //新たに定数article:辞書を宣言していき
+                    let article = Article (
+                        title: json["title"].string!,  //初期値として各keyに内容（string）を割り当てていく
+                        authorName: json["user"]["id"].string!,
+                        authorIcon: json["user"]["profile_image_url"].string!,
+                        goodCnt: json["likes_count"].int!,
+                        articleText: json["body"].string!,
+                        url: json["url"].string!
+                    )
                     self.articles.append(article) //それを辞書の配列であるarticlesに入れていく
                 }
                 self.tableView.reloadData() //TableViewを更新
@@ -60,8 +66,10 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルに表示する値を設定する
         let article = articles[indexPath.row]   //○行目の記事を取得し、定数article[辞書型]に代入
-        cell.title.text = article["title"]!      //記事のtitleをxibで作ったtitleラベルのtextプロパティにセット
-        cell.author.text = article["userId"]!      //記事のuserIdをauthorラベルのtextプロパティにセット
+//        cell.title.text = article["title"]!      //記事のtitleをxibで作ったtitleラベルのtextプロパティにセット
+        cell.title.text = article.title
+//        cell.author.text = article["userId"]!      //記事のuserIdをauthorラベルのtextプロパティにセット
+        cell.author.text = article.authorName
         return cell
     }
     
@@ -101,5 +109,8 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         // Pass the selected object to the new view controller.
     }
     */
+
+
+
 
 

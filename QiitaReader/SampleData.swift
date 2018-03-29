@@ -12,24 +12,24 @@ struct Article {
     var title: String
     var authorName: String
     var authorIcon: String
-    var tag1: String //後回し
-    var tag2: String //後回し
-    var tag3: String //後回し
-    var goodCnt: String
+//    var tag1: String //後回し
+//    var tag2: String //後回し
+//    var tag3: String //後回し
+    var goodCnt: Int
     var articleText: String
     var url: String
 }
 
 //サンプルデータ
-var article1 = Article (
-    title: "初心者がオリジナルのiOSアプリを開発できるようになるまで",
-    authorName: "justin999",
-    authorIcon: ".../images/1473687346.jpeg",
-    tag1: "iOS",
-    tag2: "swift",
-    tag3: "Objective-C",
-    goodCnt: "142",
-    articleText: "私はiOSアプリのフロント側を趣味や仕事で開発しています。そんな中、時折聞かれるのが「iOSアプリってどうやって開発するの？",
-    url: "https://qiita.com/justin999/items/986fe025331f077e453e"
-)
-
+//var article1 = Article (
+//    title: "初心者がオリジナルのiOSアプリを開発できるようになるまで",
+//    authorName: "justin999",
+//    authorIcon: ".../images/1473687346.jpeg",
+//    tag1: "iOS",
+//    tag2: "swift",
+//    tag3: "Objective-C",
+//    goodCnt: "142",
+//    articleText: "私はiOSアプリのフロント側を趣味や仕事で開発しています。そんな中、時折聞かれるのが「iOSアプリってどうやって開発するの？",
+//    url: "https://qiita.com/justin999/items/986fe025331f077e453e"
+//)
+//
