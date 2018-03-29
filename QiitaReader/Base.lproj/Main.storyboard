@@ -72,7 +72,7 @@
         <!--Airticle1-->
         <scene sceneID="eKH-uS-F0e">
             <objects>
-                <viewController restorationIdentifier="DetailViewController" storyboardIdentifier="DetailViewController" title="Airticle1" id="Brp-Of-eWK" sceneMemberID="viewController">
+                <viewController restorationIdentifier="DetailViewController" storyboardIdentifier="DetailViewController" title="Airticle1" id="Brp-Of-eWK" customClass="DetailViewController" customModule="QiitaReader" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Uhx-vx-4qc"/>
                         <viewControllerLayoutGuide type="bottom" id="OQc-ty-TVE"/>
@@ -224,7 +224,6 @@
                     </view>
                     <navigationItem key="navigationItem" id="3Ta-av-0Sg"/>
                     <connections>
-                        <outlet property="TableView" destination="DF2-IV-PAB" id="tdR-V5-mGi"/>
                         <outlet property="tableView" destination="DF2-IV-PAB" id="4lg-CB-hzA"/>
                     </connections>
                 </viewController>
@@ -322,7 +321,6 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="abT-SE-OYE" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="新着" image="ic_new_releases_white.png" id="vpP-od-jGM"/>
                     <toolbarItems/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="LGl-Rv-y9y">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -427,7 +425,6 @@
                     <navigationItem key="navigationItem" id="BVH-YY-BKe"/>
                     <connections>
                         <outlet property="tableView" destination="518-GB-RHN" id="wl1-8m-rWy"/>
-                        <segue destination="Brp-Of-eWK" kind="show" id="fem-iF-7PT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="brR-75-IDA" sceneMemberID="firstResponder"/>

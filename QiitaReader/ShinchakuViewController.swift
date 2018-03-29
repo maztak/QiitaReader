@@ -9,9 +9,12 @@
 import UIKit
 import Alamofire    //Alamofireをimport
 import SwiftyJSON   //SwiftyJSONをimport
+import SafariServices //方法③の方法
 
 class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
+    //var articles: [[String: String?]] = []  //記事を入れるプロパティarticles:辞書の配列
+    var articles: [Article] = []
     
     //////////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
@@ -40,10 +43,6 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     //////////////////////////////////////////////////////////////////////////
     /*記事を取得する -> これをstructに変換したい*/
-    
-//    var articles: [[String: String?]] = []  //記事を入れるプロパティarticles:辞書の配列
-    var articles: [Article] = []
-    
     func getArticles() {
         Alamofire.request("https://qiita.com/api/v2/items").responseJSON { response in
                 guard let object = response.result.value else { //guard letで引数responseのvalueプロパティをnil剥がして、定数objectに入れる
@@ -88,25 +87,49 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     
     //タップされたcellをprintするメソッドを追加
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        処理
-        print("cell：\(indexPath.row) article：\(articles[indexPath.row].title) URL:\(articles[indexPath.row].url)")
+        var controller: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        controller.entry = articles[indexPath.row]
+        self.navigationController?.pushViewController(controller, animated: true)
+        tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
     /*①httpリクエストで記事のJSONを取得する -> OK
      ②JSONをstructに変換する -> OK */
     
     /*記事詳細detailViewに遷移するメソッド*/
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let detailViewController = DetailViewController()
-        detailViewController.entry = self.articles[indexPath.row] //entryはArticle型（構造体）
-        parent!.navigationController!.pushViewController(detailViewController , animated: true)
-    }
-}
     
-    //参考：http://webfood.info/swift-rss-reader/#tableview
+    
+    
+    //方法③
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+//        let entry = articles[indexPath.row] as Article
+//
+//        let svc = SFSafariViewController(url: NSURL(string: entry.url)! as URL)
+//        self.present(svc, animated: true, completion: nil)
+//
+//        reloadRowsAtIndexPath(indexPath)
+//    }
+    
+    
+    //方法②
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+
 
     
+    //方法①
+//    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+////    //名前を指定してStoryboardを取得する(Main.storyboardの場合）
+//    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//    //StoryboardIDを指定してViewControllerを取得する
+//    let detailViewController: DetailViewController = storyboard.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+//    detailViewController.entry = self.articles[indexPath.row] //entryはArticle型
+//    parent!.navigationController!.pushViewController(detailViewController , animated: true)
+//    }
+}
     
+
+
+
     
     
   
@@ -123,5 +146,4 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
 
 
 
-
-
+}
