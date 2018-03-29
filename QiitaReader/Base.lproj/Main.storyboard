@@ -22,33 +22,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="HxM-65-1kh">
-                                <rect key="frame" x="12" y="131" width="351" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="7mb-Wf-DiK"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Qiita Reader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REv-zM-tfX">
-                                <rect key="frame" x="16" y="104" width="94" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Qiita Reader" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="REv-zM-tfX">
+                                <rect key="frame" x="16" y="0.0" width="94" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="esE-bg-kcI">
-                                <rect key="frame" x="0.0" y="199" width="375" height="373"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="esE-bg-kcI">
+                                <rect key="frame" x="0.0" y="65" width="375" height="507"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="2Ru-h0-lXW"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="8P9-1d-lPC"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MKW-y9-bai">
-                                <rect key="frame" x="164" y="580" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
+                            <searchBar contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HxM-65-1kh">
+                                <rect key="frame" x="12" y="21" width="351" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="7mb-Wf-DiK"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -56,8 +50,12 @@
                             <constraint firstItem="HxM-65-1kh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="131" id="RVA-Mg-qcn"/>
                             <constraint firstItem="REv-zM-tfX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="Ssp-Lg-Dme"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="REv-zM-tfX" secondAttribute="trailing" id="UgO-iP-oSo"/>
+                            <constraint firstItem="esE-bg-kcI" firstAttribute="centerX" secondItem="HxM-65-1kh" secondAttribute="centerX" id="atZ-5B-K6x"/>
                             <constraint firstItem="HxM-65-1kh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-4" id="bwX-T5-STQ"/>
+                            <constraint firstItem="esE-bg-kcI" firstAttribute="top" secondItem="HxM-65-1kh" secondAttribute="bottom" id="ge9-xj-sWt"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="esE-bg-kcI" secondAttribute="bottom" constant="-18" id="j6r-Cx-om9"/>
                             <constraint firstItem="HxM-65-1kh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ogq-3n-tdL"/>
+                            <constraint firstItem="esE-bg-kcI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="z3k-jY-URe"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="wnm-NR-4mF"/>

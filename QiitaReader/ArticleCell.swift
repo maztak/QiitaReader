@@ -15,3 +15,5 @@ class ArticleCell: UITableViewCell {
     @IBOutlet weak var author: UILabel!
 
 }
+
+

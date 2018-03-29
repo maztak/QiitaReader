@@ -14,7 +14,6 @@
 		B06CFC0320521EE100C55BB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CFC0220521EE100C55BB9 /* AppDelegate.swift */; };
 		B06CFC0820521EE100C55BB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B06CFC0620521EE100C55BB9 /* Main.storyboard */; };
 		B06CFC0A20521EE100C55BB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B06CFC0920521EE100C55BB9 /* Assets.xcassets */; };
-		B06CFC0D20521EE100C55BB9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B06CFC0B20521EE100C55BB9 /* LaunchScreen.storyboard */; };
 		B06CFC442052374000C55BB9 /* AtodeyomuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CFC432052374000C55BB9 /* AtodeyomuViewController.swift */; };
 		B0B131E920528D82009C2BD1 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B131E820528D82009C2BD1 /* SampleData.swift */; };
 		B0B131EF20529284009C2BD1 /* ic_new_releases_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B131EE20529284009C2BD1 /* ic_new_releases_white.png */; };
@@ -29,14 +28,12 @@
 		5E6231C53ED2D664451C3CF6 /* Pods-QiitaReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiitaReader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QiitaReader/Pods-QiitaReader.debug.xcconfig"; sourceTree = "<group>"; };
 		77B1C86919633453B546539B /* Pods_QiitaReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QiitaReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		916D264020566137007BC178 /* TrendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendViewController.swift; sourceTree = "<group>"; };
-		B00B4CB9206C954700FEC9D6 /* QiitaReader-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "QiitaReader-Bridging-Header.h"; sourceTree = "<group>"; };
 		B04F805D2068F58000E43A62 /* ArticleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleCell.xib; sourceTree = "<group>"; };
 		B04F805F2068F5B600E43A62 /* ArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCell.swift; sourceTree = "<group>"; };
 		B050AAFF206398DD00C6DA7C /* QiitaReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QiitaReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B06CFC0220521EE100C55BB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B06CFC0720521EE100C55BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B06CFC0920521EE100C55BB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B06CFC0C20521EE100C55BB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B06CFC0E20521EE100C55BB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B06CFC432052374000C55BB9 /* AtodeyomuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtodeyomuViewController.swift; sourceTree = "<group>"; };
 		B0B131E820528D82009C2BD1 /* SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
@@ -85,17 +82,15 @@
 				B0C7A44220523C4A0066C01E /* ShinchakuViewController.swift */,
 				916D264020566137007BC178 /* TrendViewController.swift */,
 				B06CFC432052374000C55BB9 /* AtodeyomuViewController.swift */,
+				B0D20575206A127700ED4C3D /* DatailViewController.swift */,
+				B0B131E820528D82009C2BD1 /* SampleData.swift */,
 				B04F805D2068F58000E43A62 /* ArticleCell.xib */,
 				B04F805F2068F5B600E43A62 /* ArticleCell.swift */,
-				B0B131E820528D82009C2BD1 /* SampleData.swift */,
-				B0D20575206A127700ED4C3D /* DatailViewController.swift */,
 				B06CFC0920521EE100C55BB9 /* Assets.xcassets */,
 				B0B131F2205292A7009C2BD1 /* ic_access_time_white.png */,
 				B0B131EE20529284009C2BD1 /* ic_new_releases_white.png */,
 				B0B131F020529296009C2BD1 /* ic_trending_up_white.png */,
-				B06CFC0B20521EE100C55BB9 /* LaunchScreen.storyboard */,
 				B06CFC0E20521EE100C55BB9 /* Info.plist */,
-				B00B4CB9206C954700FEC9D6 /* QiitaReader-Bridging-Header.h */,
 			);
 			path = QiitaReader;
 			sourceTree = "<group>";
@@ -172,7 +167,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B06CFC0D20521EE100C55BB9 /* LaunchScreen.storyboard in Resources */,
 				B06CFC0A20521EE100C55BB9 /* Assets.xcassets in Resources */,
 				B04F805E2068F58100E43A62 /* ArticleCell.xib in Resources */,
 				B06CFC0820521EE100C55BB9 /* Main.storyboard in Resources */,
@@ -270,14 +264,6 @@
 				B06CFC0720521EE100C55BB9 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		B06CFC0B20521EE100C55BB9 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B06CFC0C20521EE100C55BB9 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
