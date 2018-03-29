@@ -12,7 +12,6 @@ import SwiftyJSON   //SwiftyJSONをimport
 
 class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
-    var articles: [[String: String?]] = []  //記事を入れるプロパティarticles:辞書の配列　を定義
     
     //////////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
@@ -28,20 +27,22 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     //////////////////////////////////////////////////////////////////////////
     /*記事を取得する -> これをstructに変換したい*/
+    
+    var articles: [[String: String?]] = []  //記事を入れるプロパティarticles:辞書の配列
+    
     func getArticles() {
-        Alamofire.request("https://qiita.com/api/v2/items") //APIへリクエストを送信
-            .responseJSON { response in
-                guard let object = response.result.value else { //guard letでnil剥がし
+        Alamofire.request("https://qiita.com/api/v2/items").responseJSON { response in
+                guard let object = response.result.value else { //guard letで引数responseのvalueプロパティをnil剥がして、定数objectに入れる
                     return
                 }
                 
-                let json = JSON(object)
-                json.forEach { (_, json) in
-                    let article: [String: String?] = [
-                        "title": json["title"].string,
+                let json = JSON(object) //object（1つの記事）をJSON型に変換？し、定数jsonに入れる
+                json.forEach { (_, json) in //JOSN型の定数jsonをforEachで
+                    let article: [String: String?] = [  //新たに定数article:辞書を宣言していき
+                        "title": json["title"].string,  //初期値として各keyに内容（string）を割り当てていく
                         "userId": json["user"]["id"].string
-                    ] //1つの記事を表す辞書型を作る
-                    self.articles.append(article) //配列に入れる
+                    ]
+                    self.articles.append(article) //それを辞書の配列であるarticlesに入れていく
                 }
                 self.tableView.reloadData() //TableViewを更新
         }
@@ -75,12 +76,12 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     /*配列articles:[["title": "初心者が〜", "userId": "justin999", ,,,]]をJSON型に変換？*/
     
     /*記事詳細detailViewに遷移するメソッド*/
-    func tableView(tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailViewController = DetailViewController()
-        detailViewController.entry = articles[indexPath.row]["title"].
-        //entryはArticle型（構造体）
-        parent!.navigationController!.pushViewController(detailViewController , animated: true)
-    }
+//    func tableView(tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let detailViewController = DetailViewController()
+//        detailViewController.entry = articles[indexPath.row]["title"].
+//        //entryはArticle型（構造体）
+//        parent!.navigationController!.pushViewController(detailViewController , animated: true)
+//    }
 }
     
     //参考：http://webfood.info/swift-rss-reader/#tableview

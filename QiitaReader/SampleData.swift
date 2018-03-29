@@ -20,7 +20,7 @@ struct Article {
     var url: String
 }
 
-
+//サンプルデータ
 var article1 = Article (
     title: "初心者がオリジナルのiOSアプリを開発できるようになるまで",
     authorName: "justin999",
@@ -33,14 +33,3 @@ var article1 = Article (
     url: "https://qiita.com/justin999/items/986fe025331f077e453e"
 )
 
-var article2 = Article (
-    title: "Rails Developers Meetup 2018 スライドまとめ",
-    authorName: "dyoshimitsu",
-    authorIcon: ".../images/1473687346.jpeg",
-    tag1: "Ruby",
-    tag2: "Rails",
-    tag3: "RubyOnRails",
-    goodCnt: "137",
-    articleText: "時間 トラックA トラックB 11:10〜 安全かつ高速に進めるマイクロサービス化    Rails on Kubernetes on AWS",
-    url : "https://qiita.com/dyoshimitsu/items/20a41ab656d2da80e4d9"
-)
