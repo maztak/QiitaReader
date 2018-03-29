@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import Alamofire    //Alamofireをimport
-import SwiftyJSON   //SwiftyJSONをimport
+import Alamofire
+import SwiftyJSON
 
 class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
@@ -22,18 +22,17 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         getArticles()
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
         
-        //NavCtrlのデザイン情報を記述
-        self.title           = "Dev News"
-        let navBar           = self.navigationController?.navigationBar
-        navBar!.barTintColor = UIColor.black
-        navBar!.shadowImage  = UIImage()
-        navBar!.tintColor    = UIColor.white
-        navBar!.titleTextAttributes =
-            [NSAttributedStringKey.foregroundColor: UIColor.gray]
-        navBar!.setBackgroundImage(
-            UIImage(), for: UIBarMetrics.default
-        )
-        
+        //NavBarのデザインを記述
+//        self.title           = "Dev News"
+//        let navBar           = self.navigationController?.navigationBar
+//        navBar!.barTintColor = UIColor.black
+//        navBar!.shadowImage  = UIImage()
+//        navBar!.tintColor    = UIColor.white
+//        navBar!.titleTextAttributes =
+//            [NSAttributedStringKey.foregroundColor: UIColor.gray]
+//        navBar!.setBackgroundImage(
+//            UIImage(), for: UIBarMetrics.default
+//        )
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,7 +88,7 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     
     /*記事詳細detailViewに遷移させるメソッド*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
         detailViewController.entry = articles[indexPath.row]
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
