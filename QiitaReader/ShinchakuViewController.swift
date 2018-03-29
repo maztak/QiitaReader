@@ -19,6 +19,19 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         // Do any additional setup after loading the view.
         getArticles()
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
+        
+        //NavCtrlのために以下を記述
+        self.title           = "Dev News"
+        let navBar           = self.navigationController?.navigationBar
+        navBar!.barTintColor = UIColor.black
+        navBar!.shadowImage  = UIImage()
+        navBar!.tintColor    = UIColor.white
+        navBar!.titleTextAttributes =
+            [NSAttributedStringKey.foregroundColor: UIColor.gray]
+        navBar!.setBackgroundImage(
+            UIImage(), for: UIBarMetrics.default
+        )
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,22 +87,20 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     //タップされたcellをprintするメソッドを追加
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //処理
-        //print("cell：\(indexPath.row) article：\(fruits[indexPath.row].title) URL:\(fruits[indexPath.row].url)")
-//    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        処理
+        print("cell：\(indexPath.row) article：\(articles[indexPath.row].title) URL:\(articles[indexPath.row].url)")
+    }
     
     /*①httpリクエストで記事のJSONを取得する -> OK
-     ②JSONをstructに変換する*/
-    /*配列articles:[["title": "初心者が〜", "userId": "justin999", ,,,]]をJSON型に変換？*/
+     ②JSONをstructに変換する -> OK */
     
     /*記事詳細detailViewに遷移するメソッド*/
-//    func tableView(tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let detailViewController = DetailViewController()
-//        detailViewController.entry = articles[indexPath.row]["title"].
-//        //entryはArticle型（構造体）
-//        parent!.navigationController!.pushViewController(detailViewController , animated: true)
-//    }
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let detailViewController = DetailViewController()
+        detailViewController.entry = self.articles[indexPath.row] //entryはArticle型（構造体）
+        parent!.navigationController!.pushViewController(detailViewController , animated: true)
+    }
 }
     
     //参考：http://webfood.info/swift-rss-reader/#tableview
