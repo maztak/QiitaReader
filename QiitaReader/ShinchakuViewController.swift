@@ -48,8 +48,9 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
                         authorName: json["user"]["id"].string!,
                         authorIcon: json["user"]["profile_image_url"].string!,
                         goodCnt: json["likes_count"].int!,
-                        articleText: json["body"].string!,
-//                        tag1: json["tags"]["items"][1].name.string!,
+                        tag1: json["tags"][0]["name"].string,
+                        tag2: json["tags"][1]["name"].string,
+                        tag3: json["tags"][2]["name"].string,
                         url: json["url"].string!
                     )
                     self.articles.append(article) //それを辞書の配列であるarticlesに入れていく
@@ -73,8 +74,10 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.title.text = article.title
         cell.author.text = article.authorName
         cell.goodCnt.text = String(article.goodCnt)
-        
-        
+        cell.tag1.text = article.tag1
+        cell.tag2.text = article.tag2
+        cell.tag3.text = article.tag3
+    
         return cell
     }
     

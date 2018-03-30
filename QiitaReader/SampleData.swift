@@ -12,11 +12,10 @@ struct Article {
     var title: String
     var authorName: String
     var authorIcon: String
-//    var tag1: String //後回し
-//    var tag2: String //後回し
-//    var tag3: String //後回し
     var goodCnt: Int
-    var articleText: String
+    var tag1: String?
+    var tag2: String?
+    var tag3: String?
     var url: String
 }
 
