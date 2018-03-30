@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Nuke
 
 class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
@@ -51,7 +52,8 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
                         tag1: json["tags"][0]["name"].string,
                         tag2: json["tags"][1]["name"].string,
                         tag3: json["tags"][2]["name"].string,
-                        url: json["url"].string!
+                        url: json["url"].string!,
+                        authorImageUrl: json["user"]["profile_image_url"].string!
                     )
                     self.articles.append(article) //それを辞書の配列であるarticlesに入れていく
                 }
@@ -77,7 +79,9 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.tag1.text = article.tag1
         cell.tag2.text = article.tag2
         cell.tag3.text = article.tag3
-    
+        
+        Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
+        
         return cell
     }
     
@@ -89,7 +93,6 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
 }
-    
 
 
 
