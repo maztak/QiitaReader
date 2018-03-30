@@ -49,6 +49,7 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
                         authorIcon: json["user"]["profile_image_url"].string!,
                         goodCnt: json["likes_count"].int!,
                         articleText: json["body"].string!,
+//                        tag1: json["tags"]["items"][1].name.string!,
                         url: json["url"].string!
                     )
                     self.articles.append(article) //それを辞書の配列であるarticlesに入れていく
@@ -71,6 +72,9 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         let article: Article = articles[indexPath.row]
         cell.title.text = article.title
         cell.author.text = article.authorName
+        cell.goodCnt.text = String(article.goodCnt)
+        
+        
         return cell
     }
     

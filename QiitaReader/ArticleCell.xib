@@ -114,6 +114,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="author" destination="bre-Nq-eC4" id="fut-bi-FH4"/>
+                <outlet property="goodCnt" destination="jkI-oj-fBF" id="rUH-iw-6Tv"/>
                 <outlet property="title" destination="HhG-4M-ofg" id="vfi-6q-jzC"/>
             </connections>
             <point key="canvasLocation" x="-36" y="166"/>
