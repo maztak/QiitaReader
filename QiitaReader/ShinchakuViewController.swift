@@ -21,18 +21,6 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         //記事を取得し、tableViewに記録(register)していく
         getArticles()
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
-        
-        //NavBarのデザインを記述
-//        self.title           = "Dev News"
-//        let navBar           = self.navigationController?.navigationBar
-//        navBar!.barTintColor = UIColor.black
-//        navBar!.shadowImage  = UIImage()
-//        navBar!.tintColor    = UIColor.white
-//        navBar!.titleTextAttributes =
-//            [NSAttributedStringKey.foregroundColor: UIColor.gray]
-//        navBar!.setBackgroundImage(
-//            UIImage(), for: UIBarMetrics.default
-//        )
     }
 
     override func didReceiveMemoryWarning() {
