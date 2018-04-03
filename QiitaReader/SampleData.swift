@@ -11,13 +11,12 @@ import Foundation
 struct Article {
     var title: String
     var authorName: String
-    var authorIcon: String
+    var authorImageUrl: String
     var goodCnt: Int
     var tag1: String?
     var tag2: String?
     var tag3: String?
     var url: String
-    var authorImageUrl: String
 }
 
 //サンプルデータ
