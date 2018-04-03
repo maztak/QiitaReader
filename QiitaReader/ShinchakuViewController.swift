@@ -13,7 +13,8 @@ import Nuke
 
 class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
+//    @IBOutlet weak var searchBar: UISearchBar!
+    var searchBar = UISearchBar()
     var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
     var searchResult = [Article]()
     
@@ -23,14 +24,18 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         // Do any additional setup after loading the view.
         //記事を取得し、tableViewに記録(register)していく
         getArticles()
-        self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
-        
+
         //デリゲート先を自分に設定する。
         searchBar.delegate = self
         //何も入力されていなくてもReturnキーを押せるようにする。
         searchBar.enablesReturnKeyAutomatically = false
         //検索結果配列にデータをコピーする。
         searchResult = articles
+        
+        
+        self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
+        setupSearchBar()
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -122,8 +127,23 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
-}
 
+
+// MARK: - private methods
+func setupSearchBar() {
+    if let navigationBarFrame = navigationController?.navigationBar.bounds {
+        let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
+        searchBar.delegate = self
+        searchBar.placeholder = "Search"
+        searchBar.showsCancelButton = true
+        searchBar.autocapitalizationType = UITextAutocapitalizationType.none
+        searchBar.keyboardType = UIKeyboardType.default
+        navigationItem.titleView = searchBar
+        navigationItem.titleView?.frame = searchBar.frame
+        self.searchBar = searchBar
+        searchBar.becomeFirstResponder()
+    }
+}
 
 
 
@@ -137,4 +157,4 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     */
 
-
+}
