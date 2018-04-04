@@ -14,12 +14,11 @@ import Nuke
 class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var tableView: UITableView!
     var testSearchBar: UISearchBar!
-    
     //データ
-    var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
-    
+    var articles: [Article] = []
     //検索結果配列を用意
-        var searchResult = [Article]()
+    var searchResult = [Article]()
+    var searchKeyword: String = ""
     
     //////////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
@@ -29,7 +28,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
        //何も入力されていなくてもReturnキーを押せるようにする。
         testSearchBar.enablesReturnKeyAutomatically = false
         //記事を取得し、tableViewをリロードする
-        getArticles()
+//        getArticles()
         //使用するXibとCellのReuseIdentifierを登録する
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
     }
@@ -48,8 +47,10 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     //////////////////////////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
-        Alamofire.request("https://qiita.com/api/v2/items").responseJSON { response in
-            guard let object: Any = response.result.value else { //guard letで引数responseのvalueプロパティをnil剥がして、定数objectに入れる
+//        Alamofire.request("https://qiita.com/api/v2/items").responseJSON { response in
+        Alamofire.request("https://qiita.com/api/v2/items?page=1&per_page=10&query=title%3A\(searchKeyword)").responseJSON { response in
+            
+            guard let object: Any = response.result.value else {
                 return
             }
             
@@ -97,26 +98,29 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         return articles.count
     }
     
-        //検索ボタン押下時の呼び出しメソッド
-        func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-            testSearchBar.endEditing(true)
-            //検索結果配列を空にする。
-            searchResult.removeAll()
-    
-            if(testSearchBar.text == "") {
-                //検索文字列が空の場合はすべてを表示する。
-                searchResult = articles
-            } else {
-                //検索文字列を含むデータを検索結果配列に追加する。
-                for data in articles {
-                    if data.title.contains(testSearchBar.text!) {
-                        searchResult.append(data)
-                    }
-                }
-            }
-            //テーブルを再読み込みする。
-            tableView.reloadData()
-        }
+    //検索ボタン押下時の呼び出しメソッド
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        testSearchBar.endEditing(true)
+        //検索結果配列を空にする。
+        searchResult.removeAll()
+        searchKeyword = ""
+        searchKeyword = testSearchBar.text!
+        
+        //            if(testSearchBar.text == "") {
+        //                //検索文字列が空の場合はすべてを表示する。
+        //                searchResult = articles
+        //            } else {
+        //                //検索文字列を含むデータを検索結果配列に追加する。
+        //                for data in articles {
+        //                    if data.title.contains(testSearchBar.text!) {
+        //                        searchResult.append(data)
+        //                    }
+        //                }
+        //            }
+        //テーブルを再読み込みする。
+        getArticles()
+        tableView.reloadData()
+    }
     
     
     /*記事詳細detailViewに遷移させるメソッド*/
