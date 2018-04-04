@@ -13,13 +13,13 @@ import Nuke
 
 class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var tableView: UITableView!
-    var testSearchBar: UISearchBar!
+//    var testSearchBar: UISearchBar!
     
     //データ
     var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
     
     //検索結果配列を用意
-    var searchResult = [Article]()
+//    var searchResult = [Article]()
     
     //////////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
@@ -31,11 +31,9 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
 //        testSearchBar.enablesReturnKeyAutomatically = false
 
         //記事を取得し、tableViewをリロードする（tableViewCellは、下にfuncを記載しているから、それを勝手に実行して記事をセットしてくれるっぽい）
-//        getArticles()
-        
-        //使用するXibとCellのReuseIdentifierを登録する
+        getArticles()
+                //使用するXibとCellのReuseIdentifierを登録する
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,7 +69,7 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
                 self.articles.append(article) //それを辞書の配列であるarticlesに入れていく
             }
             //検索結果配列にデータをコピーする。
-            self.searchResult = self.articles
+//            self.searchResult = self.articles
             self.tableView.reloadData() //TableViewを更新
         }
     }
@@ -84,7 +82,7 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         
         // セルのプロパティに記事情報を設定する
-        let article: Article = searchResult[indexPath.row]
+        let article: Article = articles[indexPath.row]
         cell.title.text = article.title
         cell.author.text = article.authorName
         cell.goodCnt.text = String(article.goodCnt)
@@ -97,29 +95,29 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     
     /*データの個数を返すメソッド*/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResult.count
+        return articles.count
     }
     
-    //検索ボタン押下時の呼び出しメソッド
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        testSearchBar.endEditing(true)
-        //検索結果配列を空にする。
-        searchResult.removeAll()
-        
-        if(testSearchBar.text == "") {
-            //検索文字列が空の場合はすべてを表示する。
-            searchResult = articles
-        } else {
-            //検索文字列を含むデータを検索結果配列に追加する。
-            for data in articles {
-                if data.title.contains(testSearchBar.text!) {
-                    searchResult.append(data)
-                }
-            }
-        }
-        //テーブルを再読み込みする。
-        tableView.reloadData()
-    }
+//    //検索ボタン押下時の呼び出しメソッド
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        testSearchBar.endEditing(true)
+//        //検索結果配列を空にする。
+//        searchResult.removeAll()
+//
+//        if(testSearchBar.text == "") {
+//            //検索文字列が空の場合はすべてを表示する。
+//            searchResult = articles
+//        } else {
+//            //検索文字列を含むデータを検索結果配列に追加する。
+//            for data in articles {
+//                if data.title.contains(testSearchBar.text!) {
+//                    searchResult.append(data)
+//                }
+//            }
+//        }
+//        //テーブルを再読み込みする。
+//        tableView.reloadData()
+//    }
     
     
     /*記事詳細detailViewに遷移させるメソッド*/
@@ -131,21 +129,21 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     }
 
 
-    // MARK: - private methods
-    private func setupSearchBar() {
-        if let navigationBarFrame = navigationController?.navigationBar.bounds {
-            let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
-            searchBar.delegate = self
-            searchBar.placeholder = "Search"
-            searchBar.showsCancelButton = true
-            searchBar.autocapitalizationType = UITextAutocapitalizationType.none
-            searchBar.keyboardType = UIKeyboardType.default
-            navigationItem.titleView = searchBar
-            navigationItem.titleView?.frame = searchBar.frame
-            self.testSearchBar = searchBar
-            searchBar.becomeFirstResponder()
-        }
-    }
+//    // MARK: - private methods
+//    private func setupSearchBar() {
+//        if let navigationBarFrame = navigationController?.navigationBar.bounds {
+//            let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
+//            searchBar.delegate = self
+//            searchBar.placeholder = "Search"
+//            searchBar.showsCancelButton = true
+//            searchBar.autocapitalizationType = UITextAutocapitalizationType.none
+//            searchBar.keyboardType = UIKeyboardType.default
+//            navigationItem.titleView = searchBar
+//            navigationItem.titleView?.frame = searchBar.frame
+//            self.testSearchBar = searchBar
+//            searchBar.becomeFirstResponder()
+//        }
+//    }
 
 
     /*
