@@ -25,13 +25,13 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        setupSearchBar()
+//        setupSearchBar()
         
         //何も入力されていなくてもReturnキーを押せるようにする。
-        testSearchBar.enablesReturnKeyAutomatically = false
+//        testSearchBar.enablesReturnKeyAutomatically = false
 
-        //記事を取得し、tableViewに記録(register)していく
-        getArticles()
+        //記事を取得し、tableViewをリロードする（tableViewCellは、下にfuncを記載しているから、それを勝手に実行して記事をセットしてくれるっぽい）
+//        getArticles()
         
         //使用するXibとCellのReuseIdentifierを登録する
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
@@ -103,7 +103,6 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     //検索ボタン押下時の呼び出しメソッド
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         testSearchBar.endEditing(true)
-        
         //検索結果配列を空にする。
         searchResult.removeAll()
         
@@ -118,7 +117,6 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
                 }
             }
         }
-        
         //テーブルを再読み込みする。
         tableView.reloadData()
     }

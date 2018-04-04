@@ -75,7 +75,6 @@
 			children = (
 				B06CFC0120521EE100C55BB9 /* QiitaReader */,
 				B050AAFF206398DD00C6DA7C /* QiitaReader.app */,
-				B0C31ED1207485C8001FE2EA /* CustomTabBarController.swift */,
 				D525B34C4DD0C5DF5E2FFD49 /* Pods */,
 				41E6758A2645FE3F5DB2886C /* Frameworks */,
 			);
@@ -93,6 +92,7 @@
 				B0B131E820528D82009C2BD1 /* SampleData.swift */,
 				B04F805D2068F58000E43A62 /* ArticleCell.xib */,
 				B04F805F2068F5B600E43A62 /* ArticleCell.swift */,
+				B0C31ED1207485C8001FE2EA /* CustomTabBarController.swift */,
 				B06CFC0920521EE100C55BB9 /* Assets.xcassets */,
 				B08DD38A206DDCEE00A7E762 /* authorIcon.png */,
 				B08DD389206DDCEE00A7E762 /* likeIcon.jpg */,

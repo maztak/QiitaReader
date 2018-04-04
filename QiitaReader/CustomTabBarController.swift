@@ -20,7 +20,7 @@ class CustomTabBarController: UITabBarController, UISearchBarDelegate {
 
         // Do any additional setup after loading the view.
         setupSearchBar()
-        
+
         //何も入力されていなくてもReturnキーを押せるようにする。
         testSearchBar.enablesReturnKeyAutomatically = false
         
