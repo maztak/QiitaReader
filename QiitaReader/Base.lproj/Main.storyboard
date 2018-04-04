@@ -127,15 +127,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="5hE-xr-YCo">
-                                <rect key="frame" x="12" y="85" width="351" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="u7J-Ld-H3d"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DF2-IV-PAB">
-                                <rect key="frame" x="0.0" y="129" width="375" height="489"/>
+                                <rect key="frame" x="0.0" y="93" width="375" height="525"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="t6n-9h-mT9" id="02z-Zo-qqp"/>
@@ -152,15 +145,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Yfd-an-fNE" secondAttribute="trailing" constant="20" symbolic="YES" id="00T-IL-eeh"/>
-                            <constraint firstItem="5hE-xr-YCo" firstAttribute="leading" secondItem="eNc-WD-MeN" secondAttribute="leadingMargin" constant="-4" id="2v0-xe-tuG"/>
-                            <constraint firstItem="5hE-xr-YCo" firstAttribute="top" secondItem="eNc-WD-MeN" secondAttribute="top" constant="85" id="FpE-7N-ItT"/>
+                            <constraint firstAttribute="trailing" secondItem="DF2-IV-PAB" secondAttribute="trailing" id="Iy6-VO-S9G"/>
                             <constraint firstItem="DF2-IV-PAB" firstAttribute="leading" secondItem="eNc-WD-MeN" secondAttribute="leading" id="JdX-ge-rlK"/>
+                            <constraint firstItem="DF2-IV-PAB" firstAttribute="top" secondItem="Yfd-an-fNE" secondAttribute="bottom" constant="8" symbolic="YES" id="TNU-lF-4HB"/>
                             <constraint firstItem="DF2-IV-PAB" firstAttribute="leading" secondItem="Yfd-an-fNE" secondAttribute="leading" constant="-16" id="XFy-BZ-4Sg"/>
-                            <constraint firstItem="5hE-xr-YCo" firstAttribute="centerX" secondItem="DF2-IV-PAB" secondAttribute="centerX" id="lXg-hf-egh"/>
-                            <constraint firstItem="5hE-xr-YCo" firstAttribute="top" secondItem="Yfd-an-fNE" secondAttribute="bottom" id="m2r-YP-bt3"/>
-                            <constraint firstItem="DF2-IV-PAB" firstAttribute="top" secondItem="5hE-xr-YCo" secondAttribute="bottom" id="m81-5v-7dx"/>
-                            <constraint firstItem="5hE-xr-YCo" firstAttribute="centerX" secondItem="eNc-WD-MeN" secondAttribute="centerX" id="rGr-02-Sx5"/>
                             <constraint firstItem="6Hk-qV-i7e" firstAttribute="top" secondItem="DF2-IV-PAB" secondAttribute="bottom" id="wSj-4g-1KU"/>
+                            <constraint firstItem="Yfd-an-fNE" firstAttribute="top" secondItem="x5A-IP-Prg" secondAttribute="bottom" id="zqq-Cz-D0h"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="3Ta-av-0Sg"/>

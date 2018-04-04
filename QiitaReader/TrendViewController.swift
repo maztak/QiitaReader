@@ -122,6 +122,22 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
+    
+    // MARK: - private methods
+    private func setupSearchBar() {
+        if let navigationBarFrame = navigationController?.navigationBar.bounds {
+            let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
+            searchBar.delegate = self
+            searchBar.placeholder = "Search"
+            searchBar.showsCancelButton = true
+            searchBar.autocapitalizationType = UITextAutocapitalizationType.none
+            searchBar.keyboardType = UIKeyboardType.default
+            navigationItem.titleView = searchBar
+            navigationItem.titleView?.frame = searchBar.frame
+            self.testSearchBar = searchBar
+            searchBar.becomeFirstResponder()
+        }
+    }
 
     /*
     // MARK: - Navigation
@@ -134,3 +150,5 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     */
 
 }
+
+
