@@ -11,14 +11,22 @@ import Alamofire
 import SwiftyJSON
 import Nuke
 
-class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var tableView: UITableView!
+    var testSearchBar: UISearchBar!
+    
     var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
+    var searchResult = [Article]()
     
     //////////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setupSearchBar()
+        
+        //何も入力されていなくてもReturnキーを押せるようにする。
+        testSearchBar.enablesReturnKeyAutomatically = false
+        
         //記事を取得し、tableViewに記録(register)していく
         getArticles()
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
@@ -54,32 +62,57 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 )
                 self.articles.append(article) //それを辞書の配列であるarticlesに入れていく
             }
+            //検索結果配列にデータをコピーする。
+            self.searchResult = self.articles
             self.tableView.reloadData() //TableViewを更新
         }
     }
     
     
-    /*TableViewに表示する記事数を返すメソッド*/
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articles.count
-    }
+    
     
     /*tableViewCellを生成し、値を設定し、そのセルを返すメソッド*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得（生成？）する
         let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルのプロパティに記事情報を設定する
-        let article: Article = articles[indexPath.row]
+        let article: Article = searchResult[indexPath.row]
         cell.title.text = article.title
         cell.author.text = article.authorName
         cell.goodCnt.text = String(article.goodCnt)
         cell.tag1.text = article.tag1
         cell.tag2.text = article.tag2
         cell.tag3.text = article.tag3
-        
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
-        
         return cell
+    }
+    
+    /*TableViewに表示する記事数を返すメソッド*/
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return searchResult.count
+    }
+    
+    //検索ボタン押下時の呼び出しメソッド
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        testSearchBar.endEditing(true)
+        
+        //検索結果配列を空にする。
+        searchResult.removeAll()
+        
+        if(testSearchBar.text == "") {
+            //検索文字列が空の場合はすべてを表示する。
+            searchResult = articles
+        } else {
+            //検索文字列を含むデータを検索結果配列に追加する。
+            for data in articles {
+                if data.title.contains(testSearchBar.text!) {
+                    searchResult.append(data)
+                }
+            }
+        }
+        
+        //テーブルを再読み込みする。
+        tableView.reloadData()
     }
     
     /*記事詳細detailViewに遷移させるメソッド*/
