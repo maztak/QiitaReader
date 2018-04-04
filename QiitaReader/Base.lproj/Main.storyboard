@@ -60,8 +60,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="wnm-NR-4mF"/>
                     <connections>
-                        <outlet property="searchBar" destination="HxM-65-1kh" id="yhk-1J-Ays"/>
                         <outlet property="tableView" destination="esE-bg-kcI" id="BMj-pY-5S1"/>
+                        <outlet property="testSearchBar" destination="HxM-65-1kh" id="M9U-JO-N3z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
