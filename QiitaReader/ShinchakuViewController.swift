@@ -13,7 +13,7 @@ import Nuke
 
 class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var testSearchBar: UISearchBar!
+    var testSearchBar: UISearchBar!
     
     //データ
     var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
@@ -25,9 +25,10 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        setupSearchBar()
         
-        //デリゲート先を自分に設定する。
-        testSearchBar.delegate = self
+//        //デリゲート先を自分に設定する。
+//        testSearchBar.delegate = self
         //何も入力されていなくてもReturnキーを押せるようにする。
         testSearchBar.enablesReturnKeyAutomatically = false
 
@@ -137,9 +138,23 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
-}
 
 
+    // MARK: - private methods
+    private func setupSearchBar() {
+        if let navigationBarFrame = navigationController?.navigationBar.bounds {
+            let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
+            searchBar.delegate = self
+            searchBar.placeholder = "Search"
+            searchBar.showsCancelButton = true
+            searchBar.autocapitalizationType = UITextAutocapitalizationType.none
+            searchBar.keyboardType = UIKeyboardType.default
+            navigationItem.titleView = searchBar
+            navigationItem.titleView?.frame = searchBar.frame
+            self.testSearchBar = searchBar
+            searchBar.becomeFirstResponder()
+        }
+    }
 
 
     /*
@@ -152,4 +167,5 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     */
 
+}
 
