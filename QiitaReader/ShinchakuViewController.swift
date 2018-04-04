@@ -27,8 +27,6 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         // Do any additional setup after loading the view.
         setupSearchBar()
         
-//        //デリゲート先を自分に設定する。
-//        testSearchBar.delegate = self
         //何も入力されていなくてもReturnキーを押せるようにする。
         testSearchBar.enablesReturnKeyAutomatically = false
 
@@ -72,13 +70,8 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
                 )
                 self.articles.append(article) //それを辞書の配列であるarticlesに入れていく
             }
-//            //デリゲート先を自分に設定する。
-//            self.testSearchBar.delegate = self
-//            //何も入力されていなくてもReturnキーを押せるようにする。
-//            self.testSearchBar.enablesReturnKeyAutomatically = false
             //検索結果配列にデータをコピーする。
             self.searchResult = self.articles
-            
             self.tableView.reloadData() //TableViewを更新
         }
     }

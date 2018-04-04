@@ -29,32 +29,22 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="esE-bg-kcI">
-                                <rect key="frame" x="0.0" y="65" width="375" height="489"/>
+                                <rect key="frame" x="0.0" y="29" width="375" height="525"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="BYZ-38-t0r" id="2Ru-h0-lXW"/>
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="8P9-1d-lPC"/>
                                 </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="HxM-65-1kh">
-                                <rect key="frame" x="12" y="21" width="351" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="7mb-Wf-DiK"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="HxM-65-1kh" firstAttribute="top" secondItem="REv-zM-tfX" secondAttribute="bottom" id="MF1-rg-Ltr"/>
-                            <constraint firstItem="HxM-65-1kh" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="21" id="RVA-Mg-qcn"/>
+                            <constraint firstItem="esE-bg-kcI" firstAttribute="top" secondItem="REv-zM-tfX" secondAttribute="bottom" constant="8" id="5C9-oC-X1d"/>
+                            <constraint firstAttribute="trailing" secondItem="esE-bg-kcI" secondAttribute="trailing" id="K4n-Th-1f7"/>
                             <constraint firstItem="REv-zM-tfX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="Ssp-Lg-Dme"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="REv-zM-tfX" secondAttribute="trailing" id="UgO-iP-oSo"/>
-                            <constraint firstItem="esE-bg-kcI" firstAttribute="centerX" secondItem="HxM-65-1kh" secondAttribute="centerX" id="atZ-5B-K6x"/>
-                            <constraint firstItem="HxM-65-1kh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-4" id="bwX-T5-STQ"/>
-                            <constraint firstItem="esE-bg-kcI" firstAttribute="top" secondItem="HxM-65-1kh" secondAttribute="bottom" id="ge9-xj-sWt"/>
+                            <constraint firstItem="REv-zM-tfX" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="dA3-kH-zyd"/>
                             <constraint firstAttribute="bottomMargin" secondItem="esE-bg-kcI" secondAttribute="bottom" id="j6r-Cx-om9"/>
-                            <constraint firstItem="HxM-65-1kh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ogq-3n-tdL"/>
                             <constraint firstItem="esE-bg-kcI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="z3k-jY-URe"/>
                         </constraints>
                     </view>
