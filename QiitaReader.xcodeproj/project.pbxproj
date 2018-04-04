@@ -21,6 +21,7 @@
 		B0B131EF20529284009C2BD1 /* ic_new_releases_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B131EE20529284009C2BD1 /* ic_new_releases_white.png */; };
 		B0B131F120529296009C2BD1 /* ic_trending_up_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B131F020529296009C2BD1 /* ic_trending_up_white.png */; };
 		B0B131F3205292A7009C2BD1 /* ic_access_time_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B131F2205292A7009C2BD1 /* ic_access_time_white.png */; };
+		B0C31ED2207485C8001FE2EA /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C31ED1207485C8001FE2EA /* CustomTabBarController.swift */; };
 		B0C7A44320523C4A0066C01E /* ShinchakuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0C7A44220523C4A0066C01E /* ShinchakuViewController.swift */; };
 		B0D20576206A127800ED4C3D /* DatailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D20575206A127700ED4C3D /* DatailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -44,6 +45,7 @@
 		B0B131EE20529284009C2BD1 /* ic_new_releases_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_new_releases_white.png; sourceTree = "<group>"; };
 		B0B131F020529296009C2BD1 /* ic_trending_up_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_trending_up_white.png; sourceTree = "<group>"; };
 		B0B131F2205292A7009C2BD1 /* ic_access_time_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_access_time_white.png; sourceTree = "<group>"; };
+		B0C31ED1207485C8001FE2EA /* CustomTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
 		B0C7A44220523C4A0066C01E /* ShinchakuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShinchakuViewController.swift; sourceTree = "<group>"; };
 		B0D20575206A127700ED4C3D /* DatailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DatailViewController.swift; path = /Users/takuya/Developer/QiitaReader/QiitaReader/DatailViewController.swift; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
@@ -73,6 +75,7 @@
 			children = (
 				B06CFC0120521EE100C55BB9 /* QiitaReader */,
 				B050AAFF206398DD00C6DA7C /* QiitaReader.app */,
+				B0C31ED1207485C8001FE2EA /* CustomTabBarController.swift */,
 				D525B34C4DD0C5DF5E2FFD49 /* Pods */,
 				41E6758A2645FE3F5DB2886C /* Frameworks */,
 			);
@@ -259,6 +262,7 @@
 			files = (
 				B0B131E920528D82009C2BD1 /* SampleData.swift in Sources */,
 				916D264120566137007BC178 /* TrendViewController.swift in Sources */,
+				B0C31ED2207485C8001FE2EA /* CustomTabBarController.swift in Sources */,
 				B06CFC442052374000C55BB9 /* AtodeyomuViewController.swift in Sources */,
 				B0D20576206A127800ED4C3D /* DatailViewController.swift in Sources */,
 				B04F80602068F5B600E43A62 /* ArticleCell.swift in Sources */,
