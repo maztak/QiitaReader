@@ -6,9 +6,12 @@
 //  Copyright © 2018年 mycompany. All rights reserved.
 //
 
-//import Foundation
 import UIKit
 //import Nuke
+
+protocol ArticleCellDelegate { //試験的に追加
+    func readLaterButtonTapped(cell: UITableViewCell)  //引数はテキトーなので、これでいいかは分からん
+}
 
 class ArticleCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
@@ -17,7 +20,13 @@ class ArticleCell: UITableViewCell {
     @IBOutlet weak var tag1: UILabel!
     @IBOutlet weak var tag2: UILabel!
     @IBOutlet weak var tag3: UILabel!
-    @IBOutlet weak var authorIcon: UIImageView!    
+    @IBOutlet weak var authorIcon: UIImageView!
+    var delegate: ArticleCellDelegate? = nil //プロパティだけど、メソッドを持つので関数プロパティ
+    
+    @IBAction func readLaterButton(_ sender: Any) {
+        delegate?.readLaterButtonTapped(cell: UITableViewCell)
+    }
+    
 }
 
 

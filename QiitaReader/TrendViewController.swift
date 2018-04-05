@@ -11,7 +11,10 @@ import Alamofire
 import SwiftyJSON
 import Nuke
 
-class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+
+//ArticleCellDelegateプロトコルに準拠　を試験的に追加
+class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
+    
     @IBOutlet weak var tableView: UITableView!
     var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
     
@@ -60,12 +63,16 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     
+    /*TableViewに表示する記事数を返すメソッド*/
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return articles.count
+    }
     
     
     /*tableViewCellを生成し、値を設定し、そのセルを返すメソッド*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルをdequeueReusableCell()で取得
-        let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルのプロパティに記事情報を設定
         let article: Article = articles[indexPath.row]
         cell.title.text = article.title
@@ -74,15 +81,19 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.tag1.text = article.tag1
         cell.tag2.text = article.tag2
         cell.tag3.text = article.tag3
+        cell.delegate = self //試験的に追加
+        
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         return cell
     }
     
-    
-    /*TableViewに表示する記事数を返すメソッド*/
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articles.count
+    /*「あとで読む」ボタンがタップされた時のメソッド*/
+    func readLaterButtonTapped(cell: UITableViewCell) {
+        //Realm(DataBase）にその記事情報を書き込む
     }
+    
+    
+    
     
     
     /*記事詳細detailViewに遷移させるメソッド*/
@@ -93,6 +104,8 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
+    
+   
 
 
     /*

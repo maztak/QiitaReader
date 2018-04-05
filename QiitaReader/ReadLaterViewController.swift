@@ -57,10 +57,10 @@ class ReadLaterViewController: UIViewController {
         }
         
         // 追記　読み取り部分//////
-//        let objs = realm.objects(RealmTest2.self).filter("authorName == テスト太郎")
-//        if let obj = objs.first {
-//            print(obj)
-//        }
+        let objs = realm.objects(RealmTest3.self).filter("title == \"はじめてのiOS開発\"")
+        if let obj = objs.first {
+            print(obj)
+        }
     }
 
     override func didReceiveMemoryWarning() {
