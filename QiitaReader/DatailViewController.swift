@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftyJSON
 import TOWebViewController
 
 class DetailViewController: TOWebViewController {
@@ -26,25 +25,26 @@ class DetailViewController: TOWebViewController {
         self.webview.loadRequest(request as URLRequest)
     }
     
+    
     override func webViewDidStartLoad(_ webView: UIWebView) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
+    
     override func webViewDidFinishLoad(_ webView: UIWebView) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
-}
-    
-    
-    
 
+    
     /*
-    // MARK: - Navigation
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+}
 

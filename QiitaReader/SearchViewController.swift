@@ -25,10 +25,8 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setupSearchBar()
-       //何も入力されていなくてもReturnキーを押せるようにする。
+        //何も入力されていなくてもReturnキーを押せるようにする。
         testSearchBar.enablesReturnKeyAutomatically = false
-        //記事を取得し、tableViewをリロードする
-//        getArticles()
         //使用するXibとCellのReuseIdentifierを登録する
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
     }
@@ -47,7 +45,6 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     //////////////////////////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
-//        Alamofire.request("https://qiita.com/api/v2/items").responseJSON { response in
         Alamofire.request("https://qiita.com/api/v2/items?page=1&per_page=10&query=title%3A\(searchKeyword)").responseJSON { response in
             
             guard let object: Any = response.result.value else {
@@ -68,8 +65,6 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
                 )
                 self.articles.append(article) //それを辞書の配列であるarticlesに入れていく
             }
-            //検索結果配列にデータをコピーする。
-            //            self.searchResult = self.articles
             self.tableView.reloadData() //TableViewを更新
         }
     }
@@ -106,19 +101,10 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         searchKeyword = ""
         searchKeyword = testSearchBar.text!
         
-        //            if(testSearchBar.text == "") {
-        //                //検索文字列が空の場合はすべてを表示する。
-        //                searchResult = articles
-        //            } else {
-        //                //検索文字列を含むデータを検索結果配列に追加する。
-        //                for data in articles {
-        //                    if data.title.contains(testSearchBar.text!) {
-        //                        searchResult.append(data)
-        //                    }
-        //                }
-        //            }
-        //テーブルを再読み込みする。
+        //ここにgetArticles()をもってくる
         getArticles()
+        
+        //テーブルを再読み込みする。
         tableView.reloadData()
     }
     
@@ -131,13 +117,12 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
-    // MARK: - private methods
+    // MARK: - SearchBarの設定メソッド
         private func setupSearchBar() {
             if let navigationBarFrame = navigationController?.navigationBar.bounds {
                 let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
                 searchBar.delegate = self
                 searchBar.placeholder = "Search"
-                searchBar.showsCancelButton = true
                 searchBar.autocapitalizationType = UITextAutocapitalizationType.none
                 searchBar.keyboardType = UIKeyboardType.default
                 navigationItem.titleView = searchBar

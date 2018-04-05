@@ -13,29 +13,22 @@ import Nuke
 
 class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var tableView: UITableView!
-//    var testSearchBar: UISearchBar!
-    
     var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
-//    var searchResult = [Article]()
     
     //////////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-//        setupSearchBar()
-        
-        //何も入力されていなくてもReturnキーを押せるようにする。
-//        testSearchBar.enablesReturnKeyAutomatically = false
-        
         //記事を取得し、tableViewに記録(register)していく
         getArticles()
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
     }
 
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
     //////////////////////////////////////////////////////////////////////////
     //*各種メソッド                                                          *//
@@ -48,8 +41,8 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 return
             }
             
-            let json = JSON(object)["trendItems"] //object（1つの記事）をJSON型に変換？し、定数jsonに入れる
-            json.forEach { (_, json) in //JOSN型の定数jsonの各要素をforEachで呼び出し、それらを構造体Articleの引数とし
+            let json = JSON(object)["trendItems"] //objectをJSON型にキャストし定数jsonに入れる
+            json.forEach { (_, json) in //JOSN型の定数jsonの各要素をforEachで呼び出し
                 let article = Article ( //articleを生成していく
                     title: json["article"]["title"].string!,
                     authorName: json["article"]["author"]["urlName"].string!,
@@ -62,8 +55,6 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
                 )
                 self.articles.append(article) //それを辞書の配列であるarticlesに入れていく
             }
-            //検索結果配列にデータをコピーする。
-//            self.searchResult = self.articles
             self.tableView.reloadData() //TableViewを更新
         }
     }
@@ -73,9 +64,9 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     /*tableViewCellを生成し、値を設定し、そのセルを返すメソッド*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // セルを取得（生成？）する
+        // セルをdequeueReusableCell()で取得
         let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
-        // セルのプロパティに記事情報を設定する
+        // セルのプロパティに記事情報を設定
         let article: Article = articles[indexPath.row]
         cell.title.text = article.title
         cell.author.text = article.authorName
@@ -87,33 +78,12 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
+    
     /*TableViewに表示する記事数を返すメソッド*/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
     }
     
-//    //検索ボタン押下時の呼び出しメソッド
-//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        testSearchBar.endEditing(true)
-//
-//        //検索結果配列を空にする。
-//        searchResult.removeAll()
-//
-//        if(testSearchBar.text == "") {
-//            //検索文字列が空の場合はすべてを表示する。
-//            searchResult = articles
-//        } else {
-//            //検索文字列を含むデータを検索結果配列に追加する。
-//            for data in articles {
-//                if data.title.contains(testSearchBar.text!) {
-//                    searchResult.append(data)
-//                }
-//            }
-//        }
-//
-//        //テーブルを再読み込みする。
-//        tableView.reloadData()
-//    }
     
     /*記事詳細detailViewに遷移させるメソッド*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -123,21 +93,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
-//    // MARK: - private methods
-//    private func setupSearchBar() {
-//        if let navigationBarFrame = navigationController?.navigationBar.bounds {
-//            let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
-//            searchBar.delegate = self
-//            searchBar.placeholder = "Search"
-//            searchBar.showsCancelButton = true
-//            searchBar.autocapitalizationType = UITextAutocapitalizationType.none
-//            searchBar.keyboardType = UIKeyboardType.default
-//            navigationItem.titleView = searchBar
-//            navigationItem.titleView?.frame = searchBar.frame
-//            self.testSearchBar = searchBar
-//            searchBar.becomeFirstResponder()
-//        }
-//    }
+
 
     /*
     // MARK: - Navigation

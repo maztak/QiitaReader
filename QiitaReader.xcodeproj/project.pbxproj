@@ -18,7 +18,6 @@
 		B06CFC442052374000C55BB9 /* AtodeyomuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CFC432052374000C55BB9 /* AtodeyomuViewController.swift */; };
 		B08DD38B206DDCEF00A7E762 /* likeIcon.jpg in Resources */ = {isa = PBXBuildFile; fileRef = B08DD389206DDCEE00A7E762 /* likeIcon.jpg */; };
 		B08DD38C206DDCEF00A7E762 /* authorIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = B08DD38A206DDCEE00A7E762 /* authorIcon.png */; };
-		B0B131E920528D82009C2BD1 /* SampleData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0B131E820528D82009C2BD1 /* SampleData.swift */; };
 		B0B131EF20529284009C2BD1 /* ic_new_releases_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B131EE20529284009C2BD1 /* ic_new_releases_white.png */; };
 		B0B131F120529296009C2BD1 /* ic_trending_up_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B131F020529296009C2BD1 /* ic_trending_up_white.png */; };
 		B0B131F3205292A7009C2BD1 /* ic_access_time_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B131F2205292A7009C2BD1 /* ic_access_time_white.png */; };
@@ -42,7 +41,6 @@
 		B06CFC432052374000C55BB9 /* AtodeyomuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AtodeyomuViewController.swift; sourceTree = "<group>"; };
 		B08DD389206DDCEE00A7E762 /* likeIcon.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = likeIcon.jpg; sourceTree = "<group>"; };
 		B08DD38A206DDCEE00A7E762 /* authorIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = authorIcon.png; sourceTree = "<group>"; };
-		B0B131E820528D82009C2BD1 /* SampleData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleData.swift; sourceTree = "<group>"; };
 		B0B131EE20529284009C2BD1 /* ic_new_releases_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_new_releases_white.png; sourceTree = "<group>"; };
 		B0B131F020529296009C2BD1 /* ic_trending_up_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_trending_up_white.png; sourceTree = "<group>"; };
 		B0B131F2205292A7009C2BD1 /* ic_access_time_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_access_time_white.png; sourceTree = "<group>"; };
@@ -86,11 +84,10 @@
 				B06CFC0220521EE100C55BB9 /* AppDelegate.swift */,
 				B06CFC0620521EE100C55BB9 /* Main.storyboard */,
 				B0C7A44220523C4A0066C01E /* ShinchakuViewController.swift */,
-				B04498502074D36100438B08 /* SearchViewController.swift */,
 				916D264020566137007BC178 /* TrendViewController.swift */,
 				B06CFC432052374000C55BB9 /* AtodeyomuViewController.swift */,
+				B04498502074D36100438B08 /* SearchViewController.swift */,
 				B0D20575206A127700ED4C3D /* DatailViewController.swift */,
-				B0B131E820528D82009C2BD1 /* SampleData.swift */,
 				B04F805D2068F58000E43A62 /* ArticleCell.xib */,
 				B04F805F2068F5B600E43A62 /* ArticleCell.swift */,
 				B06CFC0920521EE100C55BB9 /* Assets.xcassets */,
@@ -260,7 +257,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0B131E920528D82009C2BD1 /* SampleData.swift in Sources */,
 				916D264120566137007BC178 /* TrendViewController.swift in Sources */,
 				B04498512074D36100438B08 /* SearchViewController.swift in Sources */,
 				B06CFC442052374000C55BB9 /* AtodeyomuViewController.swift in Sources */,
