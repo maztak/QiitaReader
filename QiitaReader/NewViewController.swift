@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
-import Nuke
+import Alamofire    //APIで記事を取得したりするときに使う
+import SwiftyJSON   //JSON型にキャストしたり、stringやintプロパティを使う
+import Nuke         //サムネイル画像を表示して、キャッシュまでしてくれる
 
 class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var tableView: UITableView!
@@ -93,8 +93,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
-
-
+    
     /*
     // MARK: - Navigation
 
@@ -104,6 +103,5 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         // Pass the selected object to the new view controller.
     }
     */
-
 }
 

@@ -15,9 +15,9 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     @IBOutlet weak var tableView: UITableView!
     var testSearchBar: UISearchBar!
     var articles: [Article] = []
-    //検索結果配列を用意
-    var searchResult = [Article]()
-    var searchKeyword: String = ""
+//    //検索結果配列を用意
+//    var searchResult = [Article]() // <- いらない？
+    var searchQuery: String = ""
     
     //////////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
@@ -46,11 +46,9 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     //検索ボタン押下時の呼び出しメソッド
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         testSearchBar.endEditing(true)
-        //検索結果配列を空にする。
-        searchResult.removeAll()
-//        searchKeyword = ""
-//        searchKeyword = testSearchBar.text!
-//
+//        //検索結果配列を空にする。 <- いらない？
+//        searchResult.removeAll()
+
         //ここにgetArticles()をもってくる
         getArticles()
         
@@ -63,17 +61,16 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
         //
-        searchKeyword = testSearchBar.text!
-        let encodedKeyword = searchKeyword.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
-        var targetURL = ""
-        targetURL = "https://qiita.com/api/v2/items?page=1&per_page=20&query=title%3A\(encodedKeyword!)"
+        searchQuery = testSearchBar.text!
+        let encodedQuery = searchQuery.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        var targetUrl = ""
+        targetUrl = "https://qiita.com/api/v2/items?page=1&per_page=10&query=title%3A\(encodedQuery!)"
         
-        guard let url = URL(string: targetURL) else {
+        guard let url = URL(string: targetUrl) else {
             print("無効なURL")
             return
         }
         
-//        Alamofire.request("https://qiita.com/api/v2/items?page=1&per_page=20&query=title%3A\(searchKeyword)").responseJSON { response in
         Alamofire.request(url).responseJSON { response in
             guard let object: Any = response.result.value else {
                 return
@@ -122,8 +119,6 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     }
     
  
-    
-    
     /*記事詳細detailViewに遷移させるメソッド*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
@@ -132,7 +127,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
-    // MARK: - SearchBarの設定メソッド
+    // MARK: - setupSearchBarメソッド
         private func setupSearchBar() {
             if let navigationBarFrame = navigationController?.navigationBar.bounds {
                 let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
