@@ -1,5 +1,5 @@
 //
-//  AtodeyomuViewController.swift
+//  ReadLaterViewController.swift
 //  QiitaReader
 //
 //  Created by Takuya Matsuda on 2018/03/09.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AtodeyomuViewController: UIViewController {
+class ReadLaterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

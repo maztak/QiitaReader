@@ -1,5 +1,5 @@
 //
-//  ShinchakuViewController.swift
+//  NewViewController.swift
 //  QiitaReader
 //
 //  Created by Takuya Matsuda on 2018/03/09.
@@ -11,7 +11,7 @@ import Alamofire
 import SwiftyJSON
 import Nuke
 
-class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var tableView: UITableView!
     var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
     
