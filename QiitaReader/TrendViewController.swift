@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Nuke
-
+//ログインしていないと見れなくなった？ことが判明
 
 //ArticleCellDelegateプロトコルに準拠　を試験的に追加
 class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {

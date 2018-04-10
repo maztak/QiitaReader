@@ -35,30 +35,30 @@ class ReadLaterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // モデル作成
-        let myRealm = RealmTest3(value: [
-            "title" : "はじめてのiOS開発",
-            "authorName": "テスト太郎",
-            "authorImageUrl": "http://sampleImage",
-            "goodCnt": 3,
-            "tag1": "iOS",
-            "tag2": "swift",
-            "tag3": "Xcode",
-            "url": "http://testUrl.com"
-            ])
-        
-        // デフォルトRealmを取得する(おまじない)
-        let realm = try! Realm()
-        
-        // トランザクションを開始して、オブジェクトをRealmに追加する
-        try! realm.write {
-            realm.add(myRealm)
-        }
+//        let myRealm = RealmTest3(value: [
+//            "title" : "はじめてのiOS開発",
+//            "authorName": "テスト太郎",
+//            "authorImageUrl": "http://sampleImage",
+//            "goodCnt": 3,
+//            "tag1": "iOS",
+//            "tag2": "swift",
+//            "tag3": "Xcode",
+//            "url": "http://testUrl.com"
+//            ])
+//
+//        // デフォルトRealmを取得する(おまじない)
+//        let realm = try! Realm()
+//
+//        // トランザクションを開始して、オブジェクトをRealmに追加する
+//        try! realm.write {
+//            realm.add(myRealm)
+//        }
         
         // 追記　読み取り部分//////
-        let objs = realm.objects(RealmTest3.self).filter("title == \"はじめてのiOS開発\"")
-        if let obj = objs.first {
-            print(obj)
-        }
+//        let objs = realm.objects(RealmTest3.self).filter("title == \"はじめてのiOS開発\"")
+//        if let obj = objs.first {
+//            print(obj)
+//        }
     }
 
     override func didReceiveMemoryWarning() {

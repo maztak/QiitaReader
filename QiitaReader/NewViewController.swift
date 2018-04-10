@@ -10,12 +10,13 @@ import UIKit
 import Alamofire    //APIで記事を取得したりするときに使う
 import SwiftyJSON   //JSON型にキャストしたり、stringやintプロパティを使う
 import Nuke         //サムネイル画像を表示して、キャッシュまでしてくれる
+import RealmSwift
 
-class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
     
-    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
         //記事を取得し、tableViewをリロードする（tableViewCellは、下にfuncを記載しているから、それを勝手に実行して記事をセットしてくれるっぽい）
@@ -32,9 +33,9 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     
-    //////////////////////////////////////////////////////////////////////////
-    //*各種メソッド                                                          *//
-    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////
+    //*各種メソッド
+    //////////////////////////////////////////////////////////////////////
     
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
@@ -74,6 +75,8 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.tag1.text = article.tag1
         cell.tag2.text = article.tag2
         cell.tag3.text = article.tag3
+        cell.url = article.url
+        cell.delegate = self
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         return cell
     }
@@ -91,6 +94,29 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         detailViewController.entry = articles[indexPath.row]
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
+    }
+    
+    /*あとで読むボタンタップされた時のメソッド*/
+    func addReadLater(cell: ArticleCell) {
+        //Realmに記事を追加する処理
+        let myRealm = RealmTest3(value: [
+            "title" : cell.title.text!,
+            "authorName": cell.author.text!,
+            "authorImageUrl": cell.authorIcon!,
+            "goodCnt": cell.goodCnt.text!,
+            "tag1": cell.tag1.text!,
+            "tag2": cell.tag2.text!,
+            "tag3": cell.tag3.text!,
+            "url": cell.url
+            ])
+        
+        // デフォルトRealmを取得する(おまじない)
+        let realm = try! Realm()
+        
+        // トランザクションを開始して、オブジェクトをRealmに追加する
+        try! realm.write {
+            realm.add(myRealm)
+        }
     }
     
   
