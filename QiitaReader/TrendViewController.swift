@@ -13,7 +13,7 @@ import Nuke
 
 
 //ArticleCellDelegateプロトコルに準拠　を試験的に追加
-class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
+class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
@@ -24,6 +24,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //記事を取得し、tableViewに記録(register)していく
         getArticles()
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
+        
     }
 
     
@@ -81,16 +82,16 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.tag1.text = article.tag1
         cell.tag2.text = article.tag2
         cell.tag3.text = article.tag3
-        cell.delegate = self //試験的に追加
         
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         return cell
     }
     
-    /*「あとで読む」ボタンがタップされた時のメソッド*/
-    func readLaterButtonTapped(cell: UITableViewCell) {
-        //Realm(DataBase）にその記事情報を書き込む
-    }
+//    /*「あとで読む」ボタンがタップされた時のメソッド*/
+//    func addReadLater(cell: UITableViewCell) {
+//
+//        //Realm(DataBase）にその記事情報を書き込む
+//    }
     
     
     

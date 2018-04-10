@@ -9,11 +9,9 @@
 import UIKit
 import RealmSwift
 //po Realm.Configuration.defaultConfiguration.fileURL
-//Users/takuya/Library/Developer/CoreSimulator/Devices/7D56EB91-5DBD-40C7-8E54-4210D2C05D0E/data/Containers/Data/Application/4760CF7F-09A8-4916-96F7-1F027E294AEA/Documents/default.realm
-//FinderでShift+cmd+gで絶対パスを指定
+//FinderでShift+Cmd+gで絶対パスを指定
 
 class RealmTest3: Object {
-    // dynamic修飾子を付けないといけない
     @objc dynamic var title = ""
     @objc dynamic var authorName = ""
     @objc dynamic var authorImageUrl = ""

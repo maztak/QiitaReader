@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -69,7 +65,7 @@
                         <rect key="frame" x="369" y="21" width="77" height="30"/>
                         <state key="normal" title="あとで読む"/>
                         <connections>
-                            <action selector="readLaterButton:" destination="sVL-f0-5NT" eventType="touchUpInside" id="Tnd-at-ACk"/>
+                            <action selector="readLaterButtonTapped:" destination="sVL-f0-5NT" eventType="touchUpInside" id="Tnd-at-ACk"/>
                         </connections>
                     </button>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="likeIcon.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="GDJ-U5-SOX">
