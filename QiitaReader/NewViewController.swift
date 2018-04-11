@@ -37,9 +37,9 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     
-    //////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////
     //*各種メソッド
-    //////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////
     
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
@@ -118,8 +118,8 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             "tag1": article.tag1 ?? String(),
             "tag2": article.tag2 ?? String(),
             "tag3": article.tag3 ?? String(),
-            "url": article.url
-            //            "authorImageUrl": article.authorIcon! as String
+            "url": article.url,
+            "authorImageUrl": article.authorImageUrl
             ])
         
         // デフォルトRealmを取得する(おまじない)
@@ -130,7 +130,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             realm.add(realmArticle)
         }
         
-        //読み取り部分
+        //追加した記事をコンソールに出力（確認用）
         print(realmArticle)
         
     }

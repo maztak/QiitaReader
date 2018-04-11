@@ -90,35 +90,6 @@
             </objects>
             <point key="canvasLocation" x="3070" y="2392"/>
         </scene>
-        <!--Article3-->
-        <scene sceneID="w2x-PQ-lwp">
-            <objects>
-                <viewController title="Article3" id="rlZ-QP-kJF" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="1cA-xu-dHH"/>
-                        <viewControllerLayoutGuide type="bottom" id="abJ-HX-ANz"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="e0W-hI-zXb">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wFU-2O-bqU">
-                                <rect key="frame" x="0.0" y="151" width="375" height="516"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Px0-k5-9nM"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lFK-kx-c4G" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4207" y="2480"/>
-        </scene>
         <!--Trend-->
         <scene sceneID="VUz-gS-Viu">
             <objects>
@@ -190,26 +161,29 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RWi-d8-KdC">
-                                <rect key="frame" x="111" y="318" width="153" height="30"/>
-                                <state key="normal" title="あとで読む記事詳細へ"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ouW-ns-A8Z">
+                                <rect key="frame" x="0.0" y="93" width="375" height="525"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="rlZ-QP-kJF" kind="show" id="Pc9-bO-P28"/>
+                                    <outlet property="dataSource" destination="maU-44-qF5" id="5Kh-63-zGh"/>
+                                    <outlet property="delegate" destination="maU-44-qF5" id="Km3-RC-zMH"/>
                                 </connections>
-                            </button>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="g3U-7u-i7U" firstAttribute="top" secondItem="OvB-XO-2Lp" secondAttribute="bottom" id="4nA-gv-TY7"/>
                             <constraint firstItem="g3U-7u-i7U" firstAttribute="leading" secondItem="bqw-6L-fW7" secondAttribute="leading" id="H9g-UL-Awq"/>
-                            <constraint firstItem="RWi-d8-KdC" firstAttribute="centerX" secondItem="bqw-6L-fW7" secondAttribute="centerX" id="bww-VB-GGK"/>
-                            <constraint firstItem="RWi-d8-KdC" firstAttribute="centerY" secondItem="bqw-6L-fW7" secondAttribute="centerY" id="fUg-4G-Wev"/>
                             <constraint firstAttribute="trailing" secondItem="g3U-7u-i7U" secondAttribute="trailing" id="hg7-Ci-238"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" tag="3" title="あとで読む" image="ic_access_time_white.png" id="i1w-gs-vVZ"/>
                     <navigationItem key="navigationItem" id="JIG-1h-UzZ"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="ouW-ns-A8Z" id="68g-qx-mWk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="86w-7Q-fIa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
