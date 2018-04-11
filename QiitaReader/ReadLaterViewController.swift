@@ -14,29 +14,28 @@ import RealmSwift
 
 class ReadLaterViewController: UIViewController {
     
-    
     ////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
-        // モデル作成
-        let realmArticle = RealmArticle(value: [
-            "title" : "はじめてのiOS開発",
-            "authorName": "テスト太郎",
-            "authorImageUrl": "http://sampleImage",
-            "goodCnt": 3,
-            "tag1": "iOS",
-            "tag2": "swift",
-            "tag3": "Xcode",
-            "url": "http://test.com"
-            ])
-
-        // デフォルトRealmを取得する(おまじない)
-        let realm = try! Realm()
-
-        // トランザクションを開始して、オブジェクトをRealmに追加する
-        try! realm.write {
-            realm.add(realmArticle)
-        }
+//        // モデル作成
+//        let realmArticle = RealmArticle(value: [
+//            "title" : "はじめてのiOS開発",
+//            "authorName": "テスト太郎",
+//            "authorImageUrl": "http://sampleImage",
+//            "goodCnt": 3,
+//            "tag1": "iOS",
+//            "tag2": "swift",
+//            "tag3": "Xcode",
+//            "url": "http://test.com"
+//            ])
+//
+//        // デフォルトRealmを取得する(おまじない)
+//        let realm = try! Realm()
+//
+//        // トランザクションを開始して、オブジェクトをRealmに追加する
+//        try! realm.write {
+//            realm.add(realmArticle)
+//        }
         
 //        //読み取り部分
 //        let objs = realm.objects(RealmArticle.self).filter("title == \"はじめてのiOS開発\"")

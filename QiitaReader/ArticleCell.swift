@@ -22,8 +22,6 @@ class ArticleCell: UITableViewCell {
     @IBOutlet weak var tag2: UILabel!
     @IBOutlet weak var tag3: UILabel!
     @IBOutlet weak var authorIcon: UIImageView!
-//    var url: String! //追加
-//    var indexPathRow: Int! //追加
     var delegate: ArticleCellDelegate? = nil //代理人（処理の委譲先）関数をもつプロパティ
     
     @IBAction func readLaterButtonTapped(_ sender: Any) {
@@ -32,7 +30,6 @@ class ArticleCell: UITableViewCell {
 //        let cell: UITableViewCell = btn.superview as! UITableViewCell
         delegate?.addReadLater(cell: self)
     }
-    
 }
 
 
@@ -49,14 +46,14 @@ struct Article {
 
 
 class RealmArticle: Object {
-    @objc dynamic var title = ""
-    @objc dynamic var authorName = ""
-    @objc dynamic var authorImageUrl = ""
-    @objc dynamic var goodCnt = 0
-    @objc dynamic var tag1 = ""
-    @objc dynamic var tag2 = ""
-    @objc dynamic var tag3 = ""
-    @objc dynamic var url = ""
+    @objc dynamic var title = String()
+    @objc dynamic var authorName = String()
+    @objc dynamic var authorImageUrl = String()
+    @objc dynamic var goodCnt = Int()
+    @objc dynamic var tag1: String? = String()
+    @objc dynamic var tag2: String? = String()
+    @objc dynamic var tag3: String? = String()
+    @objc dynamic var url = String()
     
     // Specify properties to ignore (Realm won't persist these)
     

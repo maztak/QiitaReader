@@ -23,7 +23,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     //////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
-        //記事を取得し、tableViewをリロードする（tableViewCellは、下にfuncを記載しているから、それを勝手に実行して記事をセットしてくれるっぽい）
+        //記事を取得し、tableViewをリロードする
         getArticles()
         //使用するXibとCellのReuseIdentifierを登録する
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
@@ -77,14 +77,12 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         let article: Article = articles[indexPath.row]
         cell.title.text = article.title
         cell.author.text = article.authorName
+        Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         cell.goodCnt.text = String(article.goodCnt)
         cell.tag1.text = article.tag1
         cell.tag2.text = article.tag2
         cell.tag3.text = article.tag3
-//        cell.url = article.url //realmでのurl取得のために追加
         cell.delegate = self
-//        cell.indexPathRow = indexPath.row //cellのindexPathを取るために追加
-        Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         return cell
     }
     
@@ -104,7 +102,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     
-    /*あとで読むボタンタップされた時のメソッド（Realmに記事を追加する）*/
+    /*あとで読むRealmに記事を追加するメソッド*/
     func addReadLater(cell: UITableViewCell) {
         //タップされたcellのindexPath.row（tableViewの何行目か）を取得する
         guard let indexPath = tableView.indexPath(for: cell) else { return }
@@ -117,9 +115,9 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
-            "tag1": article.tag1,
-            "tag2": article.tag2,
-            "tag3": article.tag3,
+            "tag1": article.tag1 ?? String(),
+            "tag2": article.tag2 ?? String(),
+            "tag3": article.tag3 ?? String(),
             "url": article.url
             //            "authorImageUrl": article.authorIcon! as String
             ])
@@ -131,6 +129,10 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         try! realm.write {
             realm.add(realmArticle)
         }
+        
+        //読み取り部分
+        print(realmArticle)
+        
     }
     
   
