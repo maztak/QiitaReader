@@ -11,51 +11,35 @@ import RealmSwift
 //po Realm.Configuration.defaultConfiguration.fileURL
 //FinderでShift+Cmd+gで絶対パスを指定
 
-class RealmTest3: Object {
-    @objc dynamic var title = ""
-    @objc dynamic var authorName = ""
-    @objc dynamic var authorImageUrl = ""
-    @objc dynamic var goodCnt = 0
-    @objc dynamic var tag1 = ""
-    @objc dynamic var tag2 = ""
-    @objc dynamic var tag3 = ""
-    @objc dynamic var url = ""
-    
-    // Specify properties to ignore (Realm won't persist these)
-    
-    //  override static func ignoredProperties() -> [String] {
-    //    return []
-    //  }
-}
-
 
 class ReadLaterViewController: UIViewController {
+    
     
     ////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
         // モデル作成
-//        let myRealm = RealmTest3(value: [
-//            "title" : "はじめてのiOS開発",
-//            "authorName": "テスト太郎",
-//            "authorImageUrl": "http://sampleImage",
-//            "goodCnt": 3,
-//            "tag1": "iOS",
-//            "tag2": "swift",
-//            "tag3": "Xcode",
-//            "url": "http://testUrl.com"
-//            ])
-//
-//        // デフォルトRealmを取得する(おまじない)
-//        let realm = try! Realm()
-//
-//        // トランザクションを開始して、オブジェクトをRealmに追加する
-//        try! realm.write {
-//            realm.add(myRealm)
-//        }
+        let realmArticle = RealmArticle(value: [
+            "title" : "はじめてのiOS開発",
+            "authorName": "テスト太郎",
+            "authorImageUrl": "http://sampleImage",
+            "goodCnt": 3,
+            "tag1": "iOS",
+            "tag2": "swift",
+            "tag3": "Xcode",
+            "url": "http://test.com"
+            ])
+
+        // デフォルトRealmを取得する(おまじない)
+        let realm = try! Realm()
+
+        // トランザクションを開始して、オブジェクトをRealmに追加する
+        try! realm.write {
+            realm.add(realmArticle)
+        }
         
-        // 追記　読み取り部分//////
-//        let objs = realm.objects(RealmTest3.self).filter("title == \"はじめてのiOS開発\"")
+//        //読み取り部分
+//        let objs = realm.objects(RealmArticle.self).filter("title == \"はじめてのiOS開発\"")
 //        if let obj = objs.first {
 //            print(obj)
 //        }

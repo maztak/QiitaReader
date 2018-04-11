@@ -11,10 +11,14 @@ import Alamofire    //APIで記事を取得したりするときに使う
 import SwiftyJSON   //JSON型にキャストしたり、stringやintプロパティを使う
 import Nuke         //サムネイル画像を表示して、キャッシュまでしてくれる
 import RealmSwift
+//po Realm.Configuration.defaultConfiguration.fileURL
+//FinderでShift+Cmd+gで絶対パスを指定
+
 
 class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
+    
     
     //////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
@@ -40,13 +44,15 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
         Alamofire.request("https://qiita.com/api/v2/items").responseJSON { response in
-            guard let object: Any = response.result.value else { //guard letで引数responseのvalueプロパティをnil剥がして、定数objectに入れる
-                return
-            }
+            //guard letで引数responseのvalueプロパティをnil剥がし定数object:記事の辞書？に入れる
+            guard let object: Any = response.result.value else { return }
             
-            let json = JSON(object) //object（1つの記事）をJSON型にキャストし、定数jsonに入れる
-            json.forEach { (_, json) in //JOSN型の定数jsonの各要素をforEachで呼び出し、それらを構造体Articleの引数とし
-                let article = Article ( //articleを生成していく
+            //objectをJSON型にキャスト <- もともとJSON型のものをなぜキャストする必要があるのかは不明
+            let jsObject = JSON(object)
+            
+            //JSON型の辞書jsObjectの各要素をforEachで呼び出し、articlesにappendしていく
+            jsObject.forEach { (_, json) in
+                let article = Article (
                     title: json["title"].string!,
                     authorName: json["user"]["id"].string!,
                     authorImageUrl: json["user"]["profile_image_url"].string!,
@@ -56,7 +62,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                     tag3: json["tags"][2]["name"].string,
                     url: json["url"].string!
                 )
-                self.articles.append(article) //それを辞書の配列であるarticlesに入れていく
+                self.articles.append(article)
             }
             self.tableView.reloadData() //TableViewを更新
         }
@@ -66,7 +72,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     /*データを返すメソッド*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
+        let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルのプロパティに記事情報を設定する
         let article: Article = articles[indexPath.row]
         cell.title.text = article.title
@@ -75,8 +81,9 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.tag1.text = article.tag1
         cell.tag2.text = article.tag2
         cell.tag3.text = article.tag3
-        cell.url = article.url
+//        cell.url = article.url //realmでのurl取得のために追加
         cell.delegate = self
+//        cell.indexPathRow = indexPath.row //cellのindexPathを取るために追加
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         return cell
     }
@@ -96,18 +103,25 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
-    /*あとで読むボタンタップされた時のメソッド*/
-    func addReadLater(cell: ArticleCell) {
-        //Realmに記事を追加する処理
-        let myRealm = RealmTest3(value: [
-            "title" : cell.title.text!,
-            "authorName": cell.author.text!,
-            "authorImageUrl": cell.authorIcon!,
-            "goodCnt": cell.goodCnt.text!,
-            "tag1": cell.tag1.text!,
-            "tag2": cell.tag2.text!,
-            "tag3": cell.tag3.text!,
-            "url": cell.url
+    
+    /*あとで読むボタンタップされた時のメソッド（Realmに記事を追加する）*/
+    func addReadLater(cell: UITableViewCell) {
+        //タップされたcellのindexPath.row（tableViewの何行目か）を取得する
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        
+        //そこから対応している（代入した）記事article = articles[indexPath.row]を取得し
+        let article: Article = articles[indexPath.row]
+
+        //その情報をrealmArticleとしてモデル作成
+        let realmArticle = RealmArticle(value: [
+            "title" : article.title,
+            "authorName": article.authorName,
+            "goodCnt": article.goodCnt,
+            "tag1": article.tag1,
+            "tag2": article.tag2,
+            "tag3": article.tag3,
+            "url": article.url
+            //            "authorImageUrl": article.authorIcon! as String
             ])
         
         // デフォルトRealmを取得する(おまじない)
@@ -115,7 +129,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         
         // トランザクションを開始して、オブジェクトをRealmに追加する
         try! realm.write {
-            realm.add(myRealm)
+            realm.add(realmArticle)
         }
     }
     
