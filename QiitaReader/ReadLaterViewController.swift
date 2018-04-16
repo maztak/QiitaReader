@@ -16,7 +16,7 @@ import RealmSwift
 class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     var articles: [Article] = []
-    
+    var refreshControl:UIRefreshControl! //下に引っ張って更新のためのプロパティ
     
     ////////////////////////////////////////////////////////////
     override func viewDidLoad() {
@@ -25,6 +25,11 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         getArticles()
         //使用するXibとCellのReuseIdentifierを登録する
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
+        
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "下に引っ張って更新")
+        self.refreshControl.addTarget(self, action: #selector(NewViewController.refresh), for: UIControlEvents.valueChanged)
+        self.tableView.addSubview(refreshControl)
     }
 
     override func didReceiveMemoryWarning() {
@@ -32,12 +37,17 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         // Dispose of any resources that can be recreated.
     }
     
+    @objc func refresh()
+    {
+        articles = []
+        getArticles()
+        refreshControl.endRefreshing()
+    }
 
     ////////////////////////////////////////////////////////////////////
     //*各種メソッド
     ////////////////////////////////////////////////////////////////////
 
-    
     /*realmからデータ取得し*/
     func getArticles() {
         // デフォルトRealmを取得する(おまじない)
