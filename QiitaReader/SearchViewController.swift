@@ -25,7 +25,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         // Do any additional setup after loading the view.
         setupSearchBar()
         //何も入力されていなくてもReturnキーを押せるようにする。
-        testSearchBar.enablesReturnKeyAutomatically = false
+        testSearchBar.enablesReturnKeyAutomatically = true
         //使用するXibとCellのReuseIdentifierを登録する
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
     }
