@@ -18,7 +18,7 @@ import RealmSwift
 class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
-    
+    var refreshControl:UIRefreshControl!
     
     //////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
@@ -27,6 +27,12 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         getArticles()
         //使用するXibとCellのReuseIdentifierを登録する
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
+        
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "引っ張って更新")
+        self.refreshControl.addTarget(self, action: #selector(NewViewController.refresh), for: UIControlEvents.valueChanged)
+        self.tableView.addSubview(refreshControl)
+        
     }
 
     
@@ -35,6 +41,11 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         // Dispose of any resources that can be recreated.
     }
     
+    @objc func refresh()
+    {
+        getArticles()
+        refreshControl.endRefreshing()
+    }
     
     
     ////////////////////////////////////////////////////////////////////
