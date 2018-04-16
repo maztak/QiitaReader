@@ -17,6 +17,8 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     @IBOutlet weak var tableView: UITableView!
     var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
+    var refreshControl:UIRefreshControl! //下に引っ張って更新のためのプロパティ
+    
     
     //////////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
@@ -25,6 +27,11 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         getArticles()
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
         
+        //下に引っ張って更新する処理
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl.attributedTitle = NSAttributedString(string: "下に引っ張って更新")
+        self.refreshControl.addTarget(self, action: #selector(NewViewController.refresh), for: UIControlEvents.valueChanged)
+        self.tableView.addSubview(refreshControl)
     }
 
     
@@ -33,6 +40,11 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     
+    @objc func refresh()
+    {
+        getArticles()
+        refreshControl.endRefreshing()
+    }
     
     //////////////////////////////////////////////////////////////////////////
     //*各種メソッド                                                          *//

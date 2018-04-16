@@ -28,6 +28,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         //使用するXibとCellのReuseIdentifierを登録する
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
         
+        //下に引っ張って更新する処理
         self.refreshControl = UIRefreshControl()
         self.refreshControl.attributedTitle = NSAttributedString(string: "下に引っ張って更新")
         self.refreshControl.addTarget(self, action: #selector(NewViewController.refresh), for: UIControlEvents.valueChanged)
