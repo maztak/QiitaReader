@@ -24,6 +24,18 @@ DEPENDENCIES:
   - TagListView (~> 1.0)
   - TOWebViewController
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Alamofire
+    - APIKit
+    - Nuke
+    - Realm
+    - RealmSwift
+    - Result
+    - SwiftyJSON
+    - TagListView
+    - TOWebViewController
+
 SPEC CHECKSUMS:
   Alamofire: 907e0a98eb68cdb7f9d1f541a563d6ac5dc77b25
   APIKit: a39ff72ac44efc15513fd1b98800f63c525be61b
@@ -37,4 +49,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: efbbd53dc58f0630093af06c7dd9b2314f8d812a
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0

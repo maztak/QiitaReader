@@ -45,7 +45,7 @@
 		B0B131F020529296009C2BD1 /* ic_trending_up_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_trending_up_white.png; sourceTree = "<group>"; };
 		B0B131F2205292A7009C2BD1 /* ic_access_time_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_access_time_white.png; sourceTree = "<group>"; };
 		B0C7A44220523C4A0066C01E /* NewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewViewController.swift; sourceTree = "<group>"; };
-		B0D20575206A127700ED4C3D /* DatailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DatailViewController.swift; path = /Users/takuya/Developer/QiitaReader/QiitaReader/DatailViewController.swift; sourceTree = "<absolute>"; };
+		B0D20575206A127700ED4C3D /* DatailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DatailViewController.swift; path = /Users/takuya/Developer/QiitaReader/DatailViewController.swift; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +122,6 @@
 				B06CFBFC20521EE000C55BB9 /* Frameworks */,
 				B06CFBFD20521EE000C55BB9 /* Resources */,
 				122C31E0E0A4301EBF0EC002 /* [CP] Embed Pods Frameworks */,
-				A429790CE894DAA87388700B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -140,7 +139,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = mycompany;
 				TargetAttributes = {
 					B06CFBFE20521EE000C55BB9 = {
@@ -221,21 +220,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QiitaReader/Pods-QiitaReader-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A429790CE894DAA87388700B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-QiitaReader/Pods-QiitaReader-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		E25F6657AC925EB6C323E6F4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -298,6 +282,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -305,6 +290,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -354,6 +340,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -361,6 +348,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
