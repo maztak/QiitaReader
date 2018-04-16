@@ -10,21 +10,21 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Nuke
+import RealmSwift
 //ログインしていないと見れなくなったことが判明
 
 //ArticleCellDelegateプロトコルに準拠　を試験的に追加
-class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
-    
+class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
     var refreshControl:UIRefreshControl! //下に引っ張って更新のためのプロパティ
     
-    
     //////////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
-        //記事を取得し、tableViewに記録(register)していく
+        //記事を取得し、tableViewをリロードする
         getArticles()
+        //使用するXibとCellのReuseIdentifierを登録する
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
         
         //下に引っ張って更新する処理
@@ -76,36 +76,28 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     
-    /*TableViewに表示する記事数を返すメソッド*/
+     /*データの個数を返すメソッド*/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
     }
     
     
-    /*tableViewCellを生成し、値を設定し、そのセルを返すメソッド*/
+    /*TableViewにデータを返すメソッド*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // セルをdequeueReusableCell()で取得
+        // セルを取得する
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルのプロパティに記事情報を設定
         let article: Article = articles[indexPath.row]
         cell.title.text = article.title
         cell.author.text = article.authorName
+        Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         cell.goodCnt.text = String(article.goodCnt)
         cell.tag1.text = article.tag1
         cell.tag2.text = article.tag2
         cell.tag3.text = article.tag3
-        
-        Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
+        cell.delegate = self
         return cell
     }
-    
-//    /*「あとで読む」ボタンがタップされた時のメソッド*/
-//    func addReadLater(cell: UITableViewCell) {
-//
-//        //Realm(DataBase）にその記事情報を書き込む
-//    }
-    
-    
     
     
     
@@ -117,6 +109,39 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
+    
+    /*あとで読むRealmに記事を追加するメソッド*/
+    func addReadLater(cell: UITableViewCell) {
+        //タップされたcellのindexPath.row（tableViewの何行目か）を取得する
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        
+        //そこから対応している（代入した）記事article = articles[indexPath.row]を取得し
+        let article: Article = articles[indexPath.row]
+        
+        //その情報をrealmArticleとしてモデル作成
+        let realmArticle = RealmArticle(value: [
+            "title" : article.title,
+            "authorName": article.authorName,
+            "goodCnt": article.goodCnt,
+            "tag1": article.tag1 ?? String(),
+            "tag2": article.tag2 ?? String(),
+            "tag3": article.tag3 ?? String(),
+            "url": article.url,
+            "authorImageUrl": article.authorImageUrl
+            ])
+        
+        // デフォルトRealmを取得する(おまじない)
+        let realm = try! Realm()
+        
+        // トランザクションを開始して、オブジェクトをRealmに追加する
+        try! realm.write {
+            realm.add(realmArticle)
+        }
+        
+        //追加した記事をコンソールに出力（確認用）
+        print(realmArticle)
+        
+    }
     
    
 

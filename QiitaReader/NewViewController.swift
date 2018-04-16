@@ -81,7 +81,12 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     
-    /*データを返すメソッド*/
+    /*データの個数を返すメソッド*/
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return articles.count
+    }
+    
+    /*TableViewにデータを返すメソッド*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
         let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
@@ -99,10 +104,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     
-    /*データの個数を返すメソッド*/
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articles.count
-    }
+    
     
     
     /*記事詳細detailViewに遷移させるメソッド*/
