@@ -1,0 +1,11 @@
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES
+FRAMEWORK_SEARCH_PATHS = $(inherited) "${PODS_CONFIGURATION_BUILD_DIR}/APIKit" "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire" "${PODS_CONFIGURATION_BUILD_DIR}/Nuke" "${PODS_CONFIGURATION_BUILD_DIR}/Realm" "${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift" "${PODS_CONFIGURATION_BUILD_DIR}/Result" "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON" "${PODS_CONFIGURATION_BUILD_DIR}/TOWebViewController" "${PODS_CONFIGURATION_BUILD_DIR}/TagListView"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
+OTHER_CFLAGS = $(inherited) -iquote "${PODS_CONFIGURATION_BUILD_DIR}/APIKit/APIKit.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/Nuke/Nuke.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/Realm/Realm.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/RealmSwift/RealmSwift.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/Result/Result.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON/SwiftyJSON.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/TOWebViewController/TOWebViewController.framework/Headers" -iquote "${PODS_CONFIGURATION_BUILD_DIR}/TagListView/TagListView.framework/Headers"
+OTHER_LDFLAGS = $(inherited) -ObjC -framework "APIKit" -framework "Alamofire" -framework "Nuke" -framework "Realm" -framework "RealmSwift" -framework "Result" -framework "SwiftyJSON" -framework "TOWebViewController" -framework "TagListView"
+OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
+PODS_BUILD_DIR = ${BUILD_DIR}
+PODS_CONFIGURATION_BUILD_DIR = ${PODS_BUILD_DIR}/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_PODFILE_DIR_PATH = ${SRCROOT}/.
+PODS_ROOT = ${SRCROOT}/Pods
