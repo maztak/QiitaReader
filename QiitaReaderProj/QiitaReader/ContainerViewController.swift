@@ -14,13 +14,11 @@ class ContainerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // TODO
+        // MARK: TODO -
         // loginのチェック
         // login済みの処理
             // TrendVC表示
         // loginしてない時の処理
-        HttpRequest()
-        
         
     }
     
@@ -30,6 +28,8 @@ class ContainerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    /////////////////////////////////////////////////////////////////////
     
     //子のViewControllerを追加する
     func displayContentController(content: UIViewController) {
@@ -58,26 +58,7 @@ class ContainerViewController: UIViewController {
 
     
     
-    //AlamofireでQiitaのアクセストークンの取得を試みる（POST）
-    func HttpRequest() {
-        let url = "https://qiita.com/api/v2/access_tokens"
-        let headers: HTTPHeaders = [
-            "Contenttype": "application/json"
-        ]
-        let parameters:[String: Any] = [
-            "client_id": "4320ee7c09abe90741ebc4b9386aea6780dfb653",
-            "client_secret": "fe437c0b97645047c066c8b3fc159d6710226a29",
-            "code": "137f6e3c564d91c9ffc2511a3ec5520a7adb7212&state=bb17785d811bb1913ef54b0a7657de780defaa2d"
-        ]
-        
-        Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            if let result = response.result.value as? [String: Any] {
-                print(result)
-            }
-        }
-        
-    }
-    
+   
     
     /*
     // MARK: - Navigation

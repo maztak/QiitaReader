@@ -47,12 +47,21 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     //////////////////////////////////////////////////////////////////////////
-    //*各種メソッド                                                          *//
+    //*各種メソッド
     //////////////////////////////////////////////////////////////////////////
     
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
-        Alamofire.request("https://qiita.com/trend.json").responseJSON { response in
+        let url = "https://qiita.com/trend.json"
+        let headers: HTTPHeaders = [
+            "Contenttype": "application/json",
+            "Authorization": "Bearer e9370340777a530778e96acb97f6a4fff06a946d",
+        ]
+        
+        //https://qiita.com/trend.json?Authorization=Bearer e9370340777a530778e96acb97f6a4fff06a946d
+        
+        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+//        Alamofire.request("https://qiita.com/trend.json").responseJSON { response in
             guard let object = response.result.value else { //guard letで引数responseのvalueプロパティをnil剥がして、定数objectに入れる
                 return
             }

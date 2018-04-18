@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		7803A08308E290238702D3F6 /* Pods_QiitaReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77B1C86919633453B546539B /* Pods_QiitaReader.framework */; };
 		916D264120566137007BC178 /* TrendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 916D264020566137007BC178 /* TrendViewController.swift */; };
+		B02BC23B2087475D00322445 /* ArticleCellDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02BC23A2087475D00322445 /* ArticleCellDelegate.swift */; };
+		B02BC23D208747E200322445 /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02BC23C208747E200322445 /* Article.swift */; };
+		B02BC23F20874C0900322445 /* Qiita Reader Logo.png in Resources */ = {isa = PBXBuildFile; fileRef = B02BC23E20874C0800322445 /* Qiita Reader Logo.png */; };
+		B02BC24120874C1D00322445 /* readLaterBtn.png in Resources */ = {isa = PBXBuildFile; fileRef = B02BC24020874C1D00322445 /* readLaterBtn.png */; };
+		B02BC24320874C2D00322445 /* ic-tab-search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B02BC24220874C2D00322445 /* ic-tab-search@2x.png */; };
+		B02BC24520874EB000322445 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = B02BC24420874EB000322445 /* header.png */; };
+		B02BC2472087556C00322445 /* ic_favorite_red_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B02BC2462087556C00322445 /* ic_favorite_red_2x.png */; };
+		B02BC2492087577A00322445 /* ic_favorite_white_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B02BC2482087577A00322445 /* ic_favorite_white_2x.png */; };
 		B04498512074D36100438B08 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04498502074D36100438B08 /* SearchViewController.swift */; };
 		B0454F1E2084B9D10025882B /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0454F1D2084B9D10025882B /* ContainerViewController.swift */; };
 		B04F805E2068F58100E43A62 /* ArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B04F805D2068F58000E43A62 /* ArticleCell.xib */; };
@@ -31,6 +39,14 @@
 		5E6231C53ED2D664451C3CF6 /* Pods-QiitaReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QiitaReader.debug.xcconfig"; path = "Pods/Target Support Files/Pods-QiitaReader/Pods-QiitaReader.debug.xcconfig"; sourceTree = "<group>"; };
 		77B1C86919633453B546539B /* Pods_QiitaReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QiitaReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		916D264020566137007BC178 /* TrendViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendViewController.swift; sourceTree = "<group>"; };
+		B02BC23A2087475D00322445 /* ArticleCellDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleCellDelegate.swift; sourceTree = "<group>"; };
+		B02BC23C208747E200322445 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		B02BC23E20874C0800322445 /* Qiita Reader Logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Qiita Reader Logo.png"; path = "../../../Desktop/Qiita Reader Logo.png"; sourceTree = "<group>"; };
+		B02BC24020874C1D00322445 /* readLaterBtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = readLaterBtn.png; path = ../../../Desktop/readLaterBtn.png; sourceTree = "<group>"; };
+		B02BC24220874C2D00322445 /* ic-tab-search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "ic-tab-search@2x.png"; path = "../../../Desktop/ic-tab-search@2x.png"; sourceTree = "<group>"; };
+		B02BC24420874EB000322445 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = header.png; path = ../../../Desktop/header.png; sourceTree = "<group>"; };
+		B02BC2462087556C00322445 /* ic_favorite_red_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_favorite_red_2x.png; path = ../../../Desktop/ic_favorite_red_2x.png; sourceTree = "<group>"; };
+		B02BC2482087577A00322445 /* ic_favorite_white_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_favorite_white_2x.png; path = ../../../Desktop/ic_favorite_white_2x.png; sourceTree = "<group>"; };
 		B04498502074D36100438B08 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		B0454F1D2084B9D10025882B /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		B04F805D2068F58000E43A62 /* ArticleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleCell.xib; sourceTree = "<group>"; };
@@ -90,10 +106,18 @@
 				B06CFC432052374000C55BB9 /* ReadLaterViewController.swift */,
 				B04498502074D36100438B08 /* SearchViewController.swift */,
 				B0D20575206A127700ED4C3D /* DatailViewController.swift */,
+				B0454F1D2084B9D10025882B /* ContainerViewController.swift */,
+				B02BC23C208747E200322445 /* Article.swift */,
 				B04F805D2068F58000E43A62 /* ArticleCell.xib */,
 				B04F805F2068F5B600E43A62 /* ArticleCell.swift */,
-				B0454F1D2084B9D10025882B /* ContainerViewController.swift */,
+				B02BC23A2087475D00322445 /* ArticleCellDelegate.swift */,
 				B06CFC0920521EE100C55BB9 /* Assets.xcassets */,
+				B02BC24420874EB000322445 /* header.png */,
+				B02BC2462087556C00322445 /* ic_favorite_red_2x.png */,
+				B02BC2482087577A00322445 /* ic_favorite_white_2x.png */,
+				B02BC24020874C1D00322445 /* readLaterBtn.png */,
+				B02BC23E20874C0800322445 /* Qiita Reader Logo.png */,
+				B02BC24220874C2D00322445 /* ic-tab-search@2x.png */,
 				B08DD38A206DDCEE00A7E762 /* authorIcon.png */,
 				B08DD389206DDCEE00A7E762 /* likeIcon.jpg */,
 				B0B131F2205292A7009C2BD1 /* ic_access_time_white.png */,
@@ -177,10 +201,16 @@
 			files = (
 				B06CFC0A20521EE100C55BB9 /* Assets.xcassets in Resources */,
 				B08DD38B206DDCEF00A7E762 /* likeIcon.jpg in Resources */,
+				B02BC23F20874C0900322445 /* Qiita Reader Logo.png in Resources */,
 				B04F805E2068F58100E43A62 /* ArticleCell.xib in Resources */,
 				B06CFC0820521EE100C55BB9 /* Main.storyboard in Resources */,
+				B02BC2472087556C00322445 /* ic_favorite_red_2x.png in Resources */,
 				B0B131F120529296009C2BD1 /* ic_trending_up_white.png in Resources */,
+				B02BC2492087577A00322445 /* ic_favorite_white_2x.png in Resources */,
+				B02BC24520874EB000322445 /* header.png in Resources */,
+				B02BC24320874C2D00322445 /* ic-tab-search@2x.png in Resources */,
 				B08DD38C206DDCEF00A7E762 /* authorIcon.png in Resources */,
+				B02BC24120874C1D00322445 /* readLaterBtn.png in Resources */,
 				B0B131EF20529284009C2BD1 /* ic_new_releases_white.png in Resources */,
 				B0B131F3205292A7009C2BD1 /* ic_access_time_white.png in Resources */,
 			);
@@ -252,10 +282,12 @@
 				B04498512074D36100438B08 /* SearchViewController.swift in Sources */,
 				B0454F1E2084B9D10025882B /* ContainerViewController.swift in Sources */,
 				B06CFC442052374000C55BB9 /* ReadLaterViewController.swift in Sources */,
+				B02BC23D208747E200322445 /* Article.swift in Sources */,
 				B0D20576206A127800ED4C3D /* DatailViewController.swift in Sources */,
 				B04F80602068F5B600E43A62 /* ArticleCell.swift in Sources */,
 				B0C7A44320523C4A0066C01E /* NewViewController.swift in Sources */,
 				B06CFC0320521EE100C55BB9 /* AppDelegate.swift in Sources */,
+				B02BC23B2087475D00322445 /* ArticleCellDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
