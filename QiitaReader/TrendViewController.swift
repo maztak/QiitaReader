@@ -17,7 +17,7 @@ import WebKit//追加
 //WKNavigationDelegateを試験的に追加
 class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
-    let webview = WKWebView(frame: CGRect(x: 0, y: 135, width: 415, height: 200))
+//    let webview = WKWebView(frame: CGRect(x: 0, y: 135, width: 415, height: 200))
     let button = UIButton()
     
     var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
@@ -40,19 +40,19 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //ログインボタンを追加
         button.frame = CGRect(x: 300, y: 75, width: 100, height: 50)
         
-        button.backgroundColor = UIColor.cyan
         // buttonのbackgroundcolorを指定
+        button.backgroundColor = UIColor.cyan
         
         
-        button.setTitle("ログイン", for: .normal)
         // 通常時のbuttonの文字を指定
+        button.setTitle("ログイン", for: .normal)
         
         
+         // buttonにイベントを追加
         button.addTarget(self, action: #selector(TrendViewController.changeColor(sender: )), for: .touchUpInside)
-        // buttonにイベントを追加
         
         
-        view.addSubview(webview)
+//        view.addSubview(webview)
         view.addSubview(button)
     }
 
@@ -68,11 +68,16 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         refreshControl.endRefreshing()
     }
     
-    @objc func changeColor(sender: Any) { // buttonの色を変化させるメソッド
-        button.backgroundColor = UIColor.darkGray
-        let url = URL(string: "https://qiita.com/login?redirect_to=%2F")
-        let urlRequest = URLRequest(url: url!)
-        self.webview.load(urlRequest)
+    // buttonの色を変化させるメソッド
+    @objc func changeColor(sender: Any) {
+        
+//        button.backgroundColor = UIColor.darkGray
+//        let url = URL(string: "https://qiita.com/login?redirect_to=%2F")
+//        let urlRequest = URLRequest(url: url!)
+//        self.webview.load(urlRequest)
+        let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        detailViewController.entry = article1
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     //////////////////////////////////////////////////////////////////////////
