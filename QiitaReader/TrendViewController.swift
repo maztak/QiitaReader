@@ -69,7 +69,6 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //https://qiita.com/trend.json?Authorization=Bearer e9370340777a530778e96acb97f6a4fff06a946d
         
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-//        Alamofire.request("https://qiita.com/trend.json").responseJSON { response in
             guard let object = response.result.value else { //guard letで引数responseのvalueプロパティをnil剥がして、定数objectに入れる
                 return
             }

@@ -55,7 +55,13 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
-        Alamofire.request("https://qiita.com/api/v2/items").responseJSON { response in
+        let url = "https://qiita.com/api/v2/items"
+        let headers: HTTPHeaders = [
+            "Contenttype": "application/json",
+            "Authorization": "Bearer e9370340777a530778e96acb97f6a4fff06a946d",
+            ]
+        
+        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             //guard letで引数responseのvalueプロパティをnil剥がし定数object:記事の辞書？に入れる
             guard let object: Any = response.result.value else { return }
             
