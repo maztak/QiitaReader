@@ -93,6 +93,24 @@
             </objects>
             <point key="canvasLocation" x="2084" y="2581"/>
         </scene>
+        <!--Login View Controller-->
+        <scene sceneID="W0P-Vu-OIh">
+            <objects>
+                <viewController restorationIdentifier="LoginViewController" storyboardIdentifier="LoginViewController" id="Buo-AR-jcm" customClass="LoginViewController" customModule="QiitaReader" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TgD-yT-dYW"/>
+                        <viewControllerLayoutGuide type="bottom" id="RKF-wq-m5w"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3rs-S0-9bj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NcD-Tn-9o1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3726" y="2802"/>
+        </scene>
         <!--Trend-->
         <scene sceneID="VUz-gS-Viu">
             <objects>
@@ -112,7 +130,7 @@
                                 </constraints>
                             </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DF2-IV-PAB">
-                                <rect key="frame" x="0.0" y="359" width="375" height="259"/>
+                                <rect key="frame" x="0.0" y="132" width="375" height="486"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="t6n-9h-mT9" id="02z-Zo-qqp"/>
@@ -126,7 +144,7 @@
                             <constraint firstAttribute="trailing" secondItem="DF2-IV-PAB" secondAttribute="trailing" id="Iy6-VO-S9G"/>
                             <constraint firstItem="DF2-IV-PAB" firstAttribute="leading" secondItem="eNc-WD-MeN" secondAttribute="leading" id="JdX-ge-rlK"/>
                             <constraint firstItem="1dR-CE-B63" firstAttribute="trailing" secondItem="DF2-IV-PAB" secondAttribute="trailing" id="MNc-H8-nrt"/>
-                            <constraint firstItem="DF2-IV-PAB" firstAttribute="top" secondItem="x5A-IP-Prg" secondAttribute="bottom" constant="295" id="P34-2q-dgz"/>
+                            <constraint firstItem="DF2-IV-PAB" firstAttribute="top" secondItem="x5A-IP-Prg" secondAttribute="bottom" constant="68" id="P34-2q-dgz"/>
                             <constraint firstItem="1dR-CE-B63" firstAttribute="top" secondItem="x5A-IP-Prg" secondAttribute="bottom" id="iax-vJ-IZZ"/>
                             <constraint firstItem="6Hk-qV-i7e" firstAttribute="top" secondItem="DF2-IV-PAB" secondAttribute="bottom" id="wSj-4g-1KU"/>
                         </constraints>

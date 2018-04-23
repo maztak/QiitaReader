@@ -70,14 +70,8 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     // buttonの色を変化させるメソッド
     @objc func changeColor(sender: Any) {
-        
-//        button.backgroundColor = UIColor.darkGray
-//        let url = URL(string: "https://qiita.com/login?redirect_to=%2F")
-//        let urlRequest = URLRequest(url: url!)
-//        self.webview.load(urlRequest)
-        let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        detailViewController.entry = article1
-        self.navigationController?.pushViewController(detailViewController, animated: true)
+        let loginViewController: LoginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        self.navigationController?.pushViewController(loginViewController, animated: true)
     }
     
     //////////////////////////////////////////////////////////////////////////
