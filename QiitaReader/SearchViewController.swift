@@ -1,8 +1,8 @@
 //
-//  ShinchakuViewController.swift
+//  SearchViewController.swift
 //  QiitaReader
 //
-//  Created by Takuya Matsuda on 2018/03/09.
+//  Created by Takuya Matsuda on 2018/04/04.
 //  Copyright © 2018年 mycompany. All rights reserved.
 //
 
@@ -11,31 +11,23 @@ import Alamofire
 import SwiftyJSON
 import Nuke
 
-class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate {
     @IBOutlet weak var tableView: UITableView!
-//    @IBOutlet weak var searchBar: UISearchBar!
-    var searchBar = UISearchBar()
-    var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
-    var searchResult = [Article]()
+    var testSearchBar: UISearchBar!
+    var articles: [Article] = []
+//    //検索結果配列を用意
+//    var searchResult = [Article]() // <- いらない？
+    var searchQuery: String = ""
     
     //////////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        //記事を取得し、tableViewに記録(register)していく
-        getArticles()
-
-        //デリゲート先を自分に設定する。
-        searchBar.delegate = self
-        //何も入力されていなくてもReturnキーを押せるようにする。
-        searchBar.enablesReturnKeyAutomatically = false
-        //検索結果配列にデータをコピーする。
-        searchResult = articles
-        
-        
-        self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
         setupSearchBar()
-        
+        //何も入力されていなくてもReturnキーを押せるようにする。
+        testSearchBar.enablesReturnKeyAutomatically = true
+        //使用するXibとCellのReuseIdentifierを登録する
+        self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,18 +37,46 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     
     
     
+    
+    
     //////////////////////////////////////////////////////////////////////////
     //*各種メソッド                                                          *//
     //////////////////////////////////////////////////////////////////////////
     
+    //検索ボタン押下時の呼び出しメソッド
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        testSearchBar.endEditing(true)
+//        //検索結果配列を空にする。 <- いらない？
+//        searchResult.removeAll()
+
+        //ここにgetArticles()をもってくる
+        getArticles()
+        
+        //テーブルを再読み込みする。
+        tableView.reloadData()
+    }
+    
+
+    
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
-        Alamofire.request("https://qiita.com/api/v2/items").responseJSON { response in
-            guard let object = response.result.value else { //guard letで引数responseのvalueプロパティをnil剥がして、定数objectに入れる
+        //
+        searchQuery = testSearchBar.text!
+        let encodedQuery = searchQuery.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        var targetUrl = ""
+        targetUrl = "https://qiita.com/api/v2/items?page=1&per_page=10&query=title%3A\(encodedQuery!)"
+        
+        guard let url = URL(string: targetUrl) else {
+            print("無効なURL")
+            return
+        }
+        
+        Alamofire.request(url).responseJSON { response in
+            guard let object: Any = response.result.value else {
                 return
             }
             
-            let json = JSON(object) //object（1つの記事）をJSON型にキャスト？し、定数jsonに入れる
+            let json = JSON(object) //object（1つの記事）をJSON型にキャストし、定数jsonに入れる
             json.forEach { (_, json) in //JOSN型の定数jsonの各要素をforEachで呼び出し、それらを構造体Articleの引数とし
                 let article = Article ( //articleを生成していく
                     title: json["title"].string!,
@@ -75,10 +95,12 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
     
-    /*セルを取得しデータを返すメソッド*/
+    /*データを返すメソッド*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         // セルを取得する
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
+        
         // セルのプロパティに記事情報を設定する
         let article: Article = articles[indexPath.row]
         cell.title.text = article.title
@@ -91,35 +113,12 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         return cell
     }
     
-    /*TableViewに表示する記事数を返すメソッド*/
+    /*データの個数を返すメソッド*/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResult.count
+        return articles.count
     }
     
-    //検索ボタン押下時の呼び出しメソッド
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.endEditing(true)
-        
-        //検索結果配列を空にする。
-        searchResult.removeAll()
-        
-        if(searchBar.text == "") {
-            //検索文字列が空の場合はすべてを表示する。
-            searchResult = articles
-        } else {
-            //検索文字列を含むデータを検索結果配列に追加する。
-            for i in articles {
-                if i.title.contains(searchBar.text!) {
-                    searchResult.append(i)
-                }
-            }
-        }
-        
-        //テーブルを再読み込みする。
-        tableView.reloadData()
-    }
-    
-    
+ 
     /*記事詳細detailViewに遷移させるメソッド*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
@@ -127,25 +126,24 @@ class ShinchakuViewController: UIViewController, UITableViewDelegate, UITableVie
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
+    
+    // MARK: - setupSearchBarメソッド
+        private func setupSearchBar() {
+            if let navigationBarFrame = navigationController?.navigationBar.bounds {
+                let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
+                searchBar.delegate = self
+                searchBar.placeholder = "Search"
+                searchBar.autocapitalizationType = UITextAutocapitalizationType.none
+                searchBar.keyboardType = UIKeyboardType.default
+                navigationItem.titleView = searchBar
+                navigationItem.titleView?.frame = searchBar.frame
+                self.testSearchBar = searchBar
+                searchBar.becomeFirstResponder()
+            }
+        }
 
 
-// MARK: - private methods
-func setupSearchBar() {
-    if let navigationBarFrame = navigationController?.navigationBar.bounds {
-        let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
-        searchBar.delegate = self
-        searchBar.placeholder = "Search"
-        searchBar.showsCancelButton = true
-        searchBar.autocapitalizationType = UITextAutocapitalizationType.none
-        searchBar.keyboardType = UIKeyboardType.default
-        navigationItem.titleView = searchBar
-        navigationItem.titleView?.frame = searchBar.frame
-        self.searchBar = searchBar
-        searchBar.becomeFirstResponder()
-    }
-}
-
-
+    
 
     /*
     // MARK: - Navigation

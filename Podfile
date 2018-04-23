@@ -9,5 +9,6 @@ target 'QiitaReader’ do
   pod 'APIKit', '~> 3.1'
   pod 'Nuke', '~> 6.0'
   pod 'TagListView', '~> 1.0'
+  pod 'RealmSwift'
 end
 

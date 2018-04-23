@@ -1,5 +1,5 @@
 //
-//  TrendViewController.swift
+//  NewViewController.swift
 //  QiitaReader
 //
 //  Created by Takuya Matsuda on 2018/03/09.
@@ -7,23 +7,20 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
-import Nuke
+import Alamofire    //APIで記事を取得したりするときに使う
+import SwiftyJSON   //JSON型にキャストしたり、stringやintプロパティを使う
+import Nuke         //サムネイル画像を表示して、キャッシュまでしてくれる
 import RealmSwift
-//import WebKit
+//po Realm.Configuration.defaultConfiguration.fileURL
+//FinderでShift+Cmd+gで絶対パスを指定
 
-//WKNavigationDelegateを試験的に追加
-class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
+
+class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
     var refreshControl:UIRefreshControl! //下に引っ張って更新のためのプロパティ
     
-    @IBAction func loginBtn(_ sender: UIButton) {
-        let loginViewController: LoginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        self.navigationController?.pushViewController(loginViewController, animated: true)
-    }
-    //////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
         //記事を取得し、tableViewをリロードする
@@ -36,8 +33,14 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.refreshControl.attributedTitle = NSAttributedString(string: "下に引っ張って更新")
         self.refreshControl.addTarget(self, action: #selector(NewViewController.refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
+        
     }
 
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
     @objc func refresh()
     {
@@ -46,63 +49,54 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
-   
-    
-    //////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////
     //*各種メソッド
-    //////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////
     
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
-        let url = "https://qiita.com/trend.json"
+        let url = "https://qiita.com/api/v2/items"
         let headers: HTTPHeaders = [
             "Contenttype": "application/json",
             "Authorization": "Bearer e9370340777a530778e96acb97f6a4fff06a946d",
-        ]
-        
-        //https://qiita.com/trend.json?Authorization=Bearer e9370340777a530778e96acb97f6a4fff06a946d
+            ]
         
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            guard let object = response.result.value else { //guard letで引数responseのvalueプロパティをnil剥がして、定数objectに入れる
-                return
-            }
+            //guard letで引数responseのvalueプロパティをnil剥がし定数object:記事の辞書？に入れる
+            guard let object: Any = response.result.value else { return }
             
-            let json = JSON(object)["trendItems"] //objectをJSON型にキャストし定数jsonに入れる
-            json.forEach { (_, json) in //JOSN型の定数jsonの各要素をforEachで呼び出し
-                let article = Article ( //articleを生成していく
-                    title: json["article"]["title"].string!,
-                    authorName: json["article"]["author"]["urlName"].string!,
-                    authorImageUrl: json["article"]["author"]["profileImageUrl"].string!,
-                    goodCnt: json["article"]["likesCount"].int!,
-                    tag1: json["article"]["tags"][0]["name"].string,
-                    tag2: json["article"]["tags"][1]["name"].string,
-                    tag3: json["article"]["tags"][2]["name"].string,
-                    url: json["article"]["showUrl"].string!
+            //objectをJSON型にキャスト <- もともとJSON型のものをなぜキャストする必要があるのかは不明
+            let jsObject = JSON(object)
+            
+            //JSON型の辞書jsObjectの各要素をforEachで呼び出し、articlesにappendしていく
+            jsObject.forEach { (_, json) in
+                let article = Article (
+                    title: json["title"].string!,
+                    authorName: json["user"]["id"].string!,
+                    authorImageUrl: json["user"]["profile_image_url"].string!,
+                    goodCnt: json["likes_count"].int!,
+                    tag1: json["tags"][0]["name"].string,
+                    tag2: json["tags"][1]["name"].string,
+                    tag3: json["tags"][2]["name"].string,
+                    url: json["url"].string!
                 )
-                self.articles.append(article) //それを辞書の配列であるarticlesに入れていく
+                self.articles.append(article)
             }
             self.tableView.reloadData() //TableViewを更新
         }
     }
     
     
-     /*データの個数を返すメソッド*/
+    /*データの個数を返すメソッド*/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
     }
     
-    
     /*TableViewにデータを返すメソッド*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
-        // セルのプロパティに記事情報を設定
+        let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
+        // セルのプロパティに記事情報を設定する
         let article: Article = articles[indexPath.row]
 //        cell.title.text = article.title
         cell.author.text = article.authorName
@@ -113,6 +107,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.tag3.text = article.tag3
         cell.delegate = self
         
+        //titleの行間を調整するためにaddAttribute
         cell.title.numberOfLines = 2
         cell.title.lineBreakMode = NSLineBreakMode.byWordWrapping
         let attributedString = NSMutableAttributedString(string: article.title)
@@ -123,6 +118,8 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         return cell
     }
+    
+    
     
     
     
@@ -142,7 +139,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         //そこから対応している（代入した）記事article = articles[indexPath.row]を取得し
         let article: Article = articles[indexPath.row]
-        
+
         //その情報をrealmArticleとしてモデル作成
         let realmArticle = RealmArticle(value: [
             "title" : article.title,
@@ -168,9 +165,9 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
     }
     
-   
-
-
+  
+    
+    
     /*
     // MARK: - Navigation
 
@@ -180,7 +177,5 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Pass the selected object to the new view controller.
     }
     */
-
 }
-
 
