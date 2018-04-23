@@ -52,7 +52,7 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="新着" image="ic_new_releases_white.png" id="PZv-3e-3Io">
-                        <color key="badgeColor" name="alternateSelectedControlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="badgeColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <navigationItem key="navigationItem" id="wnm-NR-4mF"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>

@@ -13,27 +13,28 @@ class OriginalTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        // fontの設定
-//        let fontFamily: UIFont! = UIFont.systemFontOfSize(10)
-//
-//        // 選択時の設定
-//        let selectedColor:UIColor = UIColor(red: 65.0/255.0, green: 168.0/255.0, blue: 186.0/255.0, alpha: 1)
-//        let selectedAttributes = [NSFontAttributeName: fontFamily, NSForegroundColorAttributeName: selectedColor]
-//        /// タイトルテキストカラーの設定
-//        UITabBarItem.appearance().setTitleTextAttributes(selectedAttributes, forState: UIControlState.Selected)
-//        /// アイコンカラーの設定
-//        UITabBar.appearance().tintColor = selectedColor
-//
+        // fontの設定
+        let fontFamily: UIFont! = UIFont.systemFont(ofSize: 10)
+
+        // 選択時の設定
+        let selectedColor:UIColor = UIColor.blue
+//        (red: 65.0/255.0, green: 168.0/255.0, blue: 186.0/255.0, alpha: 1)
+        let selectedAttributes = [NSAttributedStringKey.font: fontFamily, NSAttributedStringKey.foregroundColor: selectedColor] as [NSAttributedStringKey : Any]
+        /// タイトルテキストカラーの設定
+        UITabBarItem.appearance().setTitleTextAttributes(selectedAttributes, for: UIControlState.selected)
+        /// アイコンカラーの設定
+        UITabBar.appearance().tintColor = selectedColor
+
         
         // 非選択時の設定
-//        let nomalAttributes = [NSFontAttributeName: fontFamily, NSForegroundColorAttributeName: UIColor.whiteColor()]
-        /// タイトルテキストカラーの設定
-//        UITabBarItem.appearance().setTitleTextAttributes(nomalAttributes, forState: UIControlState.Normal)
-        /// アイコンカラー（画像）の設定
-//        var assets :Array<String> = ["ic_new_releases_white.png", "ic_trending_up_white.png", "ic_trending_up_white.png"]
-//        for (idx, item) in self.tabBar.items!.enumerate() {
-//            item.image = UIImage(named: assets[idx])?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-//        }
+        let nomalAttributes = [NSAttributedStringKey.font: fontFamily, NSAttributedStringKey.foregroundColor: UIColor.white] as [NSAttributedStringKey : Any]
+        // タイトルテキストカラーの設定
+        UITabBarItem.appearance().setTitleTextAttributes(nomalAttributes, for: UIControlState.normal)
+        // アイコンカラー（画像）の設定
+        var assets :Array<String> = ["ic_new_releases_white.png", "ic_trending_up_white.png", "ic_access_time_white.png"]
+        for (idx, item) in self.tabBar.items!.enumerated() {
+            item.image = UIImage(named: assets[idx])?.withRenderingMode(UIImageRenderingMode.alwaysOriginal)
+        }
     }
 
     override func didReceiveMemoryWarning() {
