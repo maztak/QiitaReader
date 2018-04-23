@@ -11,15 +11,11 @@ import Alamofire
 import SwiftyJSON
 import Nuke
 import RealmSwift
-
-import WebKit//追加
+//import WebKit
 
 //WKNavigationDelegateを試験的に追加
 class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
-    
-    let button = UIButton()
-    
     var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
     var refreshControl:UIRefreshControl! //下に引っ張って更新のためのプロパティ
     
@@ -40,29 +36,8 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.refreshControl.attributedTitle = NSAttributedString(string: "下に引っ張って更新")
         self.refreshControl.addTarget(self, action: #selector(NewViewController.refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
-        
-//        //ログインボタンを追加
-//        button.frame = CGRect(x: 300, y: 75, width: 100, height: 50)
-//
-//        // buttonのbackgroundcolorを指定
-//        button.backgroundColor = UIColor.cyan
-//
-//
-//        // 通常時のbuttonの文字を指定
-//        button.setTitle("ログイン", for: .normal)
-//
-//
-//         // buttonにイベントを追加
-//        button.addTarget(self, action: #selector(TrendViewController.changeColor(sender: )), for: .touchUpInside)
-//
-//        view.addSubview(button)
     }
 
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     @objc func refresh()
     {
@@ -70,11 +45,14 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         refreshControl.endRefreshing()
     }
     
-    // loginViewに遷移するメソッド
-    @objc func changeColor(sender: Any) {
-        let loginViewController: LoginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        self.navigationController?.pushViewController(loginViewController, animated: true)
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
+    
+    
+   
     
     //////////////////////////////////////////////////////////////////////////
     //*各種メソッド

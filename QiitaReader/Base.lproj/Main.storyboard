@@ -109,7 +109,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NcD-Tn-9o1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3726" y="2802"/>
+            <point key="canvasLocation" x="3793" y="2110"/>
         </scene>
         <!--Trend-->
         <scene sceneID="VUz-gS-Viu">
@@ -137,10 +137,12 @@
                                     <outlet property="delegate" destination="t6n-9h-mT9" id="7Tv-vc-1d7"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HgV-0P-15Y">
-                                <rect key="frame" x="286" y="83" width="62" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="ログイン"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HgV-0P-15Y">
+                                <rect key="frame" x="297" y="86" width="68" height="30"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <state key="normal" title="ログイン">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="loginBtn:" destination="t6n-9h-mT9" eventType="touchUpInside" id="ae5-kW-VKO"/>
                                 </connections>
@@ -149,10 +151,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1dR-CE-B63" firstAttribute="leading" secondItem="DF2-IV-PAB" secondAttribute="leading" id="4Ba-kB-xHy"/>
+                            <constraint firstItem="DF2-IV-PAB" firstAttribute="top" secondItem="HgV-0P-15Y" secondAttribute="bottom" constant="16" id="4wE-VK-2gx"/>
+                            <constraint firstItem="HgV-0P-15Y" firstAttribute="top" secondItem="x5A-IP-Prg" secondAttribute="bottom" constant="22" id="6mn-fS-suJ"/>
                             <constraint firstAttribute="trailing" secondItem="DF2-IV-PAB" secondAttribute="trailing" id="Iy6-VO-S9G"/>
                             <constraint firstItem="DF2-IV-PAB" firstAttribute="leading" secondItem="eNc-WD-MeN" secondAttribute="leading" id="JdX-ge-rlK"/>
                             <constraint firstItem="1dR-CE-B63" firstAttribute="trailing" secondItem="DF2-IV-PAB" secondAttribute="trailing" id="MNc-H8-nrt"/>
+                            <constraint firstItem="HgV-0P-15Y" firstAttribute="leading" secondItem="eNc-WD-MeN" secondAttribute="leadingMargin" constant="281" id="N8o-aE-OAT"/>
                             <constraint firstItem="DF2-IV-PAB" firstAttribute="top" secondItem="x5A-IP-Prg" secondAttribute="bottom" constant="68" id="P34-2q-dgz"/>
+                            <constraint firstItem="HgV-0P-15Y" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="eNc-WD-MeN" secondAttribute="trailingMargin" id="PI2-1C-NND"/>
                             <constraint firstItem="1dR-CE-B63" firstAttribute="top" secondItem="x5A-IP-Prg" secondAttribute="bottom" id="iax-vJ-IZZ"/>
                             <constraint firstItem="6Hk-qV-i7e" firstAttribute="top" secondItem="DF2-IV-PAB" secondAttribute="bottom" id="wSj-4g-1KU"/>
                         </constraints>
@@ -166,7 +172,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VSP-3c-1VN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2980" y="2579.4602698650679"/>
+            <point key="canvasLocation" x="3074" y="1799"/>
         </scene>
         <!--ReadLater-->
         <scene sceneID="aIv-jo-jyk">
@@ -220,7 +226,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="86w-7Q-fIa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4604" y="1798.6506746626687"/>
+            <point key="canvasLocation" x="4529" y="1799"/>
         </scene>
         <!--ContainerTest-->
         <scene sceneID="o8k-dM-kZj">
@@ -274,7 +280,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vsy-Mk-quB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3726" y="1799"/>
+            <point key="canvasLocation" x="5417" y="1799"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0Jp-t4-fhX">
@@ -313,8 +319,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="buW-zc-2Cc"/>
-                        <segue destination="maU-44-qF5" kind="relationship" relationship="viewControllers" id="ku9-OY-lfT"/>
                         <segue destination="t6n-9h-mT9" kind="relationship" relationship="viewControllers" id="9Aq-Bj-UDc"/>
+                        <segue destination="maU-44-qF5" kind="relationship" relationship="viewControllers" id="urt-QB-s3l"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hV8-no-Q8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -391,7 +397,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="08h-Js-rYJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3726" y="2307"/>
+            <point key="canvasLocation" x="5417" y="2306"/>
         </scene>
     </scenes>
     <resources>
