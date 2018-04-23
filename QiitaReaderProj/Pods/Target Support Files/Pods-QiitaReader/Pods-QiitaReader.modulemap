@@ -1,6 +1,0 @@
-framework module Pods_QiitaReader {
-  umbrella header "Pods-QiitaReader-umbrella.h"
-
-  export *
-  module * { export * }
-}
