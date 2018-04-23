@@ -131,7 +131,6 @@
                 <outlet property="author" destination="bre-Nq-eC4" id="fut-bi-FH4"/>
                 <outlet property="authorIcon" destination="pwr-02-4tq" id="h7l-Rw-E2q"/>
                 <outlet property="goodCnt" destination="jkI-oj-fBF" id="rUH-iw-6Tv"/>
-                <outlet property="readLaterButton" destination="pwD-ha-5aM" id="kUU-NP-9yn"/>
                 <outlet property="tag1" destination="lZR-H9-NC6" id="xCK-kn-GFA"/>
                 <outlet property="tag2" destination="9Vh-QP-CEa" id="5pz-Gt-Zae"/>
                 <outlet property="tag3" destination="xHK-V0-hOK" id="9mu-PC-eCE"/>

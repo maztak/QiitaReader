@@ -298,10 +298,10 @@
             </objects>
             <point key="canvasLocation" x="2391" y="699"/>
         </scene>
-        <!--Custom Tab Bar Controller-->
+        <!--Original Tab Bar Controller-->
         <scene sceneID="29A-dS-g47">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="OfO-ao-EPV" customClass="CustomTabBarController" customModule="QiitaReader" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="OfO-ao-EPV" customClass="OriginalTabBarController" customModule="QiitaReader" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="TRd-Q7-CRF">
                         <barButtonItem key="rightBarButtonItem" title="検索" id="g08-Xm-HkQ">

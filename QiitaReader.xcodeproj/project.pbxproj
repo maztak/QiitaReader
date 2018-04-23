@@ -17,6 +17,7 @@
 		B02BC24520874EB000322445 /* header.png in Resources */ = {isa = PBXBuildFile; fileRef = B02BC24420874EB000322445 /* header.png */; };
 		B02BC2472087556C00322445 /* ic_favorite_red_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B02BC2462087556C00322445 /* ic_favorite_red_2x.png */; };
 		B02BC2492087577A00322445 /* ic_favorite_white_2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B02BC2482087577A00322445 /* ic_favorite_white_2x.png */; };
+		B02FDEDC208DEE7600FA83F9 /* OriginalTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02FDEDB208DEE7600FA83F9 /* OriginalTabBarController.swift */; };
 		B04498512074D36100438B08 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04498502074D36100438B08 /* SearchViewController.swift */; };
 		B0454F1E2084B9D10025882B /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0454F1D2084B9D10025882B /* ContainerViewController.swift */; };
 		B04F805E2068F58100E43A62 /* ArticleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B04F805D2068F58000E43A62 /* ArticleCell.xib */; };
@@ -46,6 +47,7 @@
 		B02BC24420874EB000322445 /* header.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = header.png; path = img/header.png; sourceTree = "<group>"; };
 		B02BC2462087556C00322445 /* ic_favorite_red_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_favorite_red_2x.png; path = img/ic_favorite_red_2x.png; sourceTree = "<group>"; };
 		B02BC2482087577A00322445 /* ic_favorite_white_2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_favorite_white_2x.png; path = img/ic_favorite_white_2x.png; sourceTree = "<group>"; };
+		B02FDEDB208DEE7600FA83F9 /* OriginalTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginalTabBarController.swift; sourceTree = "<group>"; };
 		B04498502074D36100438B08 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		B0454F1D2084B9D10025882B /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		B04F805D2068F58000E43A62 /* ArticleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArticleCell.xib; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				916D264020566137007BC178 /* TrendViewController.swift */,
 				B06CFC432052374000C55BB9 /* ReadLaterViewController.swift */,
 				B04498502074D36100438B08 /* SearchViewController.swift */,
+				B02FDEDB208DEE7600FA83F9 /* OriginalTabBarController.swift */,
 				B0D20575206A127700ED4C3D /* DatailViewController.swift */,
 				B0E87838208D92C200B10147 /* LoginViewController.swift */,
 				B0454F1D2084B9D10025882B /* ContainerViewController.swift */,
@@ -279,6 +282,7 @@
 				B06CFC442052374000C55BB9 /* ReadLaterViewController.swift in Sources */,
 				B02BC23D208747E200322445 /* Article.swift in Sources */,
 				B0D20576206A127800ED4C3D /* DatailViewController.swift in Sources */,
+				B02FDEDC208DEE7600FA83F9 /* OriginalTabBarController.swift in Sources */,
 				B04F80602068F5B600E43A62 /* ArticleCell.swift in Sources */,
 				B0C7A44320523C4A0066C01E /* NewViewController.swift in Sources */,
 				B06CFC0320521EE100C55BB9 /* AppDelegate.swift in Sources */,
