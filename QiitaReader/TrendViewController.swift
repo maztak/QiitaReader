@@ -105,7 +105,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルのプロパティに記事情報を設定
         let article: Article = articles[indexPath.row]
-        cell.title.text = article.title
+//        cell.title.text = article.title
         cell.author.text = article.authorName
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         cell.goodCnt.text = String(article.goodCnt)
@@ -113,6 +113,15 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.tag2.text = article.tag2
         cell.tag3.text = article.tag3
         cell.delegate = self
+        
+        cell.title.numberOfLines = 2
+        cell.title.lineBreakMode = NSLineBreakMode.byWordWrapping
+        let attributedString = NSMutableAttributedString(string: article.title)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 6
+        attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
+        cell.title.attributedText = attributedString
+        
         return cell
     }
     

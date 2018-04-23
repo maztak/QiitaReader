@@ -16,11 +16,14 @@ class ArticleCell: UITableViewCell {
     @IBOutlet weak var tag2: UILabel!
     @IBOutlet weak var tag3: UILabel!
     @IBOutlet weak var authorIcon: UIImageView!
-    var delegate: ArticleCellDelegate? = nil //代理人（処理の委譲先）関数をもつプロパティ
+    var delegate: ArticleCellDelegate? = nil //代理人
     
     @IBAction func readLaterButtonTapped(_ sender: Any) {
         delegate?.addReadLater(cell: self)
     }
+    
+   
+    
 }
 
 

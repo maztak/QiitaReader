@@ -83,14 +83,22 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルのプロパティに記事情報を設定する
         let article: Article = reversedArticles[indexPath.row]
-        cell.title.text = article.title
+//        cell.title.text = article.title
         cell.author.text = article.authorName
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         cell.goodCnt.text = String(article.goodCnt)
         cell.tag1.text = article.tag1
         cell.tag2.text = article.tag2
         cell.tag3.text = article.tag3
-//        cell.delegate = self
+        
+        cell.title.numberOfLines = 2
+        cell.title.lineBreakMode = NSLineBreakMode.byWordWrapping
+        let attributedString = NSMutableAttributedString(string: article.title)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 6
+        attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
+        cell.title.attributedText = attributedString
+        
         return cell
     }
     
@@ -109,38 +117,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
     
-    
-    
-//    // モデル作成
-//    //        let realmArticle = RealmArticle(value: [
-//    //            "title" : "はじめてのiOS開発",
-//    //            "authorName": "テスト太郎",
-//    //            "authorImageUrl": "http://sampleImage",
-//    //            "goodCnt": 3,
-//    //            "tag1": "iOS",
-//    //            "tag2": "swift",
-//    //            "tag3": "Xcode",
-//    //            "url": "http://test.com"
-//    //            ])
-//    //
-//    //        // デフォルトRealmを取得する(おまじない)
-//    //        let realm = try! Realm()
-//    //
-//    //        // トランザクションを開始して、オブジェクトをRealmに追加する
-//    //        try! realm.write {
-//    //            realm.add(realmArticle)
-//    //        }
-//
-//
-//
-//    //読み取り部分
-//    let objs = realm.objects(RealmArticle.self).filter("title == \"はじめてのiOS開発\"")
-//    if let obj = objs.first {
-//        print(obj)
-//    }
-//
 
-    
 
     /*
     // MARK: - Navigation
