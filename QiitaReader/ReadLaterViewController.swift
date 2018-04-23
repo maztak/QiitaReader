@@ -16,6 +16,7 @@ import RealmSwift
 class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     var articles: [Article] = []
+    var reversedArticles: [Article] = []
     var refreshControl:UIRefreshControl! //下に引っ張って更新のためのプロパティ
     
     ////////////////////////////////////////////////////////////
@@ -40,7 +41,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @objc func refresh()
     {
-        articles = []
+        reversedArticles = []
         getArticles()
         refreshControl.endRefreshing()
     }
@@ -70,6 +71,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
             )
             self.articles.append(article)
         }
+        self.reversedArticles = articles.reversed() //記事配列を逆順に
         self.tableView.reloadData() //TableViewを更新
     }
 
@@ -80,7 +82,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         // セルを取得する
         let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルのプロパティに記事情報を設定する
-        let article: Article = articles[indexPath.row]
+        let article: Article = reversedArticles[indexPath.row]
         cell.title.text = article.title
         cell.author.text = article.authorName
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
@@ -95,14 +97,14 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
     
     /*データの個数を返すメソッド*/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articles.count
+        return reversedArticles.count
     }
     
     
     /*記事詳細detailViewに遷移させるメソッド*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        detailViewController.entry = articles[indexPath.row]
+        detailViewController.entry = reversedArticles[indexPath.row]
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
