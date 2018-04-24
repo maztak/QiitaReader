@@ -22,11 +22,6 @@ class ArticleCell: UITableViewCell {
     @IBAction func readLaterButtonTapped(_ sender: Any) {
         delegate?.addReadLater(cell: self)
     }
-    
-    
-    
-   
-    
 }
 
 

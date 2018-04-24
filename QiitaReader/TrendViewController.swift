@@ -30,7 +30,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         getArticles()
         //使用するXibとCellのReuseIdentifierを登録する
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
-        //下に引っ張って更新する処理
+        //下に引っ張って更新するための設定
         self.refreshControl = UIRefreshControl()
         self.refreshControl.attributedTitle = NSAttributedString(string: "下に引っ張って更新")
         self.refreshControl.addTarget(self, action: #selector(NewViewController.refresh), for: UIControlEvents.valueChanged)
@@ -99,7 +99,14 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let article: Article = articles[indexPath.row]
         //cellのタイトルラベルを設定
         cell.title.numberOfLines = 2
+        cell.title.baselineAdjustment = .none
         cell.title.lineBreakMode = NSLineBreakMode.byWordWrapping
+        
+//        //上揃え（1行でも2行でもTopLineが同じ）にしたかったがならず・・・
+//        cell.title.baselineAdjustment = .none
+//        cell.title.lineBreakMode = NSLineBreakMode.byTruncatingTail
+//        cell.title.preferredMaxLayoutWidth = 0
+        
         let attributedString = NSMutableAttributedString(string: article.title)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 6
