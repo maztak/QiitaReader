@@ -84,13 +84,14 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         // セルのプロパティに記事情報を設定する
         let article: Article = reversedArticles[indexPath.row]
         //cellのタイトルラベルを設定する
-        cell.title.numberOfLines = 2
-        cell.title.lineBreakMode = NSLineBreakMode.byWordWrapping
         let attributedString = NSMutableAttributedString(string: article.title)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 6
         attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         cell.title.attributedText = attributedString
+        cell.title.lineBreakMode = NSLineBreakMode.byTruncatingTail
+        cell.title.numberOfLines = 2
+        cell.title.textAlignment = NSTextAlignment.left
         //その他のラベルを設定
         cell.author.text = article.authorName
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)

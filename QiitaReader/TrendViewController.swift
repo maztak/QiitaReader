@@ -98,20 +98,15 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // セルのプロパティに記事情報を設定
         let article: Article = articles[indexPath.row]
         //cellのタイトルラベルを設定
-        cell.title.numberOfLines = 2
-        cell.title.baselineAdjustment = .none
-        cell.title.lineBreakMode = NSLineBreakMode.byWordWrapping
-        
-//        //上揃え（1行でも2行でもTopLineが同じ）にしたかったがならず・・・
-//        cell.title.baselineAdjustment = .none
-//        cell.title.lineBreakMode = NSLineBreakMode.byTruncatingTail
-//        cell.title.preferredMaxLayoutWidth = 0
-        
         let attributedString = NSMutableAttributedString(string: article.title)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 6
         attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         cell.title.attributedText = attributedString
+        cell.title.lineBreakMode = NSLineBreakMode.byTruncatingTail
+        cell.title.numberOfLines = 2
+        cell.title.textAlignment = NSTextAlignment.left
+        
         //その他のラベル
         cell.author.text = article.authorName
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
