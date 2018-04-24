@@ -62,12 +62,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2084" y="1798.6506746626687"/>
+            <point key="canvasLocation" x="2390" y="1799"/>
         </scene>
-        <!--Article1-->
+        <!--DetailViewController-->
         <scene sceneID="eKH-uS-F0e">
             <objects>
-                <viewController restorationIdentifier="DetailViewController" storyboardIdentifier="DetailViewController" title="Article1" id="Brp-Of-eWK" customClass="DetailViewController" customModule="QiitaReader" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController restorationIdentifier="DetailViewController" storyboardIdentifier="DetailViewController" title="DetailViewController" id="Brp-Of-eWK" customClass="DetailViewController" customModule="QiitaReader" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Uhx-vx-4qc"/>
                         <viewControllerLayoutGuide type="bottom" id="OQc-ty-TVE"/>
@@ -75,23 +75,13 @@
                     <view key="view" contentMode="scaleToFill" id="pE1-1V-8M4">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bn9-E3-2CF">
-                                <rect key="frame" x="0.0" y="151" width="375" height="516"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="wzT-G7-0qV"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dFT-0X-6n3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2084" y="2581"/>
+            <point key="canvasLocation" x="2878" y="2579"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="W0P-Vu-OIh">
@@ -109,7 +99,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NcD-Tn-9o1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3793" y="2110"/>
+            <point key="canvasLocation" x="3745" y="2580"/>
         </scene>
         <!--Trend-->
         <scene sceneID="VUz-gS-Viu">
@@ -172,7 +162,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VSP-3c-1VN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3074" y="1799"/>
+            <point key="canvasLocation" x="3300" y="1799"/>
         </scene>
         <!--ReadLater-->
         <scene sceneID="aIv-jo-jyk">
@@ -226,7 +216,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="86w-7Q-fIa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4529" y="1799"/>
+            <point key="canvasLocation" x="4284" y="1799"/>
         </scene>
         <!--ContainerTest-->
         <scene sceneID="o8k-dM-kZj">

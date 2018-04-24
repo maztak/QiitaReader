@@ -18,7 +18,6 @@ class OriginalTabBarController: UITabBarController {
 
         // 選択時の設定
         let selectedColor:UIColor = UIColor.blue
-//        (red: 65.0/255.0, green: 168.0/255.0, blue: 186.0/255.0, alpha: 1)
         let selectedAttributes = [NSAttributedStringKey.font: fontFamily, NSAttributedStringKey.foregroundColor: selectedColor] as [NSAttributedStringKey : Any]
         /// タイトルテキストカラーの設定
         UITabBarItem.appearance().setTitleTextAttributes(selectedAttributes, for: UIControlState.selected)
