@@ -72,7 +72,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dFT-0X-6n3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2084" y="2581"/>
+            <point key="canvasLocation" x="3300" y="2579"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="W0P-Vu-OIh">
@@ -90,7 +90,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NcD-Tn-9o1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3745" y="2580"/>
+            <point key="canvasLocation" x="4284" y="340"/>
         </scene>
         <!--Trend-->
         <scene sceneID="VUz-gS-Viu">
@@ -105,30 +105,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DF2-IV-PAB">
-                                <rect key="frame" x="0.0" y="110" width="375" height="508"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="t6n-9h-mT9" id="02z-Zo-qqp"/>
                                     <outlet property="delegate" destination="t6n-9h-mT9" id="7Tv-vc-1d7"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HgV-0P-15Y">
-                                <rect key="frame" x="16" y="72" width="221" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <state key="normal" title="ログイン">
-                                    <color key="titleColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="loginBtn:" destination="t6n-9h-mT9" eventType="touchUpInside" id="ae5-kW-VKO"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="DF2-IV-PAB" firstAttribute="top" secondItem="x5A-IP-Prg" secondAttribute="bottom" id="773-Qx-rCB"/>
                             <constraint firstAttribute="trailing" secondItem="DF2-IV-PAB" secondAttribute="trailing" id="Iy6-VO-S9G"/>
                             <constraint firstItem="DF2-IV-PAB" firstAttribute="leading" secondItem="eNc-WD-MeN" secondAttribute="leading" id="JdX-ge-rlK"/>
-                            <constraint firstItem="DF2-IV-PAB" firstAttribute="top" secondItem="x5A-IP-Prg" secondAttribute="bottom" constant="46" id="P34-2q-dgz"/>
                             <constraint firstItem="6Hk-qV-i7e" firstAttribute="top" secondItem="DF2-IV-PAB" secondAttribute="bottom" id="wSj-4g-1KU"/>
                         </constraints>
                     </view>
@@ -141,7 +130,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VSP-3c-1VN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3300" y="1798.6506746626687"/>
+            <point key="canvasLocation" x="3300" y="1799"/>
         </scene>
         <!--ReadLater-->
         <scene sceneID="aIv-jo-jyk">
@@ -257,7 +246,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jc6-yP-05r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2391" y="699"/>
+            <point key="canvasLocation" x="2465" y="682"/>
         </scene>
         <!--Original Tab Bar Controller-->
         <scene sceneID="29A-dS-g47">
@@ -265,6 +254,12 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="OfO-ao-EPV" customClass="OriginalTabBarController" customModule="QiitaReader" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="TRd-Q7-CRF">
+                        <barButtonItem key="leftBarButtonItem" title="ログイン" id="jzy-Yp-oP7">
+                            <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <segue destination="Buo-AR-jcm" kind="show" id="NYF-VB-jdO"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="検索" id="g08-Xm-HkQ">
                             <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -287,7 +282,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hV8-no-Q8W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3300" y="699"/>
+            <point key="canvasLocation" x="3300" y="681"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="FNu-NZ-HR5">
@@ -325,7 +320,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c66-fI-Ddz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4284" y="699"/>
+            <point key="canvasLocation" x="4284" y="1048"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="qJ4-6a-p3g">
