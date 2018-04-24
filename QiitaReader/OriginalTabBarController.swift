@@ -13,6 +13,13 @@ class OriginalTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // NavBarのtitleLabelをセット
+        let title = UILabel()
+        title.text = "QiitaReader"
+        title.font = UIFont(name: "Heiti TC", size: 23)
+        title.textColor = UIColor.white
+        self.navigationItem.titleView = title
+
         // fontの設定
         let fontFamily: UIFont! = UIFont.systemFont(ofSize: 10)
 

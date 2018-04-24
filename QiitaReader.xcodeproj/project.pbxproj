@@ -25,6 +25,7 @@
 		B06CFC0820521EE100C55BB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B06CFC0620521EE100C55BB9 /* Main.storyboard */; };
 		B06CFC0A20521EE100C55BB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B06CFC0920521EE100C55BB9 /* Assets.xcassets */; };
 		B06CFC442052374000C55BB9 /* ReadLaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CFC432052374000C55BB9 /* ReadLaterViewController.swift */; };
+		B0830587208EDFF40003771B /* CustomNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0830586208EDFF40003771B /* CustomNavigationController.swift */; };
 		B0B131EF20529284009C2BD1 /* ic_new_releases_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B131EE20529284009C2BD1 /* ic_new_releases_white.png */; };
 		B0B131F120529296009C2BD1 /* ic_trending_up_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B131F020529296009C2BD1 /* ic_trending_up_white.png */; };
 		B0B131F3205292A7009C2BD1 /* ic_access_time_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B131F2205292A7009C2BD1 /* ic_access_time_white.png */; };
@@ -56,6 +57,7 @@
 		B06CFC0920521EE100C55BB9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B06CFC0E20521EE100C55BB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B06CFC432052374000C55BB9 /* ReadLaterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadLaterViewController.swift; sourceTree = "<group>"; };
+		B0830586208EDFF40003771B /* CustomNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavigationController.swift; sourceTree = "<group>"; };
 		B0B131EE20529284009C2BD1 /* ic_new_releases_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_new_releases_white.png; path = img/ic_new_releases_white.png; sourceTree = "<group>"; };
 		B0B131F020529296009C2BD1 /* ic_trending_up_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_trending_up_white.png; path = img/ic_trending_up_white.png; sourceTree = "<group>"; };
 		B0B131F2205292A7009C2BD1 /* ic_access_time_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_access_time_white.png; path = img/ic_access_time_white.png; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				B02BC23A2087475D00322445 /* ArticleCellDelegate.swift */,
 				B02FDEDB208DEE7600FA83F9 /* OriginalTabBarController.swift */,
 				B04498502074D36100438B08 /* SearchViewController.swift */,
+				B0830586208EDFF40003771B /* CustomNavigationController.swift */,
 				B0E87838208D92C200B10147 /* LoginViewController.swift */,
 				B06CFC0920521EE100C55BB9 /* Assets.xcassets */,
 				B02BC24420874EB000322445 /* header.png */,
@@ -273,6 +276,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0830587208EDFF40003771B /* CustomNavigationController.swift in Sources */,
 				916D264120566137007BC178 /* TrendViewController.swift in Sources */,
 				B04498512074D36100438B08 /* SearchViewController.swift in Sources */,
 				B06CFC442052374000C55BB9 /* ReadLaterViewController.swift in Sources */,
