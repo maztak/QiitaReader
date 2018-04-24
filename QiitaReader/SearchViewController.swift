@@ -15,18 +15,16 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     @IBOutlet weak var tableView: UITableView!
     var testSearchBar: UISearchBar!
     var articles: [Article] = []
-//    //検索結果配列を用意
-//    var searchResult = [Article]() // <- いらない？
     var searchQuery: String = ""
     
-    //////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+       
         setupSearchBar()
         //何も入力されていなくてもReturnキーを押せるようにする。
         testSearchBar.enablesReturnKeyAutomatically = true
-        //使用するXibとCellのReuseIdentifierを登録する
+        //XibとCellのReuseIdentifierを登録する
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
     }
 
@@ -39,19 +37,16 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     
     
     
-    //////////////////////////////////////////////////////////////////////////
-    //*各種メソッド                                                          *//
-    //////////////////////////////////////////////////////////////////////////
-    
+    ////////////////////////////////////////////////////////////////////
+    //*各種メソッド
+    ////////////////////////////////////////////////////////////////////
     //検索ボタン押下時の呼び出しメソッド
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         testSearchBar.endEditing(true)
-//        //検索結果配列を空にする。 <- いらない？
-//        searchResult.removeAll()
-
+        //検索結果配列を空にする
+        articles.removeAll()
         //ここにgetArticles()をもってくる
         getArticles()
-        
         //テーブルを再読み込みする。
         tableView.reloadData()
     }
@@ -60,11 +55,12 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
-        //
-        searchQuery = testSearchBar.text!
-        let encodedQuery = searchQuery.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        var encodedQuery = ""
         var targetUrl = ""
-        targetUrl = "https://qiita.com/api/v2/items?page=1&per_page=10&query=title%3A\(encodedQuery!)"
+        
+        searchQuery = testSearchBar.text!
+        encodedQuery = searchQuery.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
+        targetUrl = "https://qiita.com/api/v2/items?page=1&per_page=10&query=title%3A\(encodedQuery)"
         
         guard let url = URL(string: targetUrl) else {
             print("無効なURL")
@@ -77,8 +73,8 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
             }
             
             let json = JSON(object) //object（1つの記事）をJSON型にキャストし、定数jsonに入れる
-            json.forEach { (_, json) in //JOSN型の定数jsonの各要素をforEachで呼び出し、それらを構造体Articleの引数とし
-                let article = Article ( //articleを生成していく
+            json.forEach { (_, json) in
+                let article = Article (
                     title: json["title"].string!,
                     authorName: json["user"]["id"].string!,
                     authorImageUrl: json["user"]["profile_image_url"].string!,
@@ -97,10 +93,8 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     
     /*データを返すメソッド*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         // セルを取得する
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
-        
         // セルのプロパティに記事情報を設定する
         let article: Article = articles[indexPath.row]
         cell.title.text = article.title
@@ -128,19 +122,19 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     }
     
     // MARK: - setupSearchBarメソッド
-        private func setupSearchBar() {
-            if let navigationBarFrame = navigationController?.navigationBar.bounds {
-                let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
-                searchBar.delegate = self
-                searchBar.placeholder = "Search"
-                searchBar.autocapitalizationType = UITextAutocapitalizationType.none
-                searchBar.keyboardType = UIKeyboardType.default
-                navigationItem.titleView = searchBar
-                navigationItem.titleView?.frame = searchBar.frame
-                self.testSearchBar = searchBar
-                searchBar.becomeFirstResponder()
-            }
+    private func setupSearchBar() {
+        if let navigationBarFrame = navigationController?.navigationBar.bounds {
+            let searchBar: UISearchBar = UISearchBar(frame: navigationBarFrame)
+            searchBar.delegate = self
+            searchBar.placeholder = "Search"
+            searchBar.autocapitalizationType = UITextAutocapitalizationType.none
+            searchBar.keyboardType = UIKeyboardType.default
+            navigationItem.titleView = searchBar
+            navigationItem.titleView?.frame = searchBar.frame
+            self.testSearchBar = searchBar
+            searchBar.becomeFirstResponder()
         }
+    }
 
 
     
