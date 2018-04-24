@@ -76,7 +76,8 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     tag1: json["article"]["tags"][0]["name"].string,
                     tag2: json["article"]["tags"][1]["name"].string,
                     tag3: json["article"]["tags"][2]["name"].string,
-                    url: json["article"]["showUrl"].string!
+                    url: json["article"]["showUrl"].string!,
+                    id: json["id"].string!
                 )
                 self.articles.append(article) //それを辞書の配列であるarticlesに入れていく
             }
@@ -145,7 +146,8 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
             "tag2": article.tag2 ?? String(),
             "tag3": article.tag3 ?? String(),
             "url": article.url,
-            "authorImageUrl": article.authorImageUrl
+            "authorImageUrl": article.authorImageUrl,
+            "id": article.id
             ])
         // デフォルトRealmを取得する(おまじない)
         let realm = try! Realm()

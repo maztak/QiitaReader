@@ -17,10 +17,9 @@ struct Article {
     var tag2: String?
     var tag3: String?
     var url: String
+    var id: String
 }
 
-//サンプル記事
-let article1 = Article(title: "title", authorName: "author", authorImageUrl: "https://qiita-image-store.s3.amazonaws.com/0/83914/profile-images/1474114026", goodCnt: 42, tag1: "testTag1", tag2: "testTag2", tag3: "testTag3", url: "https://qiita.com/on0z/items/9768d2bccc29cc4e1851")
 
 class RealmArticle: Object {
     @objc dynamic var title = String()
@@ -31,4 +30,9 @@ class RealmArticle: Object {
     @objc dynamic var tag2: String? = String()
     @objc dynamic var tag3: String? = String()
     @objc dynamic var url = String()
+    @objc dynamic var id =  String()
+    
+    override static func primaryKey() -> String? {
+        return "id"
+    }
 }

@@ -77,7 +77,8 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                     tag1: json["tags"][0]["name"].string,
                     tag2: json["tags"][1]["name"].string,
                     tag3: json["tags"][2]["name"].string,
-                    url: json["url"].string!
+                    url: json["url"].string!,
+                    id: json["id"].string!
                 )
                 self.articles.append(article)
             }
@@ -132,7 +133,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     /*あとで読むRealmに記事を追加するメソッド*/
     func addReadLater(cell: UITableViewCell) {
-        //タップされたcellのindexPath.row（tableViewの何行目か）を取得する
+        //タップされたcellのindexPath.rowを取得する
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         //そこから対応している記事を取得し
         let article: Article = articles[indexPath.row]
@@ -145,13 +146,14 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             "tag2": article.tag2 ?? String(),
             "tag3": article.tag3 ?? String(),
             "url": article.url,
-            "authorImageUrl": article.authorImageUrl
+            "authorImageUrl": article.authorImageUrl,
+            "id": article.id
             ])
         // デフォルトRealmを取得する(おまじない)
         let realm = try! Realm()
         // トランザクションを開始して、オブジェクトをRealmに追加する
         try! realm.write {
-            realm.add(realmArticle)
+            realm.add(realmArticle, update: true)
         }
         //追加した記事をコンソールに出力（確認用）
         print(realmArticle)

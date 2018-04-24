@@ -82,7 +82,8 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
                     tag1: json["tags"][0]["name"].string,
                     tag2: json["tags"][1]["name"].string,
                     tag3: json["tags"][2]["name"].string,
-                    url: json["url"].string!
+                    url: json["url"].string!,
+                    id: json["id"].string!
                 )
                 self.articles.append(article) //それを辞書の配列であるarticlesに入れていく
             }

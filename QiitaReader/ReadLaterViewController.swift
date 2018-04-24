@@ -41,7 +41,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
     
     @objc func refresh()
     {
-        reversedArticles = []
+        articles.removeAll()
         getArticles()
         refreshControl.endRefreshing()
     }
@@ -53,8 +53,8 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
     func getArticles() {
         // デフォルトRealmを取得する(おまじない)
         let realm = try! Realm()
-        let object = realm.objects(RealmArticle.self)
-//        let object = Set(realm.objects(RealmArticle.self).value(forKey: "title") as! [String])
+        // 記事の読み取りをする
+        let object = realm.objects(RealmArticle.self) //objectはResults<RealmArticle>型　＝ [RealmArticel]？
         print("object: \(object)")
         
         //配列？objectの各要素をforEachで呼び出し、articlesにappendしていく
@@ -67,13 +67,20 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
                 tag1: realmArticle.tag1,
                 tag2: realmArticle.tag2,
                 tag3: realmArticle.tag3,
-                url: realmArticle.url
+                url: realmArticle.url,
+                id: realmArticle.id
             )
             self.articles.append(article)
         }
+        
+            
+            
         self.reversedArticles = articles.reversed() //記事配列を逆順に
         self.tableView.reloadData() //TableViewを更新
     }
+    
+    
+
 
     
     
