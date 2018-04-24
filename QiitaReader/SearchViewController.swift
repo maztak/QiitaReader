@@ -10,8 +10,9 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Nuke
+import RealmSwift
 
-class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate {
+class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     var testSearchBar: UISearchBar!
     var articles: [Article] = []
@@ -20,7 +21,6 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     ////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         setupSearchBar()
         //何も入力されていなくてもReturnキーを押せるようにする。
         testSearchBar.enablesReturnKeyAutomatically = true
@@ -99,11 +99,12 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         let article: Article = articles[indexPath.row]
         cell.title.text = article.title
         cell.author.text = article.authorName
+        Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         cell.goodCnt.text = String(article.goodCnt)
         cell.tag1.text = article.tag1
         cell.tag2.text = article.tag2
         cell.tag3.text = article.tag3
-        Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
+        cell.delegate = self
         return cell
     }
     
@@ -134,6 +135,34 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
             self.testSearchBar = searchBar
             searchBar.becomeFirstResponder()
         }
+    }
+    
+    
+    /*あとで読むRealmに記事を追加するメソッド*/
+    func addReadLater(cell: UITableViewCell) {
+        //タップされたcellのindexPath.row（tableViewの何行目か）を取得する
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        //そこから対応している記事を取得し
+        let article: Article = articles[indexPath.row]
+        //その情報をrealmArticleとしてモデル作成
+        let realmArticle = RealmArticle(value: [
+            "title" : article.title,
+            "authorName": article.authorName,
+            "goodCnt": article.goodCnt,
+            "tag1": article.tag1 ?? String(),
+            "tag2": article.tag2 ?? String(),
+            "tag3": article.tag3 ?? String(),
+            "url": article.url,
+            "authorImageUrl": article.authorImageUrl
+            ])
+        // デフォルトRealmを取得する(おまじない)
+        let realm = try! Realm()
+        // トランザクションを開始して、オブジェクトをRealmに追加する
+        try! realm.write {
+            realm.add(realmArticle)
+        }
+        //追加した記事をコンソールに出力（確認用）
+        print(realmArticle)
     }
 
 

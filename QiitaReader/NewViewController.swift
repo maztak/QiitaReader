@@ -17,13 +17,12 @@ import RealmSwift
 
 class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
-    var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
-    var refreshControl:UIRefreshControl! //下に引っ張って更新のためのプロパティ
+    var articles: [Article] = []
+    var refreshControl: UIRefreshControl!
     
     //////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
-        //記事を取得し、tableViewをリロードする
         getArticles()
         //使用するXibとCellのReuseIdentifierを登録する
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
@@ -98,16 +97,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルのプロパティに記事情報を設定する
         let article: Article = articles[indexPath.row]
-//        cell.title.text = article.title
-        cell.author.text = article.authorName
-        Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
-        cell.goodCnt.text = String(article.goodCnt)
-        cell.tag1.text = article.tag1
-        cell.tag2.text = article.tag2
-        cell.tag3.text = article.tag3
-        cell.delegate = self
-        
-        //titleの行間を調整するためにaddAttribute
+        //タイトルラベルを設定
         cell.title.numberOfLines = 2
         cell.title.lineBreakMode = NSLineBreakMode.byWordWrapping
         let attributedString = NSMutableAttributedString(string: article.title)
@@ -115,7 +105,14 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         paragraphStyle.lineSpacing = 6
         attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         cell.title.attributedText = attributedString
-        
+        //その他のラベルを設定
+        cell.author.text = article.authorName
+        Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
+        cell.goodCnt.text = String(article.goodCnt)
+        cell.tag1.text = article.tag1
+        cell.tag2.text = article.tag2
+        cell.tag3.text = article.tag3
+        cell.delegate = self
         return cell
     }
     
@@ -136,10 +133,8 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     func addReadLater(cell: UITableViewCell) {
         //タップされたcellのindexPath.row（tableViewの何行目か）を取得する
         guard let indexPath = tableView.indexPath(for: cell) else { return }
-        
-        //そこから対応している（代入した）記事article = articles[indexPath.row]を取得し
+        //そこから対応している記事を取得し
         let article: Article = articles[indexPath.row]
-
         //その情報をrealmArticleとしてモデル作成
         let realmArticle = RealmArticle(value: [
             "title" : article.title,
@@ -151,18 +146,14 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             "url": article.url,
             "authorImageUrl": article.authorImageUrl
             ])
-        
         // デフォルトRealmを取得する(おまじない)
         let realm = try! Realm()
-        
         // トランザクションを開始して、オブジェクトをRealmに追加する
         try! realm.write {
             realm.add(realmArticle)
         }
-        
         //追加した記事をコンソールに出力（確認用）
         print(realmArticle)
-        
     }
     
   
