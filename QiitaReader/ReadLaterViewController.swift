@@ -49,12 +49,12 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
     ////////////////////////////////////////////////////////////////////
     //*各種メソッド
     ////////////////////////////////////////////////////////////////////
-
     /*realmからデータ取得し*/
     func getArticles() {
         // デフォルトRealmを取得する(おまじない)
         let realm = try! Realm()
         let object = realm.objects(RealmArticle.self)
+//        let object = Set(realm.objects(RealmArticle.self).value(forKey: "title") as! [String])
         print("object: \(object)")
         
         //配列？objectの各要素をforEachで呼び出し、articlesにappendしていく
