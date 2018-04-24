@@ -231,10 +231,10 @@
             </objects>
             <point key="canvasLocation" x="5417" y="1799"/>
         </scene>
-        <!--Custom Navigation Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="0Jp-t4-fhX">
             <objects>
-                <navigationController id="wV3-h4-IcZ" customClass="CustomNavigationController" customModule="QiitaReader" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="wV3-h4-IcZ" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1GW-Kr-DtD">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

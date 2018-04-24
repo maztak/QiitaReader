@@ -83,14 +83,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルのプロパティに記事情報を設定する
         let article: Article = reversedArticles[indexPath.row]
-//        cell.title.text = article.title
-        cell.author.text = article.authorName
-        Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
-        cell.goodCnt.text = String(article.goodCnt)
-        cell.tag1.text = article.tag1
-        cell.tag2.text = article.tag2
-        cell.tag3.text = article.tag3
-        
+        //cellのタイトルラベルを設定する
         cell.title.numberOfLines = 2
         cell.title.lineBreakMode = NSLineBreakMode.byWordWrapping
         let attributedString = NSMutableAttributedString(string: article.title)
@@ -98,6 +91,14 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         paragraphStyle.lineSpacing = 6
         attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         cell.title.attributedText = attributedString
+        //その他のラベルを設定
+        cell.author.text = article.authorName
+        Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
+        cell.goodCnt.text = String(article.goodCnt)
+        cell.tag1.text = article.tag1
+        cell.tag2.text = article.tag2
+        cell.tag3.text = article.tag3
+        cell.readLaterButton.isHidden = true
         
         return cell
     }

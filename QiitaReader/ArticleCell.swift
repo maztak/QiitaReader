@@ -16,8 +16,9 @@ class ArticleCell: UITableViewCell {
     @IBOutlet weak var tag2: UILabel!
     @IBOutlet weak var tag3: UILabel!
     @IBOutlet weak var authorIcon: UIImageView!
-    
+    @IBOutlet weak var readLaterButton: UIButton!
     var delegate: ArticleCellDelegate? = nil
+    
     @IBAction func readLaterButtonTapped(_ sender: Any) {
         delegate?.addReadLater(cell: self)
     }
