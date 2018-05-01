@@ -61,7 +61,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let url = "https://qiita.com/trend.json"
         let headers: HTTPHeaders = [
             "Contenttype": "application/json",
-            "Authorization": "Bearer e9370340777a530778e96acb97f6a4fff06a946d",
+            "Authorization": "",//アクセストークン
             ]
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             guard let object = response.result.value else { return }

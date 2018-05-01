@@ -57,7 +57,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         let url = "https://qiita.com/api/v2/items"
         let headers: HTTPHeaders = [
             "Contenttype": "application/json",
-            "Authorization": "Bearer e9370340777a530778e96acb97f6a4fff06a946d",
+            "Authorization": "", //アクセストークン
             ]
         
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
