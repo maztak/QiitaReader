@@ -75,9 +75,9 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     authorName: json["article"]["author"]["urlName"].string!,
                     authorImageUrl: json["article"]["author"]["profileImageUrl"].string!,
                     goodCnt: json["article"]["likesCount"].int!,
-                    tag1: json["article"]["tags"][0]["name"].string,
-                    tag2: json["article"]["tags"][1]["name"].string,
-                    tag3: json["article"]["tags"][2]["name"].string,
+//                    tag1: json["article"]["tags"][0]["name"].string,
+//                    tag2: json["article"]["tags"][1]["name"].string,
+//                    tag3: json["article"]["tags"][2]["name"].string,
                     url: json["article"]["showUrl"].string!,
                     id: String(json["article"]["id"].int!)
                 )
@@ -114,9 +114,9 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.author.text = article.authorName
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         cell.goodCnt.text = String(article.goodCnt)
-        cell.tag1.text = article.tag1
-        cell.tag2.text = article.tag2
-        cell.tag3.text = article.tag3
+//        cell.tag1.text = article.tag1
+//        cell.tag2.text = article.tag2
+//        cell.tag3.text = article.tag3
         cell.delegate = self
         
         return cell
@@ -144,9 +144,9 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
-            "tag1": article.tag1 ?? String(),
-            "tag2": article.tag2 ?? String(),
-            "tag3": article.tag3 ?? String(),
+//            "tag1": article.tag1 ?? String(),
+//            "tag2": article.tag2 ?? String(),
+//            "tag3": article.tag3 ?? String(),
             "url": article.url,
             "authorImageUrl": article.authorImageUrl,
             "id": article.id

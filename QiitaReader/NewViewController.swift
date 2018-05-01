@@ -33,6 +33,9 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         self.refreshControl.addTarget(self, action: #selector(NewViewController.refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
         
+        //
+        
+        
     }
 
     
@@ -75,9 +78,9 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                     authorName: json["user"]["id"].string!,
                     authorImageUrl: json["user"]["profile_image_url"].string!,
                     goodCnt: json["likes_count"].int!,
-                    tag1: json["tags"][0]["name"].string,
-                    tag2: json["tags"][1]["name"].string,
-                    tag3: json["tags"][2]["name"].string,
+//                    tag1: json["tags"][0]["name"].string,
+//                    tag2: json["tags"][1]["name"].string,
+//                    tag3: json["tags"][2]["name"].string,
                     url: json["url"].string!,
                     id: json["id"].string!
                 )
@@ -112,9 +115,16 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.author.text = article.authorName
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         cell.goodCnt.text = String(article.goodCnt)
-        cell.tag1.text = article.tag1
-        cell.tag2.text = article.tag2
-        cell.tag3.text = article.tag3
+//        cell.tag1.text = article.tag1
+//        cell.tag2.text = article.tag2
+//        cell.tag3.text = article.tag3
+        cell.tagListView.addTag("Tag1")
+         cell.tagListView.addTag("Tag2")
+         cell.tagListView.addTag("Tag3")
+         cell.tagListView.addTag("TagListView4")
+         cell.tagListView.addTag("TagListView5")
+         cell.tagListView.addTag("TagListView6")
+        
         cell.delegate = self
         return cell
     }
@@ -143,9 +153,9 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
-            "tag1": article.tag1 ?? String(),
-            "tag2": article.tag2 ?? String(),
-            "tag3": article.tag3 ?? String(),
+//            "tag1": article.tag1 ?? String(),
+//            "tag2": article.tag2 ?? String(),
+//            "tag3": article.tag3 ?? String(),
             "url": article.url,
             "authorImageUrl": article.authorImageUrl,
             "id": article.id

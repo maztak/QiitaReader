@@ -64,9 +64,9 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
                 authorName: realmArticle.authorName,
                 authorImageUrl: realmArticle.authorImageUrl,
                 goodCnt: realmArticle.goodCnt,
-                tag1: realmArticle.tag1,
-                tag2: realmArticle.tag2,
-                tag3: realmArticle.tag3,
+//                tag1: realmArticle.tag1,
+//                tag2: realmArticle.tag2,
+//                tag3: realmArticle.tag3,
                 url: realmArticle.url,
                 id: realmArticle.id
             )
@@ -103,9 +103,9 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.author.text = article.authorName
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         cell.goodCnt.text = String(article.goodCnt)
-        cell.tag1.text = article.tag1
-        cell.tag2.text = article.tag2
-        cell.tag3.text = article.tag3
+//        cell.tag1.text = article.tag1
+//        cell.tag2.text = article.tag2
+//        cell.tag3.text = article.tag3
         cell.readLaterButton.isHidden = true
         
         return cell

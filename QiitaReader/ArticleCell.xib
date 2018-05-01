@@ -48,97 +48,101 @@
                         </connections>
                     </button>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bre-Nq-eC4">
-                        <rect key="frame" x="223" y="81.5" width="61" height="19"/>
+                        <rect key="frame" x="223" y="74" width="61" height="19"/>
                         <fontDescription key="fontDescription" name="HiraMaruProN-W4" family="Hiragino Maru Gothic ProN" pointSize="19"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="by" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9pM-5j-Fdl">
-                        <rect key="frame" x="196" y="81" width="19" height="20.5"/>
+                        <rect key="frame" x="196" y="73" width="19" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cnt" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jkI-oj-fBF">
-                        <rect key="frame" x="155" y="81" width="28" height="21"/>
+                        <rect key="frame" x="155" y="73" width="28" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lZR-H9-NC6">
-                        <rect key="frame" x="122" y="116" width="34" height="24"/>
-                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="24" id="6KJ-qf-Nk6"/>
-                        </constraints>
-                        <attributedString key="attributedText">
-                            <fragment content="tag1">
-                                <attributes>
-                                    <font key="NSFont" metaFont="system" size="16"/>
-                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" firstLineHeadIndent="3" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO"/>
-                                </attributes>
-                            </fragment>
-                        </attributedString>
-                        <nil key="highlightedColor"/>
-                        <size key="shadowOffset" width="0.0" height="0.0"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="tag2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Vh-QP-CEa">
-                        <rect key="frame" x="175" y="116" width="33" height="24"/>
-                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_favorite_red_2x.png" translatesAutoresizingMaskIntoConstraints="NO" id="GDJ-U5-SOX">
-                        <rect key="frame" x="122" y="81" width="23" height="21"/>
+                        <rect key="frame" x="122" y="73" width="23" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="23" id="5qC-g1-RLl"/>
                             <constraint firstAttribute="height" constant="21" id="EHD-PQ-AI6"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tag3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xHK-V0-hOK">
-                        <rect key="frame" x="227" y="116" width="33.5" height="24"/>
-                        <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LA3-T2-iaJ" customClass="TagListView" customModule="TagListView">
+                        <rect key="frame" x="122" y="101" width="336" height="45"/>
+                        <color key="backgroundColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
+                                <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="paddingX">
+                                <real key="value" value="12"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="marginY">
+                                <real key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="marginX">
+                                <real key="value" value="7"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <real key="value" value="3"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="GDJ-U5-SOX" firstAttribute="top" secondItem="jkI-oj-fBF" secondAttribute="top" id="40Q-Ed-UOc"/>
                     <constraint firstAttribute="trailingMargin" secondItem="pwD-ha-5aM" secondAttribute="trailing" constant="12" id="6aK-qv-YBN"/>
                     <constraint firstItem="9pM-5j-Fdl" firstAttribute="leading" secondItem="jkI-oj-fBF" secondAttribute="trailing" constant="13" id="8jx-ls-6g0"/>
                     <constraint firstItem="bre-Nq-eC4" firstAttribute="leading" secondItem="9pM-5j-Fdl" secondAttribute="trailing" constant="8" id="9eo-t3-7Pq"/>
-                    <constraint firstItem="lZR-H9-NC6" firstAttribute="height" secondItem="9Vh-QP-CEa" secondAttribute="height" id="A6Z-gM-Xti"/>
                     <constraint firstItem="HhG-4M-ofg" firstAttribute="top" secondItem="5Tk-i0-U68" secondAttribute="top" constant="20" id="BBg-Sq-t74"/>
                     <constraint firstItem="pwr-02-4tq" firstAttribute="top" secondItem="HhG-4M-ofg" secondAttribute="bottom" constant="7" id="D1o-9h-g2H"/>
-                    <constraint firstItem="9Vh-QP-CEa" firstAttribute="leading" secondItem="lZR-H9-NC6" secondAttribute="trailing" constant="19" id="DNQ-15-9oQ"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="LA3-T2-iaJ" secondAttribute="bottom" constant="3" id="G2N-VH-9Wf"/>
                     <constraint firstItem="GDJ-U5-SOX" firstAttribute="leading" secondItem="pwr-02-4tq" secondAttribute="trailing" constant="28" id="GDw-1i-38D"/>
                     <constraint firstItem="9pM-5j-Fdl" firstAttribute="bottom" secondItem="bre-Nq-eC4" secondAttribute="bottom" constant="1" id="GSz-bp-8ru"/>
-                    <constraint firstItem="xHK-V0-hOK" firstAttribute="leading" secondItem="9Vh-QP-CEa" secondAttribute="trailing" constant="19" id="OTg-cO-cKf"/>
+                    <constraint firstItem="LA3-T2-iaJ" firstAttribute="leading" secondItem="pwr-02-4tq" secondAttribute="trailing" constant="28" id="Glw-77-iga"/>
                     <constraint firstAttribute="bottomMargin" secondItem="pwr-02-4tq" secondAttribute="bottom" constant="3" id="Qb8-uo-o2g"/>
                     <constraint firstItem="pwr-02-4tq" firstAttribute="leading" secondItem="5Tk-i0-U68" secondAttribute="leadingMargin" id="TGe-zM-tAP"/>
-                    <constraint firstItem="9Vh-QP-CEa" firstAttribute="height" secondItem="xHK-V0-hOK" secondAttribute="height" id="UPA-fG-niB"/>
                     <constraint firstItem="GDJ-U5-SOX" firstAttribute="top" secondItem="9pM-5j-Fdl" secondAttribute="top" id="Ysa-z4-Y8Z"/>
+                    <constraint firstItem="LA3-T2-iaJ" firstAttribute="trailing" secondItem="5Tk-i0-U68" secondAttribute="trailingMargin" id="Zie-0M-ct2"/>
                     <constraint firstItem="pwD-ha-5aM" firstAttribute="leading" secondItem="HhG-4M-ofg" secondAttribute="trailing" constant="24" id="cFC-xZ-L46"/>
                     <constraint firstItem="HhG-4M-ofg" firstAttribute="leading" secondItem="5Tk-i0-U68" secondAttribute="leading" constant="20" id="gIU-gV-hbE"/>
                     <constraint firstItem="pwD-ha-5aM" firstAttribute="top" secondItem="5Tk-i0-U68" secondAttribute="topMargin" constant="11" id="gT1-AJ-Or4"/>
-                    <constraint firstItem="9Vh-QP-CEa" firstAttribute="bottom" secondItem="xHK-V0-hOK" secondAttribute="bottom" id="ir0-Kh-1WE"/>
                     <constraint firstItem="jkI-oj-fBF" firstAttribute="leading" secondItem="GDJ-U5-SOX" secondAttribute="trailing" constant="10" id="jzO-dl-9kH"/>
-                    <constraint firstItem="lZR-H9-NC6" firstAttribute="bottom" secondItem="9Vh-QP-CEa" secondAttribute="bottom" id="nQi-15-bRI"/>
-                    <constraint firstItem="lZR-H9-NC6" firstAttribute="top" secondItem="GDJ-U5-SOX" secondAttribute="bottom" constant="14" id="tmp-j1-bvP"/>
-                    <constraint firstItem="GDJ-U5-SOX" firstAttribute="top" secondItem="HhG-4M-ofg" secondAttribute="bottom" constant="16" id="wQo-h5-g2S"/>
-                    <constraint firstItem="lZR-H9-NC6" firstAttribute="leading" secondItem="GDJ-U5-SOX" secondAttribute="leading" id="xDf-II-qZs"/>
+                    <constraint firstItem="LA3-T2-iaJ" firstAttribute="top" secondItem="GDJ-U5-SOX" secondAttribute="bottom" constant="7" id="seL-33-Ghm"/>
+                    <constraint firstItem="GDJ-U5-SOX" firstAttribute="top" secondItem="HhG-4M-ofg" secondAttribute="bottom" constant="8" id="wQo-h5-g2S"/>
                 </constraints>
+                <userDefinedRuntimeAttributes>
+                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </userDefinedRuntimeAttribute>
+                    <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
+                        <color key="value" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </userDefinedRuntimeAttribute>
+                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                        <real key="value" value="3"/>
+                    </userDefinedRuntimeAttribute>
+                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                        <real key="value" value="1"/>
+                    </userDefinedRuntimeAttribute>
+                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                        <color key="value" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </userDefinedRuntimeAttribute>
+                </userDefinedRuntimeAttributes>
             </tableViewCellContentView>
             <connections>
                 <outlet property="author" destination="bre-Nq-eC4" id="fut-bi-FH4"/>
                 <outlet property="authorIcon" destination="pwr-02-4tq" id="h7l-Rw-E2q"/>
                 <outlet property="goodCnt" destination="jkI-oj-fBF" id="rUH-iw-6Tv"/>
                 <outlet property="readLaterButton" destination="pwD-ha-5aM" id="QYb-sQ-4t4"/>
-                <outlet property="tag1" destination="lZR-H9-NC6" id="xCK-kn-GFA"/>
-                <outlet property="tag2" destination="9Vh-QP-CEa" id="5pz-Gt-Zae"/>
-                <outlet property="tag3" destination="xHK-V0-hOK" id="9mu-PC-eCE"/>
+                <outlet property="tagListView" destination="LA3-T2-iaJ" id="uWh-ek-tdw"/>
                 <outlet property="title" destination="HhG-4M-ofg" id="vfi-6q-jzC"/>
             </connections>
             <point key="canvasLocation" x="-36" y="-91"/>
