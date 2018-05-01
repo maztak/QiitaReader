@@ -68,7 +68,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             let json = JSON(object)["trendItems"] //objectをJSON型にキャストし定数jsonに入れる
             json.forEach { (_, json) in //JOSN型の定数jsonの各要素をforEachで呼び出し
-                let article = Article ( //articleを生成していく
+                let article = Article( //articleを生成していく
                     title: json["article"]["title"].string!,
                     authorName: json["article"]["author"]["urlName"].string!,
                     authorImageUrl: json["article"]["author"]["profileImageUrl"].string!,
@@ -77,7 +77,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     tag2: json["article"]["tags"][1]["name"].string,
                     tag3: json["article"]["tags"][2]["name"].string,
                     url: json["article"]["showUrl"].string!,
-                    id: json["id"].string!
+                    id: String(json["article"]["id"].int!)
                 )
                 self.articles.append(article) //それを辞書の配列であるarticlesに入れていく
             }
