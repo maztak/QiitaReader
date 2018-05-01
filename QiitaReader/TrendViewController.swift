@@ -59,11 +59,13 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
         let url = "https://qiita.com/trend.json"
-        let headers: HTTPHeaders = [
-            "Contenttype": "application/json",
-            "Authorization": "",//アクセストークン
-            ]
-        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+//        let headers: HTTPHeaders = [
+//            "Contenttype": "application/json",
+//            "Authorization": ""
+//            ]
+        
+        Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON { response in
+//        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             guard let object = response.result.value else { return }
             
             let json = JSON(object)["trendItems"] //objectをJSON型にキャストし定数jsonに入れる
