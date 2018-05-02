@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire    //APIで記事を取得したりするときに使う
-import SwiftyJSON   //JSON型にキャストしたり、stringやintプロパティを使う
+import SwiftyJSON   //JSON型にキャストしたり、intプロパティ等を使う
 import Nuke         //サムネイル画像を表示して、キャッシュまでしてくれる
 import RealmSwift
 //po Realm.Configuration.defaultConfiguration.fileURL
@@ -109,7 +109,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
 //        cell.tag2.text = article.tag2
 //        cell.tag3.text = article.tag3
         cell.tagListView.addTags(article.tags)
-    
+        
         cell.delegate = self
         return cell
     }
@@ -138,7 +138,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
-            "tags": article.tags,
+            "tagList": article.tags,
 //            "tag1": article.tag1 ?? String(),
 //            "tag2": article.tag2 ?? String(),
 //            "tag3": article.tag3 ?? String(),

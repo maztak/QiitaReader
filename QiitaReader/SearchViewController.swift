@@ -72,6 +72,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
             let json = JSON(object)
             json.forEach { (_, json) in
                 let risouTags = json["tags"].array!.map { $0["name"].string! }
+                
                 let article = Article (
                     title: json["title"].string!,
                     authorName: json["user"]["id"].string!,
@@ -84,9 +85,9 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
                     url: json["url"].string!,
                     id: json["id"].string!
                 )
-                self.articles.append(article) //それを辞書の配列であるarticlesに入れていく
+                self.articles.append(article)
             }
-            self.tableView.reloadData() //TableViewを更新
+            self.tableView.reloadData()
         }
     }
     
@@ -169,10 +170,6 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
             "authorImageUrl": article.authorImageUrl,
             "id": article.id
             ])
-
-//        article.tags.map {
-//            realmTags.list.append($0)
-//        }
 
         // デフォルトRealmを取得する(おまじない)
         let realm = try! Realm()

@@ -151,7 +151,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
-            "tags": article.tags,
+            "tagList": article.tags,
 //            "tag1": article.tag1 ?? String(),
 //            "tag2": article.tag2 ?? String(),
 //            "tag3": article.tag3 ?? String(),
