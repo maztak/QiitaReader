@@ -22,7 +22,6 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
     ////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
-        //記事を取得し、tableViewをリロードする
         getArticles()
         //使用するXibとCellのReuseIdentifierを登録する
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
@@ -33,28 +32,27 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         self.refreshControl.addTarget(self, action: #selector(NewViewController.refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
-    @objc func refresh()
-    {
+    @objc func refresh() {
         articles.removeAll()
         getArticles()
         refreshControl.endRefreshing()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
 
     ////////////////////////////////////////////////////////////////////
     //*各種メソッド
     ////////////////////////////////////////////////////////////////////
-    /*realmからデータ取得し*/
+    /*realmからデータ取得しarticlesに追加*/
     func getArticles() {
         // デフォルトRealmを取得する(おまじない)
         let realm = try! Realm()
         // 記事の読み取りをする
-        let object = realm.objects(RealmArticle.self) //objectはResults<RealmArticle>型　＝ [RealmArticel]？
+        let object = realm.objects(RealmArticle.self) //objectはResults<RealmArticle>型　＝ [RealmArticel]型
         print("object: \(object)")
         
         //配列？objectの各要素をforEachで呼び出し、articlesにappendしていく
@@ -106,8 +104,17 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
 //        cell.tag1.text = article.tag1
 //        cell.tag2.text = article.tag2
 //        cell.tag3.text = article.tag3
-        cell.readLaterButton.isHidden = true
+        if article.tag1 != nil {
+            cell.tagListView.addTag(article.tag1!)
+        }
+        if article.tag2 != nil {
+            cell.tagListView.addTag(article.tag2!)
+        }
+        if article.tag3 != nil {
+            cell.tagListView.addTag(article.tag3!)
+        }
         
+        cell.readLaterButton.isHidden = true
         return cell
     }
     

@@ -33,17 +33,15 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         self.refreshControl.addTarget(self, action: #selector(NewViewController.refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
     }
-
+    
+    @objc func refresh() {
+        getArticles()
+        refreshControl.endRefreshing()
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    @objc func refresh()
-    {
-        getArticles()
-        refreshControl.endRefreshing()
     }
     
     
@@ -61,7 +59,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             let jsObject = JSON(object)
             //JSON型の辞書jsObjectの各要素をforEachで呼び出し、articlesにappendしていく
             jsObject.forEach { (_, json) in
-                let article = Article (
+                let article = Article(
                     title: json["title"].string!,
                     authorName: json["user"]["id"].string!,
                     authorImageUrl: json["user"]["profile_image_url"].string!,
@@ -74,7 +72,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                 )
                 self.articles.append(article)
             }
-            self.tableView.reloadData() //TableViewを更新
+            self.tableView.reloadData()
         }
     }
     
@@ -146,9 +144,9 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
-//            "tag1": article.tag1 ?? String(),
-//            "tag2": article.tag2 ?? String(),
-//            "tag3": article.tag3 ?? String(),
+            "tag1": article.tag1 ?? String(),
+            "tag2": article.tag2 ?? String(),
+            "tag3": article.tag3 ?? String(),
             "url": article.url,
             "authorImageUrl": article.authorImageUrl,
             "id": article.id

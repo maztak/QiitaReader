@@ -37,22 +37,18 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     
     
     
-    ////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////
     //*各種メソッド
-    ////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////
     //検索ボタン押下時の呼び出しメソッド
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         testSearchBar.endEditing(true)
-        //検索結果配列を空にする
         articles.removeAll()
-        //ここにgetArticles()をもってくる
         getArticles()
-        //テーブルを再読み込みする。
         tableView.reloadData()
     }
     
 
-    
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
         var encodedQuery = ""
@@ -68,11 +64,9 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         }
         
         Alamofire.request(url).responseJSON { response in
-            guard let object: Any = response.result.value else {
-                return
-            }
+            guard let object: Any = response.result.value else { return }
             
-            let json = JSON(object) //object（1つの記事）をJSON型にキャストし、定数jsonに入れる
+            let json = JSON(object)
             json.forEach { (_, json) in
                 let article = Article (
                     title: json["title"].string!,
@@ -91,6 +85,10 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         }
     }
     
+    /*データの個数を返すメソッド*/
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return articles.count
+    }
     
     /*データを返すメソッド*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -98,21 +96,37 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルのプロパティに記事情報を設定する
         let article: Article = articles[indexPath.row]
-        cell.title.text = article.title
+        //タイトルラベルを設定
+        let attributedString = NSMutableAttributedString(string: article.title)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = 9
+        attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
+        cell.title.attributedText = attributedString
+        cell.title.lineBreakMode = NSLineBreakMode.byTruncatingTail
+        cell.title.numberOfLines = 2
+        cell.title.textAlignment = NSTextAlignment.left
+        //その他のラベルを設定
         cell.author.text = article.authorName
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         cell.goodCnt.text = String(article.goodCnt)
 //        cell.tag1.text = article.tag1
 //        cell.tag2.text = article.tag2
 //        cell.tag3.text = article.tag3
+        if article.tag1 != nil {
+            cell.tagListView.addTag(article.tag1!)
+        }
+        if article.tag2 != nil {
+            cell.tagListView.addTag(article.tag2!)
+        }
+        if article.tag3 != nil {
+            cell.tagListView.addTag(article.tag3!)
+        }
+        
         cell.delegate = self
         return cell
     }
     
-    /*データの個数を返すメソッド*/
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return articles.count
-    }
+    
     
  
     /*記事詳細detailViewに遷移させるメソッド*/
@@ -150,11 +164,12 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
-//            "tag1": article.tag1 ?? String(),
-//            "tag2": article.tag2 ?? String(),
-//            "tag3": article.tag3 ?? String(),
+            "tag1": article.tag1 ?? String(),
+            "tag2": article.tag2 ?? String(),
+            "tag3": article.tag3 ?? String(),
             "url": article.url,
-            "authorImageUrl": article.authorImageUrl
+            "authorImageUrl": article.authorImageUrl,
+            "id": article.id
             ])
         // デフォルトRealmを取得する(おまじない)
         let realm = try! Realm()

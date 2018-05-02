@@ -11,6 +11,8 @@ import Alamofire
 import SwiftyJSON
 import Nuke
 import RealmSwift
+//po Realm.Configuration.defaultConfiguration.fileURL
+//FinderでShift+Cmd+gで絶対パスを指定
 
 
 class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
@@ -23,7 +25,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.navigationController?.pushViewController(loginViewController, animated: true)
     }
     
-    //////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
         //記事を取得し、tableViewをリロードする
@@ -38,8 +40,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
 
     
-    @objc func refresh()
-    {
+    @objc func refresh() {
         getArticles()
         refreshControl.endRefreshing()
     }
@@ -53,19 +54,15 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
    
     
-    //////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////
     //*各種メソッド
-    //////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
         let url = "https://qiita.com/trend.json"
-//        let headers: HTTPHeaders = [
-//            "Contenttype": "application/json",
-//            "Authorization": ""
-//            ]
         
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON { response in
-//        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            
             guard let object = response.result.value else { return }
             
             let json = JSON(object)["trendItems"] //objectをJSON型にキャストし定数jsonに入れる
@@ -81,9 +78,9 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     url: json["article"]["showUrl"].string!,
                     id: String(json["article"]["id"].int!)
                 )
-                self.articles.append(article) //それを辞書の配列であるarticlesに入れていく
+                self.articles.append(article)
             }
-            self.tableView.reloadData() //TableViewを更新
+            self.tableView.reloadData()
         }
     }
     
@@ -109,7 +106,6 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.title.lineBreakMode = NSLineBreakMode.byTruncatingTail
         cell.title.numberOfLines = 2
         cell.title.textAlignment = NSTextAlignment.left
-        
         //その他のラベル
         cell.author.text = article.authorName
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
@@ -117,8 +113,17 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //        cell.tag1.text = article.tag1
 //        cell.tag2.text = article.tag2
 //        cell.tag3.text = article.tag3
-        cell.delegate = self
+        if article.tag1 != nil {
+            cell.tagListView.addTag(article.tag1!)
+        }
+        if article.tag2 != nil {
+            cell.tagListView.addTag(article.tag2!)
+        }
+        if article.tag3 != nil {
+            cell.tagListView.addTag(article.tag3!)
+        }
         
+        cell.delegate = self
         return cell
     }
     
@@ -144,9 +149,9 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
-//            "tag1": article.tag1 ?? String(),
-//            "tag2": article.tag2 ?? String(),
-//            "tag3": article.tag3 ?? String(),
+            "tag1": article.tag1 ?? String(),
+            "tag2": article.tag2 ?? String(),
+            "tag3": article.tag3 ?? String(),
             "url": article.url,
             "authorImageUrl": article.authorImageUrl,
             "id": article.id
@@ -162,8 +167,6 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
    
-
-
     /*
     // MARK: - Navigation
 
@@ -173,7 +176,6 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Pass the selected object to the new view controller.
     }
     */
-
 }
 
 
