@@ -27,6 +27,7 @@ class RealmArticle: Object {
     @objc dynamic var authorName = String()
     @objc dynamic var authorImageUrl = String()
     @objc dynamic var goodCnt = Int()
+    var tagList = List<String>()
 //    @objc dynamic var tag1: String? = String()
 //    @objc dynamic var tag2: String? = String()
 //    @objc dynamic var tag3: String? = String()
@@ -39,8 +40,3 @@ class RealmArticle: Object {
 }
 
 
-
-class RealmTags: Object {
-//    @objc dynamic var tag: String = ""
-    var list = List<String>()
-}

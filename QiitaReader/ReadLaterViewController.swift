@@ -54,14 +54,19 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         // 記事の読み取りをする
         let object = realm.objects(RealmArticle.self) //objectはResults<RealmArticle>型　＝ [RealmArticel]型
         print("object: \(object)")
-        //配列？objectの各要素をforEachで呼び出し、articlesにappend
+        //配列？objectの各要素をforEachで呼び出し、articleを生成、appendしてく
         object.forEach{ realmArticle in
+            var stringTagList = [String]()
+            realmArticle.tagList.forEach({ (tag) in
+                stringTagList.append(tag)
+            })
+            
             let article = Article(
                 title: realmArticle.title,
                 authorName: realmArticle.authorName,
                 authorImageUrl: realmArticle.authorImageUrl,
                 goodCnt: realmArticle.goodCnt,
-                tags: ["tag1","tag2"],
+                tags: stringTagList,
 //                tag1: realmArticle.tag1,
 //                tag2: realmArticle.tag2,
 //                tag3: realmArticle.tag3,
@@ -99,16 +104,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
 //        cell.tag3.text = article.tag3
         cell.tagListView.removeAllTags()
         cell.tagListView.addTags(article.tags)
-//        if article.tag1 != nil {
-//            cell.tagListView.addTag(article.tag1,)
-//        }
-//        if article.tag2 != nil {
-//            cell.tagListView.addTag(article.tag2!)
-//        }
-//        if article.tag3 != nil {
-//            cell.tagListView.addTag(article.tag3!)
-//        }
-//
+
         cell.readLaterButton.isHidden = true
         return cell
     }

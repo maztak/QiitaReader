@@ -118,12 +118,6 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
 //        cell.tag2.text = article.tag2
 //        cell.tag3.text = article.tag3
         cell.tagListView.addTags(article.tags)
-//        if article.tag2 != nil {
-//            cell.tagListView.addTag(article.tag2!)
-//        }
-//        if article.tag3 != nil {
-//            cell.tagListView.addTag(article.tag3!)
-//        }
         
         cell.delegate = self
         return cell
@@ -167,6 +161,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
+            "tagList": article.tags,
 //            "tag1": article.tag1 ?? String(),
 //            "tag2": article.tag2 ?? String(),
 //            "tag3": article.tag3 ?? String(),
@@ -175,17 +170,15 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
             "id": article.id
             ])
 
-        let realmTags = RealmTags()
-        article.tags.map {
-            realmTags.list.append($0)
-        }
+//        article.tags.map {
+//            realmTags.list.append($0)
+//        }
 
         // デフォルトRealmを取得する(おまじない)
         let realm = try! Realm()
         // トランザクションを開始して、オブジェクトをRealmに追加する
         try! realm.write {
             realm.add(realmArticle)
-            realm.add(realmTags)
         }
         //追加した記事をコンソールに出力（確認用）
         print(realmArticle)
