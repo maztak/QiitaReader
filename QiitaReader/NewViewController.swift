@@ -30,7 +30,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         //下に引っ張って更新する処理
         self.refreshControl = UIRefreshControl()
         self.refreshControl.attributedTitle = NSAttributedString(string: "下に引っ張って更新")
-        self.refreshControl.addTarget(self, action: #selector(NewViewController.refresh), for: UIControlEvents.valueChanged)
+        self.refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
     }
     
@@ -45,9 +45,9 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     
-    ////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////
     //*各種メソッド
-    ////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
         let url = "https://qiita.com/api/v2/items"
@@ -160,8 +160,6 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         //追加した記事をコンソールに出力（確認用）
         print(realmArticle)
     }
-    
-  
     
     
     /*

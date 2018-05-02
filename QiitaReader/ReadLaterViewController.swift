@@ -29,7 +29,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         //下に引っ張って更新する処理
         self.refreshControl = UIRefreshControl()
         self.refreshControl.attributedTitle = NSAttributedString(string: "下に引っ張って更新")
-        self.refreshControl.addTarget(self, action: #selector(NewViewController.refresh), for: UIControlEvents.valueChanged)
+        self.refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
     }
     
@@ -44,9 +44,9 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         // Dispose of any resources that can be recreated.
     }
 
-    ////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////
     //*各種メソッド
-    ////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////
     /*realmからデータ取得しarticlesに追加*/
     func getArticles() {
         // デフォルトRealmを取得する(おまじない)
@@ -54,10 +54,9 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         // 記事の読み取りをする
         let object = realm.objects(RealmArticle.self) //objectはResults<RealmArticle>型　＝ [RealmArticel]型
         print("object: \(object)")
-        
-        //配列？objectの各要素をforEachで呼び出し、articlesにappendしていく
+        //配列？objectの各要素をforEachで呼び出し、articlesにappend
         object.forEach{ realmArticle in
-            let article = Article (
+            let article = Article(
                 title: realmArticle.title,
                 authorName: realmArticle.authorName,
                 authorImageUrl: realmArticle.authorImageUrl,
@@ -70,22 +69,15 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
             )
             self.articles.append(article)
         }
-        
-            
-            
-        self.reversedArticles = articles.reversed() //記事配列を逆順に
-        self.tableView.reloadData() //TableViewを更新
+        self.reversedArticles = articles.reversed()
+        self.tableView.reloadData()
     }
     
-    
 
-
-    
-    
     /*データを返すメソッド*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
-        let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルのプロパティに記事情報を設定する
         let article: Article = reversedArticles[indexPath.row]
         //cellのタイトルラベルを設定する
@@ -113,7 +105,6 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         if article.tag3 != nil {
             cell.tagListView.addTag(article.tag3!)
         }
-        
         cell.readLaterButton.isHidden = true
         return cell
     }
@@ -134,7 +125,6 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
     }
     
 
-
     /*
     // MARK: - Navigation
 
@@ -144,5 +134,4 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         // Pass the selected object to the new view controller.
     }
     */
-
 }
