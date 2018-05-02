@@ -67,7 +67,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             let json = JSON(object)["trendItems"] //objectをJSON型にキャストし定数jsonに入れる
             json.forEach { (_, json) in //JOSN型の定数jsonの各要素をforEachで呼び出し
-                let risouTags = json["tags"].array!.map { $0["name"].string! }
+                let risouTags = json["article"]["tags"].array!.map { $0["name"].string! }
                 let article = Article( //articleを生成していく
                     title: json["article"]["title"].string!,
                     authorName: json["article"]["author"]["urlName"].string!,
@@ -112,18 +112,9 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.author.text = article.authorName
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         cell.goodCnt.text = String(article.goodCnt)
-//        cell.tag1.text = article.tag1
-//        cell.tag2.text = article.tag2
-//        cell.tag3.text = article.tag3
-//        if article.tag1 != nil {
-//            cell.tagListView.addTag(article.tag1!)
-//        }
-//        if article.tag2 != nil {
-//            cell.tagListView.addTag(article.tag2!)
-//        }
-//        if article.tag3 != nil {
-//            cell.tagListView.addTag(article.tag3!)
-//        }
+
+        cell.tagListView.removeAllTags()
+        cell.tagListView.addTags(article.tags)
         
         cell.delegate = self
         return cell

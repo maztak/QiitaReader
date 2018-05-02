@@ -118,6 +118,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
 //        cell.tag1.text = article.tag1
 //        cell.tag2.text = article.tag2
 //        cell.tag3.text = article.tag3
+        cell.tagListView.removeAllTags()
         cell.tagListView.addTags(article.tags)
         
         cell.delegate = self
