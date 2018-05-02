@@ -96,6 +96,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
 //        cell.tag1.text = article.tag1
 //        cell.tag2.text = article.tag2
 //        cell.tag3.text = article.tag3
+        cell.tagListView.removeAllTags()
         if article.tag1 != nil {
             cell.tagListView.addTag(article.tag1!)
         }
