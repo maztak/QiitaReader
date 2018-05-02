@@ -79,9 +79,9 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
                     authorName: json["user"]["id"].string!,
                     authorImageUrl: json["user"]["profile_image_url"].string!,
                     goodCnt: json["likes_count"].int!,
-//                    tag1: json["tags"][0]["name"].string,
-//                    tag2: json["tags"][1]["name"].string,
-//                    tag3: json["tags"][2]["name"].string,
+                    tag1: json["tags"][0]["name"].string,
+                    tag2: json["tags"][1]["name"].string,
+                    tag3: json["tags"][2]["name"].string,
                     url: json["url"].string!,
                     id: json["id"].string!
                 )

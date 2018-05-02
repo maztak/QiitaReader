@@ -64,9 +64,9 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
                 authorName: realmArticle.authorName,
                 authorImageUrl: realmArticle.authorImageUrl,
                 goodCnt: realmArticle.goodCnt,
-//                tag1: realmArticle.tag1,
-//                tag2: realmArticle.tag2,
-//                tag3: realmArticle.tag3,
+                tag1: realmArticle.tag1,
+                tag2: realmArticle.tag2,
+                tag3: realmArticle.tag3,
                 url: realmArticle.url,
                 id: realmArticle.id
             )
@@ -93,7 +93,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         //cellのタイトルラベルを設定する
         let attributedString = NSMutableAttributedString(string: article.title)
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 6
+        paragraphStyle.lineSpacing = 9
         attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         cell.title.attributedText = attributedString
         cell.title.lineBreakMode = NSLineBreakMode.byTruncatingTail

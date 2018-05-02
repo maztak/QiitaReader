@@ -32,10 +32,6 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         self.refreshControl.attributedTitle = NSAttributedString(string: "下に引っ張って更新")
         self.refreshControl.addTarget(self, action: #selector(NewViewController.refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
-        
-        //
-        
-        
     }
 
     
@@ -54,23 +50,15 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     ////////////////////////////////////////////////////////////////////
     //*各種メソッド
     ////////////////////////////////////////////////////////////////////
-    
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
         let url = "https://qiita.com/api/v2/items"
-//        let headers: HTTPHeaders = [
-//            "Contenttype": "application/json",
-//            "Authorization": "",
-//            ]
         
         Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON { response in
-//        Alamofire.request(url, method: .get, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
             //guard letで引数responseのvalueプロパティをnil剥がし定数object:記事の辞書？に入れる
             guard let object: Any = response.result.value else { return }
-            
             //objectをJSON型にキャスト <- もともとJSON型のものをなぜキャストする必要があるのかは不明
             let jsObject = JSON(object)
-            
             //JSON型の辞書jsObjectの各要素をforEachで呼び出し、articlesにappendしていく
             jsObject.forEach { (_, json) in
                 let article = Article (
@@ -78,9 +66,9 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                     authorName: json["user"]["id"].string!,
                     authorImageUrl: json["user"]["profile_image_url"].string!,
                     goodCnt: json["likes_count"].int!,
-//                    tag1: json["tags"][0]["name"].string,
-//                    tag2: json["tags"][1]["name"].string,
-//                    tag3: json["tags"][2]["name"].string,
+                    tag1: json["tags"][0]["name"].string,
+                    tag2: json["tags"][1]["name"].string,
+                    tag3: json["tags"][2]["name"].string,
                     url: json["url"].string!,
                     id: json["id"].string!
                 )
@@ -96,6 +84,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         return articles.count
     }
     
+    
     /*TableViewにデータを返すメソッド*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
@@ -105,7 +94,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         //タイトルラベルを設定
         let attributedString = NSMutableAttributedString(string: article.title)
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 6
+        paragraphStyle.lineSpacing = 9
         attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         cell.title.attributedText = attributedString
         cell.title.lineBreakMode = NSLineBreakMode.byTruncatingTail
@@ -118,12 +107,16 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
 //        cell.tag1.text = article.tag1
 //        cell.tag2.text = article.tag2
 //        cell.tag3.text = article.tag3
-        cell.tagListView.addTag("Tag1")
-         cell.tagListView.addTag("Tag2")
-         cell.tagListView.addTag("Tag3")
-         cell.tagListView.addTag("TagListView4")
-         cell.tagListView.addTag("TagListView5")
-         cell.tagListView.addTag("TagListView6")
+        if article.tag1 != nil {
+            cell.tagListView.addTag(article.tag1!)
+        }
+        if article.tag2 != nil {
+            cell.tagListView.addTag(article.tag2!)
+        }
+        if article.tag3 != nil {
+            cell.tagListView.addTag(article.tag3!)
+        }
+
         
         cell.delegate = self
         return cell

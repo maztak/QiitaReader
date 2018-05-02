@@ -75,9 +75,9 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
                     authorName: json["article"]["author"]["urlName"].string!,
                     authorImageUrl: json["article"]["author"]["profileImageUrl"].string!,
                     goodCnt: json["article"]["likesCount"].int!,
-//                    tag1: json["article"]["tags"][0]["name"].string,
-//                    tag2: json["article"]["tags"][1]["name"].string,
-//                    tag3: json["article"]["tags"][2]["name"].string,
+                    tag1: json["article"]["tags"][0]["name"].string,
+                    tag2: json["article"]["tags"][1]["name"].string,
+                    tag3: json["article"]["tags"][2]["name"].string,
                     url: json["article"]["showUrl"].string!,
                     id: String(json["article"]["id"].int!)
                 )
@@ -103,7 +103,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //cellのタイトルラベルを設定
         let attributedString = NSMutableAttributedString(string: article.title)
         let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = 6
+        paragraphStyle.lineSpacing = 9
         attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         cell.title.attributedText = attributedString
         cell.title.lineBreakMode = NSLineBreakMode.byTruncatingTail
