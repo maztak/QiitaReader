@@ -11,6 +11,9 @@ import Alamofire
 import SwiftyJSON
 import Nuke
 import RealmSwift
+//po Realm.Configuration.defaultConfiguration.fileURL
+//FinderでShift+Cmd+gで絶対パスを指定
+
 
 class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
@@ -68,14 +71,16 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
             
             let json = JSON(object)
             json.forEach { (_, json) in
+                let risouTags = json["tags"].array!.map { $0["name"].string! }
                 let article = Article (
                     title: json["title"].string!,
                     authorName: json["user"]["id"].string!,
                     authorImageUrl: json["user"]["profile_image_url"].string!,
                     goodCnt: json["likes_count"].int!,
-                    tag1: json["tags"][0]["name"].string,
-                    tag2: json["tags"][1]["name"].string,
-                    tag3: json["tags"][2]["name"].string,
+                    tags: risouTags,
+//                    tag1: json["tags"][0]["name"].string,
+//                    tag2: json["tags"][1]["name"].string,
+//                    tag3: json["tags"][2]["name"].string,
                     url: json["url"].string!,
                     id: json["id"].string!
                 )
@@ -112,15 +117,13 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
 //        cell.tag1.text = article.tag1
 //        cell.tag2.text = article.tag2
 //        cell.tag3.text = article.tag3
-        if article.tag1 != nil {
-            cell.tagListView.addTag(article.tag1!)
-        }
-        if article.tag2 != nil {
-            cell.tagListView.addTag(article.tag2!)
-        }
-        if article.tag3 != nil {
-            cell.tagListView.addTag(article.tag3!)
-        }
+        cell.tagListView.addTags(article.tags)
+//        if article.tag2 != nil {
+//            cell.tagListView.addTag(article.tag2!)
+//        }
+//        if article.tag3 != nil {
+//            cell.tagListView.addTag(article.tag3!)
+//        }
         
         cell.delegate = self
         return cell
@@ -164,18 +167,25 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
-            "tag1": article.tag1 ?? String(),
-            "tag2": article.tag2 ?? String(),
-            "tag3": article.tag3 ?? String(),
+//            "tag1": article.tag1 ?? String(),
+//            "tag2": article.tag2 ?? String(),
+//            "tag3": article.tag3 ?? String(),
             "url": article.url,
             "authorImageUrl": article.authorImageUrl,
             "id": article.id
             ])
+
+        let realmTags = RealmTags()
+        article.tags.map {
+            realmTags.list.append($0)
+        }
+
         // デフォルトRealmを取得する(おまじない)
         let realm = try! Realm()
         // トランザクションを開始して、オブジェクトをRealmに追加する
         try! realm.write {
             realm.add(realmArticle)
+            realm.add(realmTags)
         }
         //追加した記事をコンソールに出力（確認用）
         print(realmArticle)
@@ -193,5 +203,4 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         // Pass the selected object to the new view controller.
     }
     */
-
 }

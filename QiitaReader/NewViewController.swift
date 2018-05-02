@@ -56,17 +56,20 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             //guard letで引数responseのvalueプロパティをnil剥がし定数object:記事の辞書？に入れる
             guard let object: Any = response.result.value else { return }
             //objectをJSON型にキャスト <- もともとJSON型のものをなぜキャストする必要があるのかは不明
-            let jsObject = JSON(object)
+            let jsonObject = JSON(object)
             //JSON型の辞書jsObjectの各要素をforEachで呼び出し、articlesにappendしていく
-            jsObject.forEach { (_, json) in
+            jsonObject.forEach { (_, json) in
+                let risouTags = json["tags"].array!.map { $0["name"].string! }
+                
                 let article = Article(
                     title: json["title"].string!,
                     authorName: json["user"]["id"].string!,
                     authorImageUrl: json["user"]["profile_image_url"].string!,
                     goodCnt: json["likes_count"].int!,
-                    tag1: json["tags"][0]["name"].string,
-                    tag2: json["tags"][1]["name"].string,
-                    tag3: json["tags"][2]["name"].string,
+                    tags: risouTags,
+//                    tag1: json["tags"][0]["name"].string,
+//                    tag2: json["tags"][1]["name"].string,
+//                    tag3: json["tags"][2]["name"].string,
                     url: json["url"].string!,
                     id: json["id"].string!
                 )
@@ -105,17 +108,8 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
 //        cell.tag1.text = article.tag1
 //        cell.tag2.text = article.tag2
 //        cell.tag3.text = article.tag3
-        if article.tag1 != nil {
-            cell.tagListView.addTag(article.tag1!)
-        }
-        if article.tag2 != nil {
-            cell.tagListView.addTag(article.tag2!)
-        }
-        if article.tag3 != nil {
-            cell.tagListView.addTag(article.tag3!)
-        }
-
-        
+        cell.tagListView.addTags(article.tags)
+    
         cell.delegate = self
         return cell
     }
@@ -144,9 +138,10 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
-            "tag1": article.tag1 ?? String(),
-            "tag2": article.tag2 ?? String(),
-            "tag3": article.tag3 ?? String(),
+            "tags": article.tags,
+//            "tag1": article.tag1 ?? String(),
+//            "tag2": article.tag2 ?? String(),
+//            "tag3": article.tag3 ?? String(),
             "url": article.url,
             "authorImageUrl": article.authorImageUrl,
             "id": article.id

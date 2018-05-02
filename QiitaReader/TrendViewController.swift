@@ -67,14 +67,16 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             let json = JSON(object)["trendItems"] //objectをJSON型にキャストし定数jsonに入れる
             json.forEach { (_, json) in //JOSN型の定数jsonの各要素をforEachで呼び出し
+                let risouTags = json["tags"].array!.map { $0["name"].string! }
                 let article = Article( //articleを生成していく
                     title: json["article"]["title"].string!,
                     authorName: json["article"]["author"]["urlName"].string!,
                     authorImageUrl: json["article"]["author"]["profileImageUrl"].string!,
                     goodCnt: json["article"]["likesCount"].int!,
-                    tag1: json["article"]["tags"][0]["name"].string,
-                    tag2: json["article"]["tags"][1]["name"].string,
-                    tag3: json["article"]["tags"][2]["name"].string,
+                    tags: risouTags,
+//                    tag1: json["article"]["tags"][0]["name"].string,
+//                    tag2: json["article"]["tags"][1]["name"].string,
+//                    tag3: json["article"]["tags"][2]["name"].string,
                     url: json["article"]["showUrl"].string!,
                     id: String(json["article"]["id"].int!)
                 )
@@ -113,15 +115,15 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //        cell.tag1.text = article.tag1
 //        cell.tag2.text = article.tag2
 //        cell.tag3.text = article.tag3
-        if article.tag1 != nil {
-            cell.tagListView.addTag(article.tag1!)
-        }
-        if article.tag2 != nil {
-            cell.tagListView.addTag(article.tag2!)
-        }
-        if article.tag3 != nil {
-            cell.tagListView.addTag(article.tag3!)
-        }
+//        if article.tag1 != nil {
+//            cell.tagListView.addTag(article.tag1!)
+//        }
+//        if article.tag2 != nil {
+//            cell.tagListView.addTag(article.tag2!)
+//        }
+//        if article.tag3 != nil {
+//            cell.tagListView.addTag(article.tag3!)
+//        }
         
         cell.delegate = self
         return cell
@@ -149,9 +151,10 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
-            "tag1": article.tag1 ?? String(),
-            "tag2": article.tag2 ?? String(),
-            "tag3": article.tag3 ?? String(),
+            "tags": article.tags,
+//            "tag1": article.tag1 ?? String(),
+//            "tag2": article.tag2 ?? String(),
+//            "tag3": article.tag3 ?? String(),
             "url": article.url,
             "authorImageUrl": article.authorImageUrl,
             "id": article.id
