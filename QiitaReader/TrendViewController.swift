@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import APIKit
+import Himotoki
 import Nuke
 import RealmSwift
 //po Realm.Configuration.defaultConfiguration.fileURL

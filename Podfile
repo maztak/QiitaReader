@@ -10,6 +10,7 @@ target 'QiitaReader’ do
   pod 'Nuke', '~> 6.0'
   pod 'TagListView', '~> 1.0'
   pod 'RealmSwift'
+  pod "Himotoki", "~> 3.1"
 end
 
 # Workaround for Cocoapods issue #7606
