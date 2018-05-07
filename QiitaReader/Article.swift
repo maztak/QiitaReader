@@ -14,9 +14,6 @@ struct Article {
     var authorImageUrl: String
     var goodCnt: Int
     var tags: [String]
-//    var tag1: String?
-//    var tag2: String?
-//    var tag3: String?
     var url: String
     var id: String
 }
@@ -28,9 +25,6 @@ class RealmArticle: Object {
     @objc dynamic var authorImageUrl = String()
     @objc dynamic var goodCnt = Int()
     var tagList = List<String>()
-//    @objc dynamic var tag1: String? = String()
-//    @objc dynamic var tag2: String? = String()
-//    @objc dynamic var tag3: String? = String()
     @objc dynamic var url = String()
     @objc dynamic var id =  String()
     

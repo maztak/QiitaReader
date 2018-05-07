@@ -184,10 +184,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
-            "tagList": article.tags,
-            //            "tag1": article.tag1 ?? String(),
-            //            "tag2": article.tag2 ?? String(),
-            //            "tag3": article.tag3 ?? String(),
+            "tagList": article.tags.map { $0.name },
             "url": article.url,
             "authorImageUrl": article.authorImageUrl,
             "id": article.id
