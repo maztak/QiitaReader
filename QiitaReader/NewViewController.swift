@@ -112,6 +112,10 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
     //test
     let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
     cell.title.text = repoArray[indexPath.row].title
+    cell.author.text = repoArray[indexPath.row].authorName
+    Manager.shared.loadImage(with: URL(string: repoArray[indexPath.row].authorImageUrl)!, into: cell.authorIcon)
+    cell.goodCnt.text = String(repoArray[indexPath.row].goodCnt)
+    
     return cell
     
     

@@ -35,10 +35,22 @@ struct FetchRepositoryRequest: GitHubRequest {
 
 struct Repository: Himotoki.Decodable {
     let title: String
+    let authorName: String
+    let authorImageUrl: String
+    let goodCnt: Int
+//    let tags: String
+    let url: String
+    let id: String
     
     static func decode(_ e: Extractor) throws -> Repository {
         return try Repository(
-            title: e <| "title"
+            title: e <| "title",
+            authorName: e <| "user" <| "id",
+            authorImageUrl: e <| "user" <| "profile_image_url",
+            goodCnt: e <| "likes_count",
+//            tags: e <| "tags",
+            url: e <| "url",
+            id: e <| "id"
         )
     }
 }
