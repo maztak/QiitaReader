@@ -13,16 +13,13 @@ protocol GitHubRequest: Request {}
 
 extension GitHubRequest {
     var baseURL: URL {
-        return URL(string: "https://api.github.com")!
+        return URL(string: "https://qiita.com/api/v2/items")!
     }
 }
 
 
 struct FetchRepositoryRequest: GitHubRequest {
-    var userName: String
-    var path: String {
-        return "/users/\(userName)/repos"
-    }
+    var path: String
     typealias Response = [Repository]
     var method: HTTPMethod {
         return .get
@@ -37,11 +34,11 @@ struct FetchRepositoryRequest: GitHubRequest {
 
 
 struct Repository: Himotoki.Decodable {
-    let fullName: String
+    let title: String
     
     static func decode(_ e: Extractor) throws -> Repository {
         return try Repository(
-            fullName: e <| "full_name"
+            title: e <| "title"
         )
     }
 }

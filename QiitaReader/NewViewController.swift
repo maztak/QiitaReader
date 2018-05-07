@@ -55,7 +55,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
         
-        Session.send(FetchRepositoryRequest(userName: "takuya108817")) { result in
+        Session.send(FetchRepositoryRequest(path: "")) { result in
             switch result {
             case .success(let res):
                 print("成功\(res)")
@@ -67,42 +67,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             }
         }
         
-//        Session.send(QiitaApiRequest(path: "")) { result in
-//            switch result {
-//            case .success(let response):
-//                print("成功\(response)")
-////                print("1記事目：\(response[0] as Any?)")
-//                //guard letで引数responseのvalueプロパティをnil剥がし定数object:記事の辞書？に入れる
-////                guard let object: Any = response.result.value else { return }
-//                //objectをJSON型にキャスト <- もともとJSON型のものをなぜキャストする必要があるのかは不明
-//                let jsonObject = JSON(response)
-//                //JSON型の辞書jsObjectの各要素をforEachで呼び出し、articlesにappendしていく
-//                jsonObject.forEach { (_, json) in
-//                    let risouTags = json["tags"].array!.map { $0["name"].string! }
-//
-//                    let article = Article(
-//                        title: json["title"].string!,
-//                        authorName: json["user"]["id"].string!,
-//                        authorImageUrl: json["user"]["profile_image_url"].string!,
-//                        goodCnt: json["likes_count"].int!,
-//                        tags: risouTags,
-//                        //                    tag1: json["tags"][0]["name"].string,
-//                        //                    tag2: json["tags"][1]["name"].string,
-//                        //                    tag3: json["tags"][2]["name"].string,
-//                        url: json["url"].string!,
-//                        id: json["id"].string!
-//                    )
-//                    self.articles.append(article)
-//                }
-//                self.tableView.reloadData()
-//
-//
-//            case .failure(let err):
-//            print("しくった\(err)")
-//
-//
-//        }
-//    }
+
     
     //        let url = "https://qiita.com/api/v2/items"
     
@@ -146,7 +111,7 @@ func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> U
     
     //test
     let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
-    cell.title.text = repoArray[indexPath.row].fullName
+    cell.title.text = repoArray[indexPath.row].title
     return cell
     
     
