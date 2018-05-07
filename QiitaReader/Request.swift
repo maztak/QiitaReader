@@ -20,7 +20,7 @@ extension GitHubRequest {
 
 struct FetchRepositoryRequest: GitHubRequest {
     var path: String
-    typealias Response = [Group]
+    typealias Response = [ArticleByHimotoki]
     var method: HTTPMethod {
         return .get
     }
@@ -43,7 +43,7 @@ struct Tag: Himotoki.Decodable {
 }
 
 
-struct Group: Himotoki.Decodable {
+struct ArticleByHimotoki: Himotoki.Decodable {
     let title: String
     let authorName: String
     let authorImageUrl: String
@@ -52,8 +52,8 @@ struct Group: Himotoki.Decodable {
     let url: String
     let id: String
     
-    static func decode(_ e: Extractor) throws -> Group {
-        return try Group(
+    static func decode(_ e: Extractor) throws -> ArticleByHimotoki {
+        return try ArticleByHimotoki(
             title: e <| "title",
             authorName: e <| ["user", "id"],
             authorImageUrl: e <| ["user", "profile_image_url"],

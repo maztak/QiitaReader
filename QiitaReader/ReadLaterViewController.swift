@@ -119,7 +119,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
     /*記事詳細detailViewに遷移させるメソッド*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        detailViewController.entry = reversedArticles[indexPath.row]
+//        detailViewController.entry = reversedArticles[indexPath.row]
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }

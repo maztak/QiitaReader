@@ -19,10 +19,9 @@ import RealmSwift
 
 class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
-    var articles: [Article] = []
+//    var articles: [Article] = []
     var refreshControl: UIRefreshControl!
-    
-    var repoArray: [Group] = [] //test
+    var repoArray: [ArticleByHimotoki] = [] //test
     
     ///////////////////////////////////////////////////////////
     override func viewDidLoad() {
@@ -56,13 +55,13 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     func getArticles() {
         Session.send(FetchRepositoryRequest(path: "")) { result in
             switch result {
-            case .success(let res):
-                print("成功\(res)")
-                self.repoArray = res
+            case .success(let response):
+                print("成功：\(response)")
+                self.repoArray = response
                 self.tableView.reloadData()
                 
-            case .failure(let err):
-                print("失敗\(err)")
+            case .failure(let error):
+                print("失敗：\(error)")
             }
         }
         
@@ -111,17 +110,12 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         //test
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルのプロパティに記事情報を設定する
-        let articleByHimotoki: Group = repoArray[indexPath.row]
-        
-        cell.title.text = articleByHimotoki.title
+        let articleByHimotoki: ArticleByHimotoki = repoArray[indexPath.row]
         //タイトルラベルを設定
         let attributedString = NSMutableAttributedString(string: articleByHimotoki.title)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 9
-        attributedString.addAttribute(NSAttributedStringKey.paragraphStyle,
-                                      value: paragraphStyle,
-                                      range: NSMakeRange(0, attributedString.length)
-        )
+        attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
         cell.title.attributedText = attributedString
         cell.title.lineBreakMode = NSLineBreakMode.byTruncatingTail
         cell.title.numberOfLines = 2
@@ -135,6 +129,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.tagListView.removeAllTags()
         cell.tagListView.addTags(myTags)
         
+        cell.delegate = self
         return cell
         
         
@@ -171,8 +166,8 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     /*記事詳細detailViewに遷移させるメソッド*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        detailViewController.entry = articles[indexPath.row]
+        let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        detailViewController.entry = repoArray[indexPath.row]
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
@@ -183,7 +178,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         //タップされたcellのindexPath.rowを取得する
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         //そこから対応している記事を取得し
-        let article: Article = articles[indexPath.row]
+        let article: ArticleByHimotoki = repoArray[indexPath.row]
         //その情報をrealmArticleとしてモデル作成
         let realmArticle = RealmArticle(value: [
             "title" : article.title,

@@ -10,7 +10,8 @@ import TOWebViewController
 
 class DetailViewController: TOWebViewController {
     var webview: UIWebView = UIWebView()
-    var entry: Article? //Articleは構造体
+//    var entry: Article?
+    var entry: ArticleByHimotoki? //test
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,6 @@ class DetailViewController: TOWebViewController {
     override func webViewDidStartLoad(_ webView: UIWebView) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
-    
     
     override func webViewDidFinishLoad(_ webView: UIWebView) {
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
