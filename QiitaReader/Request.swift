@@ -20,7 +20,7 @@ extension GitHubRequest {
 
 struct FetchRepositoryRequest: GitHubRequest {
     var path: String
-    typealias Response = [Repository]
+    typealias Response = [Group]
     var method: HTTPMethod {
         return .get
     }
@@ -32,23 +32,33 @@ struct FetchRepositoryRequest: GitHubRequest {
 
 
 
+struct Tag: Himotoki.Decodable {
+    let name: String
+    
+    static func decode(_ e: Extractor) throws -> Tag {
+        return try Tag(
+            name:   e <| "name"
+        )
+    }
+}
 
-struct Repository: Himotoki.Decodable {
+
+struct Group: Himotoki.Decodable {
     let title: String
     let authorName: String
     let authorImageUrl: String
     let goodCnt: Int
-//    let tags: String
+    let tags: [Tag] // 変数の型をPersonの配列にする
     let url: String
     let id: String
     
-    static func decode(_ e: Extractor) throws -> Repository {
-        return try Repository(
+    static func decode(_ e: Extractor) throws -> Group {
+        return try Group(
             title: e <| "title",
-            authorName: e <| "user" <| "id",
-            authorImageUrl: e <| "user" <| "profile_image_url",
+            authorName: e <| ["user", "id"],
+            authorImageUrl: e <| ["user", "profile_image_url"],
             goodCnt: e <| "likes_count",
-//            tags: e <| "tags",
+            tags: e <|| "tags", //変数の型がDecodableの場合は階層的にデコードしてくれる
             url: e <| "url",
             id: e <| "id"
         )

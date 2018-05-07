@@ -13,9 +13,6 @@ class ArticleCell: UITableViewCell, TagListViewDelegate {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var author: UILabel!
     @IBOutlet weak var goodCnt: UILabel!
-//    @IBOutlet weak var tag1: UILabel!
-//    @IBOutlet weak var tag2: UILabel!
-//    @IBOutlet weak var tag3: UILabel!
     @IBOutlet weak var authorIcon: UIImageView!
     @IBOutlet weak var readLaterButton: UIButton!
     var delegate: ArticleCellDelegate? = nil
