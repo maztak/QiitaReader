@@ -11,26 +11,14 @@ import Himotoki
 import RealmSwift
 
 
-//struct Article { //realmからのtagListの読み出し時に必要
-//    var title: String
-//    var authorName: String
-//    var authorImageUrl: String
-//    var goodCnt: Int
-//    var tags: [String]
-//    var url: String
-//    var id: String
-//}
-
-
-
 protocol QiitaRequest: Request {}
 
 extension QiitaRequest {
     var baseURL: URL {
-        return URL(string: "https://qiita.com/api/v2/items")!
+        return URL(string: "https://qiita.com")!
     }
 }
-
+////////////////////////////////////////
 struct GetArticleRequest: QiitaRequest {
     var path: String
     typealias Response = [ArticleByHimotoki]
@@ -43,8 +31,25 @@ struct GetArticleRequest: QiitaRequest {
     }
 }
 
+struct GetTrendRequest: QiitaRequest {
+    var path: String
+    typealias Response = [TrendByHimotoki]
+    var method: HTTPMethod {
+        return .get
+    }
+    
+    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> GetTrendRequest.Response {
+        return try decodeArray(object)
+    }
+}
 
 
+
+
+
+
+
+////////////////////////////////////////
 struct Tag: Himotoki.Decodable {
     let name: String
     
@@ -54,8 +59,7 @@ struct Tag: Himotoki.Decodable {
         )
     }
 }
-
-
+///////////////////////////////////////
 struct ArticleByHimotoki: Himotoki.Decodable {
     let title: String
     let authorName: String
@@ -78,8 +82,32 @@ struct ArticleByHimotoki: Himotoki.Decodable {
     }
 }
 
+struct TrendByHimotoki: Himotoki.Decodable {
+    let title: String
+    let authorName: String
+    let authorImageUrl: String
+    let goodCnt: Int
+    let tags: [Tag] // 変数の型をPersonの配列にする
+    let url: String
+    let id: String
+    
+    static func decode(_ e: Extractor) throws -> TrendByHimotoki {
+        return try TrendByHimotoki(
+            title: e <| "trendItems" <| "article" <| "title",
+            authorName: e <| "trendItems" <| "article" <| ["author", "urlName"],
+            authorImageUrl: e <| "trendItems" <| "article" <| ["author", "profileImageUrl"],
+            goodCnt: e <| "trendItems" <| "article" <| "likesCount",
+            tags: e <| "trendItems" <| "article" <|| "tags", //
+            url: e <| "trendItems" <| "article" <| "showUrl",
+            id: e <| "trendItems" <| "article" <| "uuid"
+        )
+    }
+}
 
 
+
+
+////////////////////////////////////////
 class RealmArticle: Object {
     @objc dynamic var title = String()
     @objc dynamic var authorName = String()

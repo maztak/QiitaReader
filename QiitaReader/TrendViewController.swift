@@ -17,8 +17,8 @@ import RealmSwift
 
 class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
-    var articles: [ArticleByHimotoki] = []
-    var refreshControl:UIRefreshControl! //下に引っ張って更新のためのプロパティ
+    var articles: [TrendByHimotoki] = []
+    var refreshControl: UIRefreshControl! //下に引っ張って更新のためのプロパティ
     
     @IBAction func loginBtn(_ sender: UIButton) {
         let loginViewController: LoginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
@@ -59,9 +59,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     /////////////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
-        let url = "https://qiita.com/trend.json"
-        
-        Session.send(GetArticleRequest(path: url)) { result in
+        Session.send(GetTrendRequest(path: "/trend.json")) { result in
             switch result {
             case .success(let response):
                 print("成功：\(response)")
@@ -78,7 +76,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
 //            guard let object = response.result.value else { return }
 //
 //            let json = JSON(object)["trendItems"] //objectをJSON型にキャストし定数jsonに入れる
-//            json.forEach { (_, json) in //JOSN型の定数jsonの各要素をforEachで呼び出し
+//            json.forEach { (_, json) in //JSON型の定数jsonの各要素をforEachで呼び出し
 //                let risouTags = json["article"]["tags"].array!.map { $0["name"].string! }
 //                let article = Article( //articleを生成していく
 //                    title: json["article"]["title"].string!,
@@ -107,7 +105,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // セルを取得する
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルのプロパティに記事情報を設定
-        let article: ArticleByHimotoki = articles[indexPath.row]
+        let article: TrendByHimotoki = articles[indexPath.row]
         //タイトルラベルを設定
         let attributedString = NSMutableAttributedString(string: article.title)
         let paragraphStyle = NSMutableParagraphStyle()
@@ -136,7 +134,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     /*記事詳細detailViewに遷移させるメソッド*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        detailViewController.entry = articles[indexPath.row]
+        detailViewController.entry = articles[indexPath.row] as! ArticleByHimotoki
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
@@ -147,7 +145,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //タップされたcellのindexPath.row（tableViewの何行目か）を取得する
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         //そこから対応している（代入した）記事article = articles[indexPath.row]を取得し
-        let article: ArticleByHimotoki = articles[indexPath.row]
+        let article: TrendByHimotoki = articles[indexPath.row]
         //その情報をrealmArticleとしてモデル作成
         let realmArticle = RealmArticle(value: [
             "title" : article.title,
