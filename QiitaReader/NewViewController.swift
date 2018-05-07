@@ -7,8 +7,6 @@
 //
 
 import UIKit
-//import Alamofire    //APIで記事を取得したりするときに使う
-import SwiftyJSON   //JSON型にキャストしたり、intプロパティ等を使う
 import APIKit
 import Himotoki
 import Nuke         //サムネイル画像を表示して、キャッシュまでしてくれる
@@ -19,17 +17,17 @@ import RealmSwift
 
 class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
-//    var articles: [Article] = []
+    var articles: [ArticleByHimotoki] = []
     var refreshControl: UIRefreshControl!
-    var repoArray: [ArticleByHimotoki] = [] //test
+    
     
     ///////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
+        //記事取得
         getArticles()
         //使用するXibとCellのReuseIdentifierを登録する
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
-        
         //下に引っ張って更新する処理
         self.refreshControl = UIRefreshControl()
         self.refreshControl.attributedTitle = NSAttributedString(string: "下に引っ張って更新")
@@ -48,71 +46,39 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     
-    ///////////////////////////////////////////////////////////
-    //*各種メソッド
-    ///////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////
+    // 各種メソッド
+    ////////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
-        Session.send(FetchRepositoryRequest(path: "")) { result in
+        Session.send(GetArticleRequest(path: "")) { result in
             switch result {
             case .success(let response):
                 print("成功：\(response)")
-                self.repoArray = response
+                self.articles = response
                 self.tableView.reloadData()
                 
             case .failure(let error):
                 print("失敗：\(error)")
             }
         }
-        
-        
-        
-        //        let url = "https://qiita.com/api/v2/items"
-        
-        //        Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON { response in
-        //            //guard letで引数responseのvalueプロパティをnil剥がし定数object:記事の辞書？に入れる
-        //            guard let object: Any = response.result.value else { return }
-        //            //objectをJSON型にキャスト <- もともとJSON型のものをなぜキャストする必要があるのかは不明
-        //            let jsonObject = JSON(object)
-        //            //JSON型の辞書jsObjectの各要素をforEachで呼び出し、articlesにappendしていく
-        //            jsonObject.forEach { (_, json) in
-        //                let risouTags = json["tags"].array!.map { $0["name"].string! }
-        //
-        //                let article = Article(
-        //                    title: json["title"].string!,
-        //                    authorName: json["user"]["id"].string!,
-        //                    authorImageUrl: json["user"]["profile_image_url"].string!,
-        //                    goodCnt: json["likes_count"].int!,
-        //                    tags: risouTags,
-        ////                    tag1: json["tags"][0]["name"].string,
-        ////                    tag2: json["tags"][1]["name"].string,
-        ////                    tag3: json["tags"][2]["name"].string,
-        //                    url: json["url"].string!,
-        //                    id: json["id"].string!
-        //                )
-        //                self.articles.append(article)
-        //            }
-        //            self.tableView.reloadData()
-        //        }
     }
     
     
     /*データの個数を返すメソッド*/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //    return articles.count
-        return repoArray.count //test
+        return articles.count
     }
     
     
     /*TableViewにデータを返すメソッド*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        //test
+        //セルを取得
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
-        // セルのプロパティに記事情報を設定する
-        let articleByHimotoki: ArticleByHimotoki = repoArray[indexPath.row]
+        //セルのプロパティに記事情報を設定する
+        let article: ArticleByHimotoki = articles[indexPath.row]
         //タイトルラベルを設定
-        let attributedString = NSMutableAttributedString(string: articleByHimotoki.title)
+        let attributedString = NSMutableAttributedString(string: article.title)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 9
         attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
@@ -120,54 +86,26 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         cell.title.lineBreakMode = NSLineBreakMode.byTruncatingTail
         cell.title.numberOfLines = 2
         cell.title.textAlignment = NSTextAlignment.left
-        //その他のラベルを設定
-        cell.author.text = articleByHimotoki.authorName
-        Manager.shared.loadImage(with: URL(string: articleByHimotoki.authorImageUrl)!, into: cell.authorIcon)
-        cell.goodCnt.text = String(articleByHimotoki.goodCnt)
-        
-        let myTags = articleByHimotoki.tags.map { $0.name }
+        //著者アイコンを設定
+        Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
+        //タグを設定
+        let myTags = article.tags.map { $0.name }
         cell.tagListView.removeAllTags()
         cell.tagListView.addTags(myTags)
-        
+        //その他のラベルを設定
+        cell.author.text = article.authorName
+        cell.goodCnt.text = String(article.goodCnt)
+        //セルのデリゲートをViewControllerに設定
         cell.delegate = self
         return cell
-        
-        
-        //    // セルを取得する
-        //    let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
-        //    // セルのプロパティに記事情報を設定する
-        //    let article: Article = articles[indexPath.row]
-        //    //タイトルラベルを設定
-        //    let attributedString = NSMutableAttributedString(string: article.title)
-        //    let paragraphStyle = NSMutableParagraphStyle()
-        //    paragraphStyle.lineSpacing = 9
-        //    attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
-        //    cell.title.attributedText = attributedString
-        //    cell.title.lineBreakMode = NSLineBreakMode.byTruncatingTail
-        //    cell.title.numberOfLines = 2
-        //    cell.title.textAlignment = NSTextAlignment.left
-        //    //その他のラベルを設定
-        //    cell.author.text = article.authorName
-        //    Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
-        //    cell.goodCnt.text = String(article.goodCnt)
-        //    //        cell.tag1.text = article.tag1
-        //    //        cell.tag2.text = article.tag2
-        //    //        cell.tag3.text = article.tag3
-        //    cell.tagListView.removeAllTags()
-        //    cell.tagListView.addTags(article.tags)
-        //
-        //    cell.delegate = self
-        //    return cell
     }
-    
-    
     
     
     
     /*記事詳細detailViewに遷移させるメソッド*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        detailViewController.entry = repoArray[indexPath.row]
+        detailViewController.entry = articles[indexPath.row]
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
@@ -178,13 +116,13 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         //タップされたcellのindexPath.rowを取得する
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         //そこから対応している記事を取得し
-        let article: ArticleByHimotoki = repoArray[indexPath.row]
+        let article: ArticleByHimotoki = articles[indexPath.row]
         //その情報をrealmArticleとしてモデル作成
         let realmArticle = RealmArticle(value: [
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
-            "tagList": article.tags.map { $0.name },
+            "tagList": article.tags.map { $0.name }, //.mapで[Tag] -> [String]
             "url": article.url,
             "authorImageUrl": article.authorImageUrl,
             "id": article.id

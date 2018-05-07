@@ -15,13 +15,14 @@ import RealmSwift
 
 class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
-    var articles: [Article] = []
-    var reversedArticles: [Article] = []
-    var refreshControl:UIRefreshControl! //下に引っ張って更新のためのプロパティ
+    var articles: [ArticleByHimotoki] = []
+    var reversedArticles: [ArticleByHimotoki] = []
+    var refreshControl: UIRefreshControl!
     
     ////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
+        //記事取得
         getArticles()
         //使用するXibとCellのReuseIdentifierを登録する
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
@@ -44,6 +45,8 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         // Dispose of any resources that can be recreated.
     }
 
+    
+    
     /////////////////////////////////////////////////////////////
     //*各種メソッド
     /////////////////////////////////////////////////////////////
@@ -52,41 +55,47 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         // デフォルトRealmを取得する(おまじない)
         let realm = try! Realm()
         // 記事の読み取りをする
-        let object = realm.objects(RealmArticle.self) //objectはResults<RealmArticle>型　＝ [RealmArticel]型
+        let object = realm.objects(RealmArticle.self) //objectはResults<RealmArticle>型　＝ [RealmArticel]型?
         print("object: \(object)")
-        //配列？objectの各要素をforEachで呼び出し、articleを生成、appendしてく
+        //objectの各要素をforEachで呼び出し、articleを生成、appendしてく
         object.forEach{ realmArticle in
-            var stringTagList = [String]()
-            realmArticle.tagList.forEach({ (tag) in
-                stringTagList.append(tag)
-            })
-            
-            let article = Article(
+            //List<String>型を[Tag]型に変換
+            var castedTagList: [Tag] = []
+            realmArticle.tagList.forEach { tag in
+                let castedTag = Tag(name: tag)
+                castedTagList.append(castedTag)
+            }
+            //articleを生成
+            let article = ArticleByHimotoki(
                 title: realmArticle.title,
                 authorName: realmArticle.authorName,
                 authorImageUrl: realmArticle.authorImageUrl,
                 goodCnt: realmArticle.goodCnt,
-                tags: stringTagList,
-//                tag1: realmArticle.tag1,
-//                tag2: realmArticle.tag2,
-//                tag3: realmArticle.tag3,
+                tags: castedTagList,
                 url: realmArticle.url,
                 id: realmArticle.id
             )
+            //append
             self.articles.append(article)
         }
         self.reversedArticles = articles.reversed()
         self.tableView.reloadData()
     }
     
+    
+    /*データの個数を返すメソッド*/
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return reversedArticles.count
+    }
 
+    
     /*データを返すメソッド*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
-        // セルのプロパティに記事情報を設定する
-        let article: Article = reversedArticles[indexPath.row]
-        //cellのタイトルラベルを設定する
+        //セルのプロパティに記事情報を設定する
+        let article: ArticleByHimotoki = reversedArticles[indexPath.row]
+        //タイトルラベルを設定
         let attributedString = NSMutableAttributedString(string: article.title)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 9
@@ -95,31 +104,26 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.title.lineBreakMode = NSLineBreakMode.byTruncatingTail
         cell.title.numberOfLines = 2
         cell.title.textAlignment = NSTextAlignment.left
+        //著者アイコンを設定
+        Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
+        //タグを設定
+        let myTags = article.tags.map { $0.name }
+        cell.tagListView.removeAllTags()
+        cell.tagListView.addTags(myTags)
         //その他のラベルを設定
         cell.author.text = article.authorName
-        Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         cell.goodCnt.text = String(article.goodCnt)
-//        cell.tag1.text = article.tag1
-//        cell.tag2.text = article.tag2
-//        cell.tag3.text = article.tag3
-        cell.tagListView.removeAllTags()
-        cell.tagListView.addTags(article.tags)
-
-        cell.readLaterButton.isHidden = true
+       
         return cell
     }
     
     
-    /*データの個数を返すメソッド*/
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return reversedArticles.count
-    }
     
     
     /*記事詳細detailViewに遷移させるメソッド*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-//        detailViewController.entry = reversedArticles[indexPath.row]
+        let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        detailViewController.entry = reversedArticles[indexPath.row]
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }

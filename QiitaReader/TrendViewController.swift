@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
 import APIKit
 import Himotoki
 import Nuke
@@ -19,7 +17,7 @@ import RealmSwift
 
 class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
-    var articles: [Article] = [] //記事を入れるプロパティarticles:構造体の配列
+    var articles: [ArticleByHimotoki] = []
     var refreshControl:UIRefreshControl! //下に引っ張って更新のためのプロパティ
     
     @IBAction func loginBtn(_ sender: UIButton) {
@@ -30,7 +28,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     /////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
-        //記事を取得し、tableViewをリロードする
+        //記事取得
         getArticles()
         //使用するXibとCellのReuseIdentifierを登録する
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
@@ -63,29 +61,38 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func getArticles() {
         let url = "https://qiita.com/trend.json"
         
-        Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON { response in
-            
-            guard let object = response.result.value else { return }
-            
-            let json = JSON(object)["trendItems"] //objectをJSON型にキャストし定数jsonに入れる
-            json.forEach { (_, json) in //JOSN型の定数jsonの各要素をforEachで呼び出し
-                let risouTags = json["article"]["tags"].array!.map { $0["name"].string! }
-                let article = Article( //articleを生成していく
-                    title: json["article"]["title"].string!,
-                    authorName: json["article"]["author"]["urlName"].string!,
-                    authorImageUrl: json["article"]["author"]["profileImageUrl"].string!,
-                    goodCnt: json["article"]["likesCount"].int!,
-                    tags: risouTags,
-//                    tag1: json["article"]["tags"][0]["name"].string,
-//                    tag2: json["article"]["tags"][1]["name"].string,
-//                    tag3: json["article"]["tags"][2]["name"].string,
-                    url: json["article"]["showUrl"].string!,
-                    id: String(json["article"]["id"].int!)
-                )
-                self.articles.append(article)
+        Session.send(GetArticleRequest(path: url)) { result in
+            switch result {
+            case .success(let response):
+                print("成功：\(response)")
+                self.articles = response
+                self.tableView.reloadData()
+                
+            case .failure(let error):
+                print("失敗：\(error)")
             }
-            self.tableView.reloadData()
         }
+        
+//        Alamofire.request(url, method: .get, encoding: JSONEncoding.default).responseJSON { response in
+//
+//            guard let object = response.result.value else { return }
+//
+//            let json = JSON(object)["trendItems"] //objectをJSON型にキャストし定数jsonに入れる
+//            json.forEach { (_, json) in //JOSN型の定数jsonの各要素をforEachで呼び出し
+//                let risouTags = json["article"]["tags"].array!.map { $0["name"].string! }
+//                let article = Article( //articleを生成していく
+//                    title: json["article"]["title"].string!,
+//                    authorName: json["article"]["author"]["urlName"].string!,
+//                    authorImageUrl: json["article"]["author"]["profileImageUrl"].string!,
+//                    goodCnt: json["article"]["likesCount"].int!,
+//                    tags: risouTags,
+//                    url: json["article"]["showUrl"].string!,
+//                    id: String(json["article"]["id"].int!)
+//                )
+//                self.articles.append(article)
+//            }
+//            self.tableView.reloadData()
+//        }
     }
     
     
@@ -95,13 +102,13 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     
-    /*TableViewにデータを返すメソッド*/
+    /*tableViewにデータを返すメソッド*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // セルを取得する
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルのプロパティに記事情報を設定
-        let article: Article = articles[indexPath.row]
-        //cellのタイトルラベルを設定
+        let article: ArticleByHimotoki = articles[indexPath.row]
+        //タイトルラベルを設定
         let attributedString = NSMutableAttributedString(string: article.title)
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = 9
@@ -110,14 +117,16 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.title.lineBreakMode = NSLineBreakMode.byTruncatingTail
         cell.title.numberOfLines = 2
         cell.title.textAlignment = NSTextAlignment.left
-        //その他のラベル
-        cell.author.text = article.authorName
+        //著者アイコンを設定
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
-        cell.goodCnt.text = String(article.goodCnt)
-
+        //タグを設定
+        let myTags = article.tags.map { $0.name }
         cell.tagListView.removeAllTags()
-        cell.tagListView.addTags(article.tags)
-        
+        cell.tagListView.addTags(myTags)
+        //その他のラベルを設定
+        cell.author.text = article.authorName
+        cell.goodCnt.text = String(article.goodCnt)
+        //セルのデリゲートをViewControllerに設定
         cell.delegate = self
         return cell
     }
@@ -127,7 +136,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     /*記事詳細detailViewに遷移させるメソッド*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-//        detailViewController.entry = articles[indexPath.row]
+        detailViewController.entry = articles[indexPath.row]
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
@@ -138,16 +147,13 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //タップされたcellのindexPath.row（tableViewの何行目か）を取得する
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         //そこから対応している（代入した）記事article = articles[indexPath.row]を取得し
-        let article: Article = articles[indexPath.row]
+        let article: ArticleByHimotoki = articles[indexPath.row]
         //その情報をrealmArticleとしてモデル作成
         let realmArticle = RealmArticle(value: [
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
-            "tagList": article.tags,
-//            "tag1": article.tag1 ?? String(),
-//            "tag2": article.tag2 ?? String(),
-//            "tag3": article.tag3 ?? String(),
+            "tagList": article.tags.map { $0.name }, //.mapで[Tag] -> [String]
             "url": article.url,
             "authorImageUrl": article.authorImageUrl,
             "id": article.id
