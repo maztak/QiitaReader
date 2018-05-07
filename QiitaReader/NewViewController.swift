@@ -22,7 +22,9 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     var articles: [Article] = []
     var refreshControl: UIRefreshControl!
     
-    //////////////////////////////////////////////////////////////////////
+    var repoArray: [Repository] = [] //test
+    
+    ///////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
         getArticles()
@@ -54,19 +56,15 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     func getArticles() {
         
         Session.send(FetchRepositoryRequest(userName: "takuya108817")) { result in
-            
             switch result {
-                
             case .success(let res):
-                
                 print("成功\(res)")
+                self.repoArray = res
+                self.tableView.reloadData()
                 
             case .failure(let err):
-                
                 print("しくった\(err)")
-                
             }
-            
         }
         
 //        Session.send(QiitaApiRequest(path: "")) { result in
@@ -138,37 +136,45 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
 
 /*データの個数を返すメソッド*/
 func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return articles.count
+//    return articles.count
+    return repoArray.count //test
 }
 
 
 /*TableViewにデータを返すメソッド*/
 func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    // セルを取得する
-    let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
-    // セルのプロパティに記事情報を設定する
-    let article: Article = articles[indexPath.row]
-    //タイトルラベルを設定
-    let attributedString = NSMutableAttributedString(string: article.title)
-    let paragraphStyle = NSMutableParagraphStyle()
-    paragraphStyle.lineSpacing = 9
-    attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
-    cell.title.attributedText = attributedString
-    cell.title.lineBreakMode = NSLineBreakMode.byTruncatingTail
-    cell.title.numberOfLines = 2
-    cell.title.textAlignment = NSTextAlignment.left
-    //その他のラベルを設定
-    cell.author.text = article.authorName
-    Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
-    cell.goodCnt.text = String(article.goodCnt)
-    //        cell.tag1.text = article.tag1
-    //        cell.tag2.text = article.tag2
-    //        cell.tag3.text = article.tag3
-    cell.tagListView.removeAllTags()
-    cell.tagListView.addTags(article.tags)
     
-    cell.delegate = self
+    //test
+    let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
+    cell.title.text = repoArray[indexPath.row].fullName
     return cell
+    
+    
+//    // セルを取得する
+//    let cell: ArticleCell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
+//    // セルのプロパティに記事情報を設定する
+//    let article: Article = articles[indexPath.row]
+//    //タイトルラベルを設定
+//    let attributedString = NSMutableAttributedString(string: article.title)
+//    let paragraphStyle = NSMutableParagraphStyle()
+//    paragraphStyle.lineSpacing = 9
+//    attributedString.addAttribute(NSAttributedStringKey.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attributedString.length))
+//    cell.title.attributedText = attributedString
+//    cell.title.lineBreakMode = NSLineBreakMode.byTruncatingTail
+//    cell.title.numberOfLines = 2
+//    cell.title.textAlignment = NSTextAlignment.left
+//    //その他のラベルを設定
+//    cell.author.text = article.authorName
+//    Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
+//    cell.goodCnt.text = String(article.goodCnt)
+//    //        cell.tag1.text = article.tag1
+//    //        cell.tag2.text = article.tag2
+//    //        cell.tag3.text = article.tag3
+//    cell.tagListView.removeAllTags()
+//    cell.tagListView.addTags(article.tags)
+//
+//    cell.delegate = self
+//    return cell
 }
 
 
