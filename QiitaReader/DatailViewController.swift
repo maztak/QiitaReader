@@ -10,7 +10,7 @@ import TOWebViewController
 
 class DetailViewController: TOWebViewController {
     var webview: UIWebView = UIWebView()
-    var entry: NewArticleResponse?
+    var entry: Article?
     
     override func viewDidLoad() {
         super.viewDidLoad()

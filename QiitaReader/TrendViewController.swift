@@ -17,7 +17,7 @@ import RealmSwift
 
 class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
-    var articles: [TrendArticle] = []
+    var articles: [Article] = []
     var refreshControl: UIRefreshControl! //下に引っ張って更新のためのプロパティ
     
     @IBAction func loginBtn(_ sender: UIButton) {
@@ -63,7 +63,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
             switch result {
             case .success(let response):
                 print("成功：\(response)")
-                self.articles = response.trendItems
+                self.articles = response.toArticle()
                 self.tableView.reloadData()
                 
             case .failure(let error):
@@ -84,7 +84,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // セルを取得する
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         // セルのプロパティに記事情報を設定
-        let article: TrendArticle = articles[indexPath.row]
+        let article: Article = articles[indexPath.row]
         //タイトルラベルを設定
         let attributedString = NSMutableAttributedString(string: article.title)
         let paragraphStyle = NSMutableParagraphStyle()
@@ -97,9 +97,9 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //著者アイコンを設定
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         //タグを設定
-        let myTags = article.tags.map { $0.name }
+//        let myTags = article.tags.map { $0.name }
         cell.tagListView.removeAllTags()
-        cell.tagListView.addTags(myTags)
+        cell.tagListView.addTags(article.tags)
         //その他のラベルを設定
         cell.author.text = article.authorName
         cell.goodCnt.text = String(article.goodCnt)
@@ -113,7 +113,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     /*記事詳細detailViewに遷移させるメソッド*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        detailViewController.entry = articles[indexPath.row] as! NewArticleResponse
+        detailViewController.entry = articles[indexPath.row]
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
@@ -124,7 +124,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //タップされたcellのindexPath.row（tableViewの何行目か）を取得する
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         //そこから対応している（代入した）記事article = articles[indexPath.row]を取得し
-        let article: TrendArticle = articles[indexPath.row]
+        let article: Article = articles[indexPath.row]
         //その情報をrealmArticleとしてモデル作成
         let realmArticle = RealmArticle(value: [
             "title" : article.title,

@@ -15,8 +15,8 @@ import RealmSwift
 
 class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
-    var articles: [NewArticleResponse] = []
-    var reversedArticles: [NewArticleResponse] = []
+    var articles: [Article] = []
+    var reversedArticles: [Article] = []
     var refreshControl: UIRefreshControl!
     
     ////////////////////////////////////////////////////////////
@@ -66,7 +66,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
                 castedTagList.append(castedTag)
             }
             //articleを生成
-            let article = NewArticleResponse(
+            let article = NewArticle(
                 title: realmArticle.title,
                 authorName: realmArticle.authorName,
                 authorImageUrl: realmArticle.authorImageUrl,
@@ -76,7 +76,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
                 id: realmArticle.id
             )
             //append
-            self.articles.append(article)
+            self.articles.append(article.toArticle())
         }
         self.reversedArticles = articles.reversed()
         self.tableView.reloadData()
@@ -94,7 +94,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         // セルを取得する
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         //セルのプロパティに記事情報を設定する
-        let article: NewArticleResponse = reversedArticles[indexPath.row]
+        let article: Article = reversedArticles[indexPath.row]
         //タイトルラベルを設定
         let attributedString = NSMutableAttributedString(string: article.title)
         let paragraphStyle = NSMutableParagraphStyle()
@@ -107,9 +107,9 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         //著者アイコンを設定
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         //タグを設定
-        let myTags = article.tags.map { $0.name }
+//        let myTags = article.tags.map { $0.name }
         cell.tagListView.removeAllTags()
-        cell.tagListView.addTags(myTags)
+        cell.tagListView.addTags(article.tags)
         //その他のラベルを設定
         cell.author.text = article.authorName
         cell.goodCnt.text = String(article.goodCnt)

@@ -17,7 +17,7 @@ import RealmSwift
 
 class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
-    var articles: [NewArticleResponse] = []
+    var articles: [NewArticle] = []
     var refreshControl: UIRefreshControl!
     
     
@@ -76,7 +76,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         //セルを取得
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         //セルのプロパティに記事情報を設定する
-        let article: NewArticleResponse = articles[indexPath.row]
+        let article: NewArticle = articles[indexPath.row]
         //タイトルラベルを設定
         let attributedString = NSMutableAttributedString(string: article.title)
         let paragraphStyle = NSMutableParagraphStyle()
@@ -105,7 +105,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     /*記事詳細detailViewに遷移させるメソッド*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        detailViewController.entry = articles[indexPath.row]
+        detailViewController.entry = articles[indexPath.row].toArticle()
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
@@ -116,7 +116,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         //タップされたcellのindexPath.rowを取得する
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         //そこから対応している記事を取得し
-        let article: NewArticleResponse = articles[indexPath.row]
+        let article: NewArticle = articles[indexPath.row]
         //その情報をrealmArticleとしてモデル作成
         let realmArticle = RealmArticle(value: [
             "title" : article.title,

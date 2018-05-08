@@ -19,12 +19,23 @@ extension QiitaRequest {
     }
 }
 
+struct Article {
+    var title: String
+    var authorName: String
+    var authorImageUrl: String
+    var goodCnt: Int
+    var tags: [String]
+    var url: String
+    var id: String
+}
+
 
 
 //新着/////////////////////////////////////
+//リクエスト
 struct GetArticleRequest: QiitaRequest {
     var path = "/api/v2/items"
-    typealias Response = [NewArticleResponse]
+    typealias Response = [NewArticle]
     var method: HTTPMethod {
         return .get
     }
@@ -34,18 +45,18 @@ struct GetArticleRequest: QiitaRequest {
     }
 }
 
-
-struct NewArticleResponse: Himotoki.Decodable {
+//レスポンス
+struct NewArticle: Himotoki.Decodable { //NewArticleOfNewItems
     let title: String
     let authorName: String
     let authorImageUrl: String
     let goodCnt: Int
-    let tags: [Tag] // 変数の型をPersonの配列にする
+    let tags: [Tag] //
     let url: String
     let id: String
     
-    static func decode(_ e: Extractor) throws -> NewArticleResponse {
-        return try NewArticleResponse(
+    static func decode(_ e: Extractor) throws -> NewArticle {
+        return try NewArticle(
             title: e <| "title",
             authorName: e <| ["user", "id"],
             authorImageUrl: e <| ["user", "profile_image_url"],
@@ -55,7 +66,20 @@ struct NewArticleResponse: Himotoki.Decodable {
             id: e <| "id"
         )
     }
+    
+    func toArticle() -> Article {
+        return Article(
+                title: title,
+                authorName: authorName,
+                authorImageUrl: authorImageUrl,
+                goodCnt: goodCnt,
+                tags: tags.map {$0.name },
+                url: url,
+                id: id
+            )
+    }
 }
+
 
 struct Tag: Himotoki.Decodable {
     let name: String
@@ -71,6 +95,7 @@ struct Tag: Himotoki.Decodable {
 
 
 //トレンド/////////////////////////////////////////
+//リクエスト
 struct GetTrendRequest: QiitaRequest {
     var path = "/trend.json"
     typealias Response = TrendItems //
@@ -82,7 +107,7 @@ struct GetTrendRequest: QiitaRequest {
         return try TrendItems.decodeValue(object) //
     }
 }
-
+//レスポンス
 struct TrendItems: Himotoki.Decodable {
     let trendItems: [TrendArticle]
     
@@ -91,6 +116,20 @@ struct TrendItems: Himotoki.Decodable {
             trendItems: e <|| "trendItems"
         )
     }
+    
+    func toArticle() -> [Article] {
+        return trendItems.map {
+            Article(
+                title: $0.title,
+                authorName: $0.authorName,
+                authorImageUrl: $0.authorImageUrl,
+                goodCnt: $0.goodCnt,
+                tags: $0.tags.map {$0.name },
+                url: $0.url,
+                id: $0.id
+            )
+        }
+    }
 }
 
 struct TrendArticle: Himotoki.Decodable {
@@ -98,7 +137,7 @@ struct TrendArticle: Himotoki.Decodable {
     let authorName: String
     let authorImageUrl: String
     let goodCnt: Int
-    let tags: [Tag] // 変数の型をPersonの配列にする
+    let tags: [Tag]
     let url: String
     let id: String
     
@@ -114,6 +153,8 @@ struct TrendArticle: Himotoki.Decodable {
         )
     }
 }
+
+
 
 
 

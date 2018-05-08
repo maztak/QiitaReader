@@ -18,7 +18,7 @@ import RealmSwift
 class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     var testSearchBar: UISearchBar!
-    var articles: [NewArticleResponse] = []
+    var articles: [NewArticle] = []
     var searchQuery: String = ""
     
     ////////////////////////////////////////////////////////////////////
@@ -157,7 +157,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     /*記事詳細detailViewに遷移させるメソッド*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        detailViewController.entry = articles[indexPath.row]
+        detailViewController.entry = articles[indexPath.row].toArticle()
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
