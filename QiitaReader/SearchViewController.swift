@@ -17,7 +17,7 @@ import RealmSwift
 
 class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
-    var testSearchBar: UISearchBar!
+    var searchBar: UISearchBar!
     var articles: [Article] = []
     
     ////////////////////////////////////////////////////////////////////
@@ -26,7 +26,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         //検索バーを設定
         setupSearchBar()
         //何も入力されていなくてもReturnキーを押せるように設定
-        testSearchBar.enablesReturnKeyAutomatically = true
+        searchBar.enablesReturnKeyAutomatically = true
         //tableViewに（Reusableな？）Cellを登録
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
     }
@@ -46,7 +46,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
             searchBar.keyboardType = UIKeyboardType.default
             navigationItem.titleView = searchBar
             navigationItem.titleView?.frame = searchBar.frame
-            self.testSearchBar = searchBar
+            self.searchBar = searchBar
             searchBar.becomeFirstResponder()
         }
     }
@@ -58,23 +58,22 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     ///////////////////////////////////////////////////////
     //検索ボタン押下時の呼び出しメソッド
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        testSearchBar.endEditing(true)
+        searchBar.endEditing(true)
         articles.removeAll()
         getArticles()
-        tableView.reloadData() // これいる？
     }
     
 
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
-        let searchQuery: String = testSearchBar.text!
-                
-        Session.send(GetSearchRequest(query: searchQuery)) { result in
+        let searchQuery: String = searchBar.text!
+        
+        Session.send(GetSearchRequest(query: searchQuery)) { [weak self] result in
             switch result {
             case .success(let response):
                 print("成功：\(response)")
-                self.articles = response.map { $0.toArticle() }
-                self.tableView.reloadData()
+                self?.articles = response.map { $0.toArticle() }
+                self?.tableView.reloadData()
                 
             case .failure(let error):
                 print("失敗：\(error)")
@@ -135,15 +134,17 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         //そこから対応している記事を取得し
         let article = articles[indexPath.row]
         //その情報をrealmArticleとしてモデル作成
-        let realmArticle = RealmArticle(value: [
-            "title" : article.title,
-            "authorName": article.authorName,
-            "goodCnt": article.goodCnt,
-            "tagList": article.tags,
-            "url": article.url,
-            "authorImageUrl": article.authorImageUrl,
-            "id": article.id
-            ])
+        let realmArticle = RealmArticle(
+            value: [
+                "title" : article.title,
+                "authorName": article.authorName,
+                "goodCnt": article.goodCnt,
+                "tagList": article.tags,
+                "url": article.url,
+                "authorImageUrl": article.authorImageUrl,
+                "id": article.id
+            ]
+        )
         // デフォルトRealmを取得する(おまじない)
         let realm = try! Realm()
         // トランザクションを開始して、オブジェクトをRealmに追加する
@@ -164,4 +165,5 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         // Pass the selected object to the new view controller.
     }
     */
+    
 }

@@ -51,12 +51,12 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     ///////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
-        Session.send(GetNewRequest()) { result in
+        Session.send(GetNewRequest()) { [weak self] result in
             switch result {
             case .success(let response):
                 print("成功：\(response)")
-                self.articles = response.map { $0.toArticle() }
-                self.tableView.reloadData()
+                self?.articles = response.map { $0.toArticle() }
+                self?.tableView.reloadData()
                 
             case .failure(let error):
                 print("失敗：\(error)")
@@ -117,15 +117,17 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         //そこから対応している記事を取得し
         let article: Article = articles[indexPath.row]
         //その情報をrealmArticleとしてモデル作成
-        let realmArticle = RealmArticle(value: [
-            "title" : article.title,
-            "authorName": article.authorName,
-            "goodCnt": article.goodCnt,
-            "tagList": article.tags,
-            "url": article.url,
-            "authorImageUrl": article.authorImageUrl,
-            "id": article.id
-            ])
+        let realmArticle = RealmArticle(
+            value: [
+                "title" : article.title,
+                "authorName": article.authorName,
+                "goodCnt": article.goodCnt,
+                "tagList": article.tags,
+                "url": article.url,
+                "authorImageUrl": article.authorImageUrl,
+                "id": article.id
+            ]
+        )
         // デフォルトRealmを取得する(おまじない)
         let realm = try! Realm()
         // トランザクションを開始して、オブジェクトをRealmに追加する
@@ -146,5 +148,6 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
      // Pass the selected object to the new view controller.
      }
      */
+    
 }
 

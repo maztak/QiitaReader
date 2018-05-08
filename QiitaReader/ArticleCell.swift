@@ -15,12 +15,12 @@ class ArticleCell: UITableViewCell, TagListViewDelegate {
     @IBOutlet weak var goodCnt: UILabel!
     @IBOutlet weak var authorIcon: UIImageView!
     @IBOutlet weak var readLaterButton: UIButton!
+    @IBOutlet weak var tagListView: TagListView!
     var delegate: ArticleCellDelegate? = nil
     
     @IBAction func readLaterButtonTapped(_ sender: Any) {
         delegate?.addReadLater(cell: self)
     }
-    @IBOutlet weak var tagListView: TagListView!
 }
 
 

@@ -20,10 +20,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     var articles: [Article] = []
     var refreshControl: UIRefreshControl!
     
-    @IBAction func loginBtn(_ sender: UIButton) {
-        let loginViewController: LoginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
-        self.navigationController?.pushViewController(loginViewController, animated: true)
-    }
+    
     
     ///////////////////////////////////////////////////////
     override func viewDidLoad() {
@@ -59,12 +56,12 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     ///////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
-        Session.send(GetTrendRequest()) { result in
+        Session.send(GetTrendRequest()) { [weak self] result in
             switch result {
             case .success(let response):
                 print("成功：\(response)")
-                self.articles = response.toArticle()
-                self.tableView.reloadData()
+                self?.articles = response.toArticle()
+                self?.tableView.reloadData()
                 
             case .failure(let error):
                 print("失敗：\(error)")
@@ -106,7 +103,6 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.delegate = self
         return cell
     }
-    
     
     
     /*記事詳細detailViewに遷移させるメソッド*/
@@ -154,6 +150,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Pass the selected object to the new view controller.
     }
     */
+    
 }
 
 

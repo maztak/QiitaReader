@@ -107,13 +107,11 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         //著者アイコンを設定
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         //タグを設定
-//        let myTags = article.tags.map { $0.name }
         cell.tagListView.removeAllTags()
         cell.tagListView.addTags(article.tags)
         //その他のラベルを設定
         cell.author.text = article.authorName
         cell.goodCnt.text = String(article.goodCnt)
-       
         return cell
     }
     
@@ -138,4 +136,5 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         // Pass the selected object to the new view controller.
     }
     */
+    
 }
