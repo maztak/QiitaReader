@@ -59,7 +59,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     /////////////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
-        Session.send(GetTrendRequest(path: "/trend.json")) { result in
+        Session.send(GetTrendRequest()) { result in
             switch result {
             case .success(let response):
                 print("成功：\(response)")

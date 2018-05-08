@@ -23,7 +23,7 @@ extension QiitaRequest {
 
 //新着/////////////////////////////////////
 struct GetArticleRequest: QiitaRequest {
-    var path: String
+    var path = "/api/v2/items"
     typealias Response = [NewArticleResponse]
     var method: HTTPMethod {
         return .get
@@ -72,7 +72,7 @@ struct Tag: Himotoki.Decodable {
 
 //トレンド/////////////////////////////////////////
 struct GetTrendRequest: QiitaRequest {
-    var path: String
+    var path = "/trend.json"
     typealias Response = TrendItems //
     var method: HTTPMethod {
         return .get

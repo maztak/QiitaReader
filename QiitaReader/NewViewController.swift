@@ -51,7 +51,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     ////////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
-        Session.send(GetArticleRequest(path: "/api/v2/items")) { result in
+        Session.send(GetArticleRequest()) { result in
             switch result {
             case .success(let response):
                 print("成功：\(response)")
