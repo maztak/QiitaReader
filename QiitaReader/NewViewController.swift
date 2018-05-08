@@ -17,7 +17,7 @@ import RealmSwift
 
 class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
-    var articles: [NewArticle] = []
+    var articles: [Article] = []
     var refreshControl: UIRefreshControl!
     
     
@@ -46,16 +46,16 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     
-    ////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////
     // 各種メソッド
-    ////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
         Session.send(GetArticleRequest()) { result in
             switch result {
             case .success(let response):
                 print("成功：\(response)")
-                self.articles = response
+                self.articles = response.map { $0.toArticle() }
                 self.tableView.reloadData()
                 
             case .failure(let error):
@@ -76,7 +76,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         //セルを取得
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         //セルのプロパティに記事情報を設定する
-        let article: NewArticle = articles[indexPath.row]
+        let article: Article = articles[indexPath.row]
         //タイトルラベルを設定
         let attributedString = NSMutableAttributedString(string: article.title)
         let paragraphStyle = NSMutableParagraphStyle()
@@ -89,9 +89,8 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         //著者アイコンを設定
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         //タグを設定
-        let myTags = article.tags.map { $0.name }
         cell.tagListView.removeAllTags()
-        cell.tagListView.addTags(myTags)
+        cell.tagListView.addTags(article.tags)
         //その他のラベルを設定
         cell.author.text = article.authorName
         cell.goodCnt.text = String(article.goodCnt)
@@ -105,7 +104,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     /*記事詳細detailViewに遷移させるメソッド*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        detailViewController.entry = articles[indexPath.row].toArticle()
+        detailViewController.entry = articles[indexPath.row]
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
@@ -116,13 +115,13 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         //タップされたcellのindexPath.rowを取得する
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         //そこから対応している記事を取得し
-        let article: NewArticle = articles[indexPath.row]
+        let article: Article = articles[indexPath.row]
         //その情報をrealmArticleとしてモデル作成
         let realmArticle = RealmArticle(value: [
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
-            "tagList": article.tags.map { $0.name }, //.mapで[Tag] -> [String]
+            "tagList": article.tags,
             "url": article.url,
             "authorImageUrl": article.authorImageUrl,
             "id": article.id

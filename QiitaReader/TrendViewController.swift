@@ -18,14 +18,14 @@ import RealmSwift
 class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     var articles: [Article] = []
-    var refreshControl: UIRefreshControl! //下に引っ張って更新のためのプロパティ
+    var refreshControl: UIRefreshControl!
     
     @IBAction func loginBtn(_ sender: UIButton) {
         let loginViewController: LoginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
         self.navigationController?.pushViewController(loginViewController, animated: true)
     }
     
-    /////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
         //記事取得
@@ -54,9 +54,9 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
    
     
-    /////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////
     //*各種メソッド
-    /////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
         Session.send(GetTrendRequest()) { result in
@@ -97,7 +97,6 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //著者アイコンを設定
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         //タグを設定
-//        let myTags = article.tags.map { $0.name }
         cell.tagListView.removeAllTags()
         cell.tagListView.addTags(article.tags)
         //その他のラベルを設定
@@ -130,7 +129,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
-//            "tagList": article.tags.map { $0.name }, //.mapで[Tag] -> [String]
+            "tagList": article.tags,
             "url": article.url,
             "authorImageUrl": article.authorImageUrl,
             "id": article.id
