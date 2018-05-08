@@ -97,9 +97,9 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //著者アイコンを設定
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         //タグを設定
-//        let myTags = article.tags.map { $0.name }
+        let myTags = article.tags.map { $0.name }
         cell.tagListView.removeAllTags()
-//        cell.tagListView.addTags(myTags)
+        cell.tagListView.addTags(myTags)
         //その他のラベルを設定
         cell.author.text = article.authorName
         cell.goodCnt.text = String(article.goodCnt)
