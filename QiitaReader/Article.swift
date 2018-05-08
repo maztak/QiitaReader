@@ -18,10 +18,13 @@ extension QiitaRequest {
         return URL(string: "https://qiita.com")!
     }
 }
-////////////////////////////////////////
+
+
+
+//新着/////////////////////////////////////
 struct GetArticleRequest: QiitaRequest {
     var path: String
-    typealias Response = [ArticleByHimotoki]
+    typealias Response = [NewArticleResponse]
     var method: HTTPMethod {
         return .get
     }
@@ -31,36 +34,8 @@ struct GetArticleRequest: QiitaRequest {
     }
 }
 
-struct GetTrendRequest: QiitaRequest {
-    var path: String
-    typealias Response = [TrendByHimotoki]
-    var method: HTTPMethod {
-        return .get
-    }
-    
-    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> GetTrendRequest.Response {
-        return try decodeArray(object)
-    }
-}
 
-
-
-
-
-
-
-////////////////////////////////////////
-struct Tag: Himotoki.Decodable {
-    let name: String
-    
-    static func decode(_ e: Extractor) throws -> Tag {
-        return try Tag(
-            name:   e <| "name"
-        )
-    }
-}
-///////////////////////////////////////
-struct ArticleByHimotoki: Himotoki.Decodable {
+struct NewArticleResponse: Himotoki.Decodable {
     let title: String
     let authorName: String
     let authorImageUrl: String
@@ -69,8 +44,8 @@ struct ArticleByHimotoki: Himotoki.Decodable {
     let url: String
     let id: String
     
-    static func decode(_ e: Extractor) throws -> ArticleByHimotoki {
-        return try ArticleByHimotoki(
+    static func decode(_ e: Extractor) throws -> NewArticleResponse {
+        return try NewArticleResponse(
             title: e <| "title",
             authorName: e <| ["user", "id"],
             authorImageUrl: e <| ["user", "profile_image_url"],
@@ -82,7 +57,43 @@ struct ArticleByHimotoki: Himotoki.Decodable {
     }
 }
 
-struct TrendByHimotoki: Himotoki.Decodable {
+struct Tag: Himotoki.Decodable {
+    let name: String
+    
+    static func decode(_ e: Extractor) throws -> Tag {
+        return try Tag(
+            name:   e <| "name"
+        )
+    }
+}
+
+
+
+
+//トレンド/////////////////////////////////////////
+struct GetTrendRequest: QiitaRequest {
+    var path: String
+    typealias Response = TrendItems //
+    var method: HTTPMethod {
+        return .get
+    }
+    
+    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> GetTrendRequest.Response {
+        return try TrendItems.decodeValue(object) //
+    }
+}
+
+struct TrendItems: Himotoki.Decodable {
+    let trendItems: [TrendArticle]
+    
+    static func decode(_ e: Extractor) throws -> TrendItems {
+        return try TrendItems(
+            trendItems: e <|| "trendItems"
+        )
+    }
+}
+
+struct TrendArticle: Himotoki.Decodable {
     let title: String
     let authorName: String
     let authorImageUrl: String
@@ -91,18 +102,22 @@ struct TrendByHimotoki: Himotoki.Decodable {
     let url: String
     let id: String
     
-    static func decode(_ e: Extractor) throws -> TrendByHimotoki {
-        return try TrendByHimotoki(
-            title: e <| "trendItems" <| "article" <| "title",
-            authorName: e <| "trendItems" <| "article" <| ["author", "urlName"],
-            authorImageUrl: e <| "trendItems" <| "article" <| ["author", "profileImageUrl"],
-            goodCnt: e <| "trendItems" <| "article" <| "likesCount",
-            tags: e <| "trendItems" <| "article" <|| "tags", //
-            url: e <| "trendItems" <| "article" <| "showUrl",
-            id: e <| "trendItems" <| "article" <| "uuid"
+    static func decode(_ e: Extractor) throws -> TrendArticle {
+        return try TrendArticle(
+            title: e <| "article" <| "title",
+            authorName: e <| "article" <| ["author", "urlName"],
+            authorImageUrl: e <| "article" <| ["author", "profileImageUrl"],
+            goodCnt: e <| "article" <| "likesCount",
+            tags: e <| "article" <|| "tags", //
+            url: e <| "article" <| "showUrl",
+            id: e <| "article" <| "uuid"
         )
     }
 }
+
+
+
+
 
 
 

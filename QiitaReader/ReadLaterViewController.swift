@@ -15,8 +15,8 @@ import RealmSwift
 
 class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
-    var articles: [ArticleByHimotoki] = []
-    var reversedArticles: [ArticleByHimotoki] = []
+    var articles: [NewArticleResponse] = []
+    var reversedArticles: [NewArticleResponse] = []
     var refreshControl: UIRefreshControl!
     
     ////////////////////////////////////////////////////////////
@@ -66,7 +66,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
                 castedTagList.append(castedTag)
             }
             //articleを生成
-            let article = ArticleByHimotoki(
+            let article = NewArticleResponse(
                 title: realmArticle.title,
                 authorName: realmArticle.authorName,
                 authorImageUrl: realmArticle.authorImageUrl,
@@ -94,7 +94,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         // セルを取得する
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArticleCell", for: indexPath) as! ArticleCell
         //セルのプロパティに記事情報を設定する
-        let article: ArticleByHimotoki = reversedArticles[indexPath.row]
+        let article: NewArticleResponse = reversedArticles[indexPath.row]
         //タイトルラベルを設定
         let attributedString = NSMutableAttributedString(string: article.title)
         let paragraphStyle = NSMutableParagraphStyle()

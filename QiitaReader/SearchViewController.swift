@@ -18,7 +18,7 @@ import RealmSwift
 class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     var testSearchBar: UISearchBar!
-    var articles: [ArticleByHimotoki] = []
+    var articles: [NewArticleResponse] = []
     var searchQuery: String = ""
     
     ////////////////////////////////////////////////////////////////////

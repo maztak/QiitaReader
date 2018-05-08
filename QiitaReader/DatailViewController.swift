@@ -10,7 +10,7 @@ import TOWebViewController
 
 class DetailViewController: TOWebViewController {
     var webview: UIWebView = UIWebView()
-    var entry: ArticleByHimotoki?
+    var entry: NewArticleResponse?
     
     override func viewDidLoad() {
         super.viewDidLoad()
