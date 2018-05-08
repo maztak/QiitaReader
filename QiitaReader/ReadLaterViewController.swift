@@ -66,7 +66,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
                 castedTagList.append(castedTag)
             }
             //articleを生成
-            let article = NewArticle(
+            let article = SearchArticle(
                 title: realmArticle.title,
                 authorName: realmArticle.authorName,
                 authorImageUrl: realmArticle.authorImageUrl,

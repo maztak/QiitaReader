@@ -18,17 +18,16 @@ import RealmSwift
 class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     var testSearchBar: UISearchBar!
-    var articles: [NewArticle] = []
-    var searchQuery: String = ""
+    var articles: [Article] = []
     
     ////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
         //検索バーを設定
         setupSearchBar()
-        //何も入力されていなくてもReturnキーを押せるようにする。
+        //何も入力されていなくてもReturnキーを押せるように設定
         testSearchBar.enablesReturnKeyAutomatically = true
-        //XibとCellのReuseIdentifierを登録する
+        //tableViewに（Reusableな？）Cellを登録
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
     }
 
@@ -54,9 +53,9 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     
     
     
-    /////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////
     // 各種メソッド
-    /////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////
     //検索ボタン押下時の呼び出しメソッド
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         testSearchBar.endEditing(true)
@@ -68,59 +67,27 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
 
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
-        var encodedQuery = ""
-        var targetUrl = ""
-        
-        searchQuery = testSearchBar.text!
-        encodedQuery = searchQuery.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)!
-        targetUrl = "https://qiita.com/api/v2/items?page=1&per_page=10&query=title%3A\(encodedQuery)"
-        
-//        guard let url = URL(string: targetUrl) else {
-//            print("無効なURL")
-//            return
-//        }
-        
-        Session.send(GetArticleRequest(path: targetUrl)) { result in
+        let searchQuery: String = testSearchBar.text!
+                
+        Session.send(GetSearchRequest(query: searchQuery)) { result in
             switch result {
             case .success(let response):
                 print("成功：\(response)")
-                self.articles = response
+                self.articles = response.map { $0.toArticle() }
                 self.tableView.reloadData()
                 
             case .failure(let error):
                 print("失敗：\(error)")
             }
         }
-        
-//        Alamofire.request(url).responseJSON { response in
-//            guard let object: Any = response.result.value else { return }
-//
-//            let json = JSON(object)
-//            json.forEach { (_, json) in
-//                let risouTags = json["tags"].array!.map { $0["name"].string! }
-//
-//                let article = Article (
-//                    title: json["title"].string!,
-//                    authorName: json["user"]["id"].string!,
-//                    authorImageUrl: json["user"]["profile_image_url"].string!,
-//                    goodCnt: json["likes_count"].int!,
-//                    tags: risouTags,
-////                    tag1: json["tags"][0]["name"].string,
-////                    tag2: json["tags"][1]["name"].string,
-////                    tag3: json["tags"][2]["name"].string,
-//                    url: json["url"].string!,
-//                    id: json["id"].string!
-//                )
-//                self.articles.append(article)
-//            }
-//            self.tableView.reloadData()
-//        }
     }
+    
     
     /*データの個数を返すメソッド*/
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return articles.count
     }
+    
     
     /*tableViewにデータを返すメソッド*/
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -140,9 +107,8 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         //著者アイコンを設定
         Manager.shared.loadImage(with: URL(string: article.authorImageUrl)!, into: cell.authorIcon)
         //タグを設定
-        let myTags = article.tags.map { $0.name }
         cell.tagListView.removeAllTags()
-        cell.tagListView.addTags(myTags)
+        cell.tagListView.addTags(article.tags)
         //その他のラベルを設定
         cell.author.text = article.authorName
         cell.goodCnt.text = String(article.goodCnt)
@@ -152,12 +118,11 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     }
     
     
-    
  
     /*記事詳細detailViewに遷移させるメソッド*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailViewController: DetailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
-        detailViewController.entry = articles[indexPath.row].toArticle()
+        let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
+        detailViewController.entry = articles[indexPath.row]
         self.navigationController?.pushViewController(detailViewController, animated: true)
         tableView.deselectRow(at: indexPath as IndexPath, animated: true)
     }
@@ -174,7 +139,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
             "title" : article.title,
             "authorName": article.authorName,
             "goodCnt": article.goodCnt,
-            "tagList": article.tags.map { $0.name }, //.mapで[Tag] -> [String]
+            "tagList": article.tags,
             "url": article.url,
             "authorImageUrl": article.authorImageUrl,
             "id": article.id
@@ -183,7 +148,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         let realm = try! Realm()
         // トランザクションを開始して、オブジェクトをRealmに追加する
         try! realm.write {
-            realm.add(realmArticle)
+            realm.add(realmArticle, update: true)
         }
         //追加した記事をコンソールに出力（確認用）
         print(realmArticle)

@@ -33,14 +33,14 @@ struct Article {
 
 //新着/////////////////////////////////////
 //リクエスト
-struct GetArticleRequest: QiitaRequest {
+struct GetNewRequest: QiitaRequest {
     var path = "/api/v2/items"
     typealias Response = [NewArticle]
     var method: HTTPMethod {
         return .get
     }
     
-    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> GetArticleRequest.Response {
+    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> GetNewRequest.Response {
         return try decodeArray(object)
     }
 }
@@ -150,6 +150,65 @@ struct TrendArticle: Himotoki.Decodable {
             tags: e <| "article" <|| "tags", //
             url: e <| "article" <| "showUrl",
             id: e <| "article" <| "uuid"
+        )
+    }
+}
+
+
+
+//検索/////////////////////////////////////
+//リクエスト
+struct GetSearchRequest: QiitaRequest {
+    let query: String
+    let path: String = "/api/v2/items"
+    typealias Response = [SearchArticle]
+    var method: HTTPMethod {
+        return .get
+    }
+    var parameters: Any? {
+        return [
+            "page": 1,
+            "per_page": 10,
+            "query": "title:\(query)"
+        ]
+    }
+    
+    func response(from object: Any, urlResponse: HTTPURLResponse) throws -> GetSearchRequest.Response {
+        return try decodeArray(object)
+    }
+}
+
+//レスポンス
+struct SearchArticle: Himotoki.Decodable {
+    let title: String
+    let authorName: String
+    let authorImageUrl: String
+    let goodCnt: Int
+    let tags: [Tag] //
+    let url: String
+    let id: String
+    
+    static func decode(_ e: Extractor) throws -> SearchArticle {
+        return try SearchArticle(
+            title: e <| "title",
+            authorName: e <| ["user", "id"],
+            authorImageUrl: e <| ["user", "profile_image_url"],
+            goodCnt: e <| "likes_count",
+            tags: e <|| "tags",
+            url: e <| "url",
+            id: e <| "id"
+        )
+    }
+    
+    func toArticle() -> Article {
+        return Article(
+            title: title,
+            authorName: authorName,
+            authorImageUrl: authorImageUrl,
+            goodCnt: goodCnt,
+            tags: tags.map { $0.name },
+            url: url,
+            id: id
         )
     }
 }
