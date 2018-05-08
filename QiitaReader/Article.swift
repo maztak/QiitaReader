@@ -124,7 +124,7 @@ struct TrendItems: Himotoki.Decodable {
                 authorName: $0.authorName,
                 authorImageUrl: $0.authorImageUrl,
                 goodCnt: $0.goodCnt,
-                tags: $0.tags.map {$0.name },
+                tags: $0.tags.map { $0.name },
                 url: $0.url,
                 id: $0.id
             )
