@@ -158,11 +158,6 @@ struct TrendArticle: Himotoki.Decodable {
 
 
 
-
-
-
-
-
 ////////////////////////////////////////
 class RealmArticle: Object {
     @objc dynamic var title = String()

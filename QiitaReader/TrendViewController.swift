@@ -138,7 +138,7 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let realm = try! Realm()
         // トランザクションを開始して、オブジェクトをRealmに追加する
         try! realm.write {
-            realm.add(realmArticle)
+            realm.add(realmArticle, update: true)
         }
         //追加した記事をコンソールに出力（確認用）
         print(realmArticle)
