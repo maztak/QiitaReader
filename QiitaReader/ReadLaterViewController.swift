@@ -112,6 +112,7 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
         //その他のラベルを設定
         cell.author.text = article.authorName
         cell.goodCnt.text = String(article.goodCnt)
+        cell.readLaterButton.isHidden = true
         return cell
     }
     
