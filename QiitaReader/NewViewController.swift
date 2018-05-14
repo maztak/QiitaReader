@@ -51,6 +51,15 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     ///////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
+        //RxSwiftを使って
+        
+        //まずはサンプルデータをStream（データの流れ）とみなして
+        //それをRxswiftで受け取って
+        //reloadData()
+        
+        //obsevableをsubscribe()して使う
+
+        
         Session.send(GetNewRequest()) { [weak self] result in
             switch result {
             case .success(let response):
