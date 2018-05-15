@@ -12,6 +12,8 @@ target 'QiitaReader’ do
   pod 'RealmSwift'
   pod "Himotoki", "~> 3.1"
   pod 'SVProgressHUD'
+  pod 'RxSwift'
+  pod 'RxCocoa'
 end
 
 # Workaround for Cocoapods issue #7606

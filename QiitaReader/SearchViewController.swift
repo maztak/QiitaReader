@@ -38,10 +38,9 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         print(viewController)
         // 遷移先が、OriginalViewControllerだったら……
-        if let controller = viewController as? OriginalTabBarController {
+        if let _ = viewController as? OriginalTabBarController {
             // インジケータを引っ込める
             SVProgressHUD.dismiss()
-            
             // API通信を中止させる
             Session.cancelRequests(with: GetSearchRequest.self)
         }
@@ -87,6 +86,9 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         SVProgressHUD.show()
         let searchQuery: String = searchBar.text!
         
+        // MARK: ToDo: ObserbleZip関数で5回Sessionを送ってみる
+        // SessionRxはノータッチ
+
         Session.send(GetSearchRequest(query: searchQuery)) { [weak self] result in
             switch result {
             case .success(let response):

@@ -12,6 +12,7 @@ import Himotoki
 import Nuke         //サムネイル画像を表示して、キャッシュまでしてくれる
 import RealmSwift
 import SVProgressHUD
+import RxSwift
 //po Realm.Configuration.defaultConfiguration.fileURL
 //FinderでShift+Cmd+gで絶対パスを指定
 
@@ -23,6 +24,10 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     var myView: UIView!
     var myButton: UIButton!
     var myLabel: UILabel!
+    
+    
+    
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,38 +97,67 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     ///////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
+        SVProgressHUD.show()
         //RxSwiftを使って
         
-        //まずはサンプルデータをStream（データの流れ）とみなして
-        //それをRxswiftで受け取って
-        //reloadData()
         
-        //obsevableをsubscribe()して使う
-
         
-        SVProgressHUD.show()
-        Session.send(GetNewRequest()) { [weak self] result in
-            switch result {
-            case .success(let response):
-                print("成功：\(response)")
+//        let seq = Single.just(1)
+//
+//        seq.subscribe(onSuccess: { (event) in
+//            print("購読したよ？\(event)")
+//        }) { (error) in
+//            print("エラーだよ？\(error)")
+//        }
+        
+        Session.rx_sendRequest(request: GetNewRequest())
+            .map { $0.map{ $0.toArticle() } }
+            .subscribe(onNext: { (response) in
+                print("onNext")
                 //subviewを消す
                 SVProgressHUD.dismiss()
-                self?.myView.isHidden = true
-                self?.myButton.isHidden = true
-                self?.myLabel.isHidden = true
-                //記事をmap
-                self?.articles = response.map { $0.toArticle() }
-                self?.tableView.reloadData()
-                
-                
-            case .failure(let error):
-                print("失敗：\(error)")
-                SVProgressHUD.dismiss()
-                self?.myView.isHidden = false
-                self?.myButton.isHidden = false
-                self?.myLabel.isHidden = false
+                self.myView.isHidden = true
+                self.myButton.isHidden = true
+                self.myLabel.isHidden = true
+                self.articles = response
+//                self.articles = response.map { $0.toArticle() }
+                self.tableView.reloadData()
+            }, onError: { (error) in
+                print("error")
             }
-        }
+                )
+        
+        
+        
+        
+        
+        
+//        Session.send(GetNewRequest()) { [weak self] result in
+//            switch result {
+//            case .success(let response):
+//                print("成功：\(response)")
+//
+//
+//
+//
+//                //subviewを消す
+//                SVProgressHUD.dismiss()
+//                self?.myView.isHidden = true
+//                self?.myButton.isHidden = true
+//                self?.myLabel.isHidden = true
+//                //記事をmap
+//                self?.articles = response.map { $0.toArticle() }
+//                self?.tableView.reloadData()
+//
+//
+//            case .failure(let error):
+//                print("失敗：\(error)")
+//                SVProgressHUD.dismiss()
+//                self?.myView.isHidden = false
+//                self?.myButton.isHidden = false
+//                self?.myLabel.isHidden = false
+//            }
+//        }
     }
     
     

@@ -168,7 +168,7 @@ struct GetSearchRequest: QiitaRequest {
     var parameters: Any? {
         return [
             "page": 1,
-            "per_page": 100,
+            "per_page": 3,
             "query": "title:\(query)"
         ]
     }

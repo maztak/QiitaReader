@@ -25,6 +25,8 @@
 		B06CFC0820521EE100C55BB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B06CFC0620521EE100C55BB9 /* Main.storyboard */; };
 		B06CFC0A20521EE100C55BB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B06CFC0920521EE100C55BB9 /* Assets.xcassets */; };
 		B06CFC442052374000C55BB9 /* ReadLaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CFC432052374000C55BB9 /* ReadLaterViewController.swift */; };
+		B07B5C6920AADD1A008A003F /* SessionRx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07B5C6820AADD1A008A003F /* SessionRx.swift */; };
+		B07B5C6B20AADEC5008A003F /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07B5C6A20AADEC5008A003F /* ListViewModel.swift */; };
 		B0B131EF20529284009C2BD1 /* ic_new_releases_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B131EE20529284009C2BD1 /* ic_new_releases_white.png */; };
 		B0B131F120529296009C2BD1 /* ic_trending_up_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B131F020529296009C2BD1 /* ic_trending_up_white.png */; };
 		B0B131F3205292A7009C2BD1 /* ic_access_time_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B131F2205292A7009C2BD1 /* ic_access_time_white.png */; };
@@ -57,6 +59,8 @@
 		B06CFC0E20521EE100C55BB9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B06CFC432052374000C55BB9 /* ReadLaterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadLaterViewController.swift; sourceTree = "<group>"; };
 		B07B5C2920AA8503008A003F /* QiitaReader-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QiitaReader-Bridging-Header.h"; sourceTree = "<group>"; };
+		B07B5C6820AADD1A008A003F /* SessionRx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRx.swift; sourceTree = "<group>"; };
+		B07B5C6A20AADEC5008A003F /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		B0B131EE20529284009C2BD1 /* ic_new_releases_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_new_releases_white.png; path = img/ic_new_releases_white.png; sourceTree = "<group>"; };
 		B0B131F020529296009C2BD1 /* ic_trending_up_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_trending_up_white.png; path = img/ic_trending_up_white.png; sourceTree = "<group>"; };
 		B0B131F2205292A7009C2BD1 /* ic_access_time_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_access_time_white.png; path = img/ic_access_time_white.png; sourceTree = "<group>"; };
@@ -102,6 +106,8 @@
 				B06CFC0620521EE100C55BB9 /* Main.storyboard */,
 				B02BC23C208747E200322445 /* Article.swift */,
 				B0C7A44220523C4A0066C01E /* NewViewController.swift */,
+				B07B5C6820AADD1A008A003F /* SessionRx.swift */,
+				B07B5C6A20AADEC5008A003F /* ListViewModel.swift */,
 				916D264020566137007BC178 /* TrendViewController.swift */,
 				B04498502074D36100438B08 /* SearchViewController.swift */,
 				B06CFC432052374000C55BB9 /* ReadLaterViewController.swift */,
@@ -230,6 +236,8 @@
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TOWebViewController/TOWebViewController.framework",
@@ -244,6 +252,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TOWebViewController.framework",
@@ -279,6 +289,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B07B5C6920AADD1A008A003F /* SessionRx.swift in Sources */,
 				916D264120566137007BC178 /* TrendViewController.swift in Sources */,
 				B04498512074D36100438B08 /* SearchViewController.swift in Sources */,
 				B06CFC442052374000C55BB9 /* ReadLaterViewController.swift in Sources */,
@@ -287,6 +298,7 @@
 				B02FDEDC208DEE7600FA83F9 /* OriginalTabBarController.swift in Sources */,
 				B04F80602068F5B600E43A62 /* ArticleCell.swift in Sources */,
 				B0C7A44320523C4A0066C01E /* NewViewController.swift in Sources */,
+				B07B5C6B20AADEC5008A003F /* ListViewModel.swift in Sources */,
 				B06CFC0320521EE100C55BB9 /* AppDelegate.swift in Sources */,
 				B02BC23B2087475D00322445 /* ArticleCellDelegate.swift in Sources */,
 				B0E87839208D92C200B10147 /* LoginViewController.swift in Sources */,
