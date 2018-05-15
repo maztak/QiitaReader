@@ -25,7 +25,6 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     ///////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
-        SVProgressHUD.show()
         //記事取得
         getArticles()
         //使用するXibとCellのReuseIdentifierを登録する
@@ -53,15 +52,18 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     ///////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
+        SVProgressHUD.show()
         Session.send(GetNewRequest()) { [weak self] result in
             switch result {
             case .success(let response):
                 print("成功：\(response)")
+                SVProgressHUD.dismiss()
                 self?.articles = response.map { $0.toArticle() }
                 self?.tableView.reloadData()
                 
             case .failure(let error):
                 print("失敗：\(error)")
+                SVProgressHUD.showError(withStatus: "ネットワーク通信エラーです")
             }
         }
     }
