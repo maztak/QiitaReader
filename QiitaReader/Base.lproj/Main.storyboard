@@ -271,6 +271,33 @@
             </objects>
             <point key="canvasLocation" x="4284" y="1048"/>
         </scene>
+        <!--Error View Controller-->
+        <scene sceneID="Dws-rN-frB">
+            <objects>
+                <viewController restorationIdentifier="ErrorViewController" storyboardIdentifier="ErrorViewController" id="VSt-nA-lfe" customClass="ErrorViewController" customModule="QiitaReader" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="IiW-6Y-wMN"/>
+                        <viewControllerLayoutGuide type="bottom" id="Vg6-rP-dQm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EFj-0q-YcV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="エラー" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3B2-ZM-CsG">
+                                <rect key="frame" x="166" y="245" width="52" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UPh-lM-fke" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5385" y="1048"/>
+        </scene>
     </scenes>
     <resources>
         <image name="ic_access_time_white.png" width="24" height="24"/>

@@ -21,6 +21,8 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     var searchBar: UISearchBar!
     var articles: [Article] = []
     
+    let myError: Error
+    
     
     ////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
@@ -38,13 +40,15 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     // UINavigationControllerDelegateのメソッド。遷移する直前の処理。
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
         print(viewController)
-        // 遷移先が、AViewControllerだったら……
+        // 遷移先が、OriginalViewControllerだったら……
         if let controller = viewController as? OriginalTabBarController {
-            print("success")
             // インジケータを引っ込める
             SVProgressHUD.dismiss()
             
             // API通信を中止させる
+            Session.cancelRequests(with: GetSearchRequest.self)
+            
+            SessionTaskError.type = myError
         }
     }
 
@@ -98,7 +102,12 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
                 
             case .failure(let error):
                 print("失敗：\(error)")
-                SVProgressHUD.showError(withStatus: "ネットワーク通信エラー")
+//                SVProgressHUD.dismiss()
+//                SVProgressHUD.showError(withStatus: "ネットワーク通信エラー")
+                // エラー画面に遷移
+                let errorViewController = self?.storyboard?.instantiateViewController(withIdentifier: "ErrorViewController") as! ErrorViewController
+                self?.navigationController?.pushViewController(errorViewController, animated: true)
+                
             }
         }
     }
