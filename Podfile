@@ -11,6 +11,7 @@ target 'QiitaReader’ do
   pod 'TagListView', '~> 1.0'
   pod 'RealmSwift'
   pod "Himotoki", "~> 3.1"
+  pod 'SVProgressHUD'
 end
 
 # Workaround for Cocoapods issue #7606

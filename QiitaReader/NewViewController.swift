@@ -11,6 +11,7 @@ import APIKit
 import Himotoki
 import Nuke         //サムネイル画像を表示して、キャッシュまでしてくれる
 import RealmSwift
+import SVProgressHUD
 //po Realm.Configuration.defaultConfiguration.fileURL
 //FinderでShift+Cmd+gで絶対パスを指定
 
@@ -24,6 +25,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     ///////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
+        SVProgressHUD.show()
         //記事取得
         getArticles()
         //使用するXibとCellのReuseIdentifierを登録する
