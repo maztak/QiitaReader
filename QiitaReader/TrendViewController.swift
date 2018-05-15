@@ -16,7 +16,7 @@ import SVProgressHUD
 //FinderでShift+Cmd+gで絶対パスを指定
 
 
-class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
+class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UINavigationControllerDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     var articles: [Article] = []
     var refreshControl: UIRefreshControl!
@@ -121,13 +121,18 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
-    /* リトライボタンイベント */
+    /* ボタンイベント */
     @objc func onClickMyButton(sender: UIButton) {
         // リトライ処理
         print("ログインボタンタップ")
         self.myView.isHidden = true
         self.myButton.isHidden = true
         self.myLabel.isHidden = true
+        
+        let loginViewController: LoginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        self.navigationController?.pushViewController(loginViewController, animated: true)
+        
+        
     }
     
     
@@ -200,6 +205,22 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //追加した記事をコンソールに出力（確認用）
         print(realmArticle)
     }
+    
+    
+//    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+//        if let _ = viewController as? OriginalTabBarController {
+//            getArticles()
+//        }
+//    }
+//
+//    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+//        print(viewController)
+//        // 遷移先が　ViewControllerだったら……
+//        if let controller = viewController as? OriginalTabBarController {
+//            getArticles()
+//        }
+//    }
+    
     
    
     /*
