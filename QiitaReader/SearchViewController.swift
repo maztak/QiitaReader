@@ -21,9 +21,6 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     var searchBar: UISearchBar!
     var articles: [Article] = []
     
-    let myError: Error
-    
-    
     ////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,8 +44,6 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
             
             // API通信を中止させる
             Session.cancelRequests(with: GetSearchRequest.self)
-            
-            SessionTaskError.type = myError
         }
     }
 
@@ -102,11 +97,11 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
                 
             case .failure(let error):
                 print("失敗：\(error)")
-//                SVProgressHUD.dismiss()
+                SVProgressHUD.dismiss()
 //                SVProgressHUD.showError(withStatus: "ネットワーク通信エラー")
-                // エラー画面に遷移
-                let errorViewController = self?.storyboard?.instantiateViewController(withIdentifier: "ErrorViewController") as! ErrorViewController
-                self?.navigationController?.pushViewController(errorViewController, animated: true)
+//                // エラー画面に遷移
+//                let errorViewController = self?.storyboard?.instantiateViewController(withIdentifier: "ErrorViewController") as! ErrorViewController
+//                self?.navigationController?.pushViewController(errorViewController, animated: true)
                 
             }
         }

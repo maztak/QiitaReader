@@ -21,6 +21,10 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     var articles: [Article] = []
     var refreshControl: UIRefreshControl!
     
+    var myView: UIView!
+    var myButton: UIButton!
+    var myLabel: UILabel!
+    
     
     ///////////////////////////////////////////////////////////
 //    override func viewWillAppear(_ animated: Bool) {
@@ -40,6 +44,21 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         self.refreshControl.attributedTitle = NSAttributedString(string: "下に引っ張って更新")
         self.refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
+        
+        // MARK: エラーView
+        // Viewを生成.
+        myView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        // myViewの背景を緑色に設定.
+        myView.backgroundColor = UIColor.green
+        // 透明度を設定.
+        myView.alpha = 0.5
+        // 位置を中心に設定.
+        myView.layer.position = CGPoint(x: self.view.frame.width/2, y: self.view.frame.height/2)
+        // myViewを非表示.
+        myView.isHidden = true
+        // myViewをviewに追加.
+        self.view.addSubview(myView)
+        
     }
     
     @objc func refresh() {
@@ -64,14 +83,68 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
             case .success(let response):
                 print("成功：\(response)")
                 SVProgressHUD.dismiss()
+                self?.myView.isHidden = true
+                self?.myButton.isHidden = true
+                self?.myLabel.isHidden = true
+                
                 self?.articles = response.map { $0.toArticle() }
                 self?.tableView.reloadData()
                 
+                
             case .failure(let error):
                 print("失敗：\(error)")
-                SVProgressHUD.showError(withStatus: "ネットワーク通信エラー")
+//                SVProgressHUD.showError(withStatus: "ネットワーク通信エラー")
+                
+                SVProgressHUD.dismiss()
+                // Viewを生成.
+                self?.myView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 150))
+                // myViewの背景を緑色に設定.
+                self?.myView.backgroundColor = UIColor.green
+                // 透明度を設定.
+                self?.myView.alpha = 0.5
+                // 位置を中心に設定.
+                self?.myView.layer.position = CGPoint(x: (self?.view.frame.width)!/2, y: (self?.view.frame.height)!/2)
+                
+                // ボタンを生成
+                self?.myButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
+                self?.myButton.backgroundColor = UIColor.red
+                self?.myButton.layer.position = CGPoint(x: (self?.myView.frame.width)!/2, y: (self?.myView.frame.height)!-50)
+                self?.myButton.setTitle("リトライ", for: .normal)
+                self?.myButton.setTitleColor(UIColor.blue, for: .normal)
+                self?.myButton.addTarget(self, action: #selector(self?.onClickMyButton), for: .touchUpInside)
+                
+                //ラベルを生成
+                self?.myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
+//                self?.myLabel.backgroundColor = UIColor.blue
+                self?.myLabel.layer.position = CGPoint(x: (self?.myView.frame.width)!/2, y: (self?.myView.frame.height)!-100)
+                self?.myLabel.textAlignment = NSTextAlignment.center
+                self?.myLabel.text = "読み込みに失敗しました"
+//                self?.myLabel.textColor = UIColor.white
+
+                
+                // myViewをviewに追加.
+                self?.view.addSubview((self?.myView)!)
+                
+                // ボタンをviewに追加.
+                self?.myView.addSubview((self?.myButton)!)
+                
+                // ラベルを追加
+                self?.myView.addSubview((self?.myLabel)!)
+
             }
         }
+    }
+    
+    
+    /* ボタンイベント */
+    @objc func onClickMyButton(sender: UIButton) {
+        // リトライ処理
+        print("Retry")
+        self.myView.isHidden = true
+        self.myButton.isHidden = true
+        self.myLabel.isHidden = true
+        SVProgressHUD.show()
+        getArticles()
     }
     
     
