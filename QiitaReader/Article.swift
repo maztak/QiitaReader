@@ -73,7 +73,7 @@ struct NewArticle: Himotoki.Decodable { //NewArticleOfNewItems
                 authorName: authorName,
                 authorImageUrl: authorImageUrl,
                 goodCnt: goodCnt,
-                tags: tags.map {$0.name },
+                tags: tags.map { $0.name },
                 url: url,
                 id: id
             )

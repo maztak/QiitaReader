@@ -16,10 +16,11 @@ import SVProgressHUD
 //FinderでShift+Cmd+gで絶対パスを指定
 
 
-class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
+class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, UINavigationControllerDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     var searchBar: UISearchBar!
     var articles: [Article] = []
+    
     
     ////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
@@ -30,6 +31,21 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         searchBar.enablesReturnKeyAutomatically = true
         //tableViewに（Reusableな？）Cellを登録
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
+        // BViewController自身をDelegate委託相手とする
+        navigationController?.delegate = self
+    }
+    
+    // UINavigationControllerDelegateのメソッド。遷移する直前の処理。
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        print(viewController)
+        // 遷移先が、AViewControllerだったら……
+        if let controller = viewController as? OriginalTabBarController {
+            print("success")
+            // インジケータを引っ込める
+            SVProgressHUD.dismiss()
+            
+            // API通信を中止させる
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -51,6 +67,8 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
             searchBar.becomeFirstResponder()
         }
     }
+    
+    
     
     
     

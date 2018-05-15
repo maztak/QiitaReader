@@ -23,10 +23,11 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     ///////////////////////////////////////////////////////////
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(false)
-        getArticles()
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(false)
+//        SVProgressHUD.dismiss()
+//        getArticles()
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +58,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     ///////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
-        SVProgressHUD.show()
+//        SVProgressHUD.show()
         Session.send(GetNewRequest()) { [weak self] result in
             switch result {
             case .success(let response):
