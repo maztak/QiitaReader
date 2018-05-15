@@ -23,6 +23,11 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     
     
     ///////////////////////////////////////////////////////////
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        getArticles()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //記事取得
