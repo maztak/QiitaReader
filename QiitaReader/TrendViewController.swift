@@ -11,6 +11,7 @@ import APIKit
 import Himotoki
 import Nuke
 import RealmSwift
+import SVProgressHUD
 //po Realm.Configuration.defaultConfiguration.fileURL
 //FinderでShift+Cmd+gで絶対パスを指定
 
@@ -56,15 +57,18 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     ///////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
+        SVProgressHUD.show()
         Session.send(GetTrendRequest()) { [weak self] result in
             switch result {
             case .success(let response):
                 print("成功：\(response)")
+                SVProgressHUD.dismiss()
                 self?.articles = response.toArticle()
                 self?.tableView.reloadData()
                 
             case .failure(let error):
                 print("失敗：\(error)")
+                SVProgressHUD.showError(withStatus: "ネットワーク通信エラー")
             }
         }
     }

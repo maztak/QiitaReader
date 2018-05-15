@@ -63,7 +63,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                 
             case .failure(let error):
                 print("失敗：\(error)")
-                SVProgressHUD.showError(withStatus: "ネットワーク通信エラーです")
+                SVProgressHUD.showError(withStatus: "ネットワーク通信エラー")
             }
         }
     }
