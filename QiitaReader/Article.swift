@@ -73,7 +73,7 @@ struct NewArticle: Himotoki.Decodable { //NewArticleOfNewItems
                 authorName: authorName,
                 authorImageUrl: authorImageUrl,
                 goodCnt: goodCnt,
-                tags: tags.map {$0.name },
+                tags: tags.map { $0.name },
                 url: url,
                 id: id
             )
@@ -168,7 +168,7 @@ struct GetSearchRequest: QiitaRequest {
     var parameters: Any? {
         return [
             "page": 1,
-            "per_page": 20,
+            "per_page": 100,
             "query": "title:\(query)"
         ]
     }

@@ -20,6 +20,11 @@ class ReadLaterViewController: UIViewController, UITableViewDelegate, UITableVie
     var refreshControl: UIRefreshControl!
     
     ////////////////////////////////////////////////////////////
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(false)
+        getArticles()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //記事取得

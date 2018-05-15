@@ -15,6 +15,8 @@ class DetailViewController: TOWebViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.navigationItem.title = ""
+        
         self.webview.frame = self.view.bounds
         self.webview.delegate = self;
         self.view.addSubview(self.webview)

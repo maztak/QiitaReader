@@ -11,15 +11,18 @@ import APIKit
 import Himotoki
 import Nuke
 import RealmSwift
+import SVProgressHUD
 //po Realm.Configuration.defaultConfiguration.fileURL
 //FinderでShift+Cmd+gで絶対パスを指定
 
 
-class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
+class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, UINavigationControllerDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     var articles: [Article] = []
     var refreshControl: UIRefreshControl!
-    
+    var myView: UIView!
+    var myButton: UIButton!
+    var myLabel: UILabel!
     
     
     ///////////////////////////////////////////////////////
@@ -34,6 +37,43 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.refreshControl.attributedTitle = NSAttributedString(string: "下に引っ張って更新")
         self.refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
+        
+        // Viewを生成.
+        self.myView = UIView(frame: CGRect(x: 0, y: 0, width: 220, height: 135))
+        // myViewの背景を緑色に設定.
+        self.myView.backgroundColor = UIColor.init(red: 200, green: 200, blue: 200, alpha: 1.0)
+        // 透明度を設定.
+        //                self?.myView.alpha = 0.85
+        // 位置を中心に設定.
+        self.myView.layer.position = CGPoint(x: (self.view.frame.width)/2, y: (self.view.frame.height)/2)
+        // 角丸
+        self.myView.layer.cornerRadius = 20.0
+        self.myView.isHidden = true
+        
+        // ボタンを生成
+        self.myButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
+        //                self?.myButton.backgroundColor = UIColor.red
+        self.myButton.layer.position = CGPoint(x: (self.myView.frame.width)/2, y: (self.myView.frame.height)-50)
+        self.myButton.setTitle("ログイン", for: .normal)
+        self.myButton.setTitleColor(UIColor.blue, for: .normal)
+        self.myButton.addTarget(self, action: #selector(self.onClickMyButton), for: .touchUpInside)
+        self.myButton.isHidden = true
+        
+        //ラベルを生成
+        self.myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
+        //                self?.myLabel.backgroundColor = UIColor.blue
+        self.myLabel.layer.position = CGPoint(x: (self.myView.frame.width)/2, y: (self.myView.frame.height)-100)
+        self.myLabel.textAlignment = NSTextAlignment.center
+        self.myLabel.text = "ログインしてください"
+        self.myLabel.textColor = UIColor.black
+        self.myLabel.isHidden = true
+        
+        // myViewをviewに追加.
+        self.view.addSubview(self.myView)
+        // ボタンをviewに追加.
+        self.myView.addSubview(self.myButton)
+        // ラベルを追加
+        self.myView.addSubview(self.myLabel)
     }
 
     
@@ -56,17 +96,43 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
     ///////////////////////////////////////////////////////
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
+        SVProgressHUD.show()
         Session.send(GetTrendRequest()) { [weak self] result in
             switch result {
             case .success(let response):
                 print("成功：\(response)")
+                //subviewを消す
+                SVProgressHUD.dismiss()
+                self?.myView.isHidden = true
+                self?.myButton.isHidden = true
+                self?.myLabel.isHidden = true
+                //
                 self?.articles = response.toArticle()
                 self?.tableView.reloadData()
                 
             case .failure(let error):
                 print("失敗：\(error)")
+                SVProgressHUD.dismiss()
+                self?.myView.isHidden = false
+                self?.myButton.isHidden = false
+                self?.myLabel.isHidden = false
+
             }
         }
+    }
+    
+    /* ボタンイベント */
+    @objc func onClickMyButton(sender: UIButton) {
+        // リトライ処理
+        print("ログインボタンタップ")
+        self.myView.isHidden = true
+        self.myButton.isHidden = true
+        self.myLabel.isHidden = true
+        
+        let loginViewController: LoginViewController = self.storyboard?.instantiateViewController(withIdentifier: "LoginViewController") as! LoginViewController
+        self.navigationController?.pushViewController(loginViewController, animated: true)
+        
+        
     }
     
     
@@ -139,6 +205,22 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         //追加した記事をコンソールに出力（確認用）
         print(realmArticle)
     }
+    
+    
+//    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+//        if let _ = viewController as? OriginalTabBarController {
+//            getArticles()
+//        }
+//    }
+//
+//    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+//        print(viewController)
+//        // 遷移先が　ViewControllerだったら……
+//        if let controller = viewController as? OriginalTabBarController {
+//            getArticles()
+//        }
+//    }
+    
     
    
     /*

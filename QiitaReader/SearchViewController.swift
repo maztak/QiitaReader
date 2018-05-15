@@ -11,11 +11,12 @@ import APIKit
 import Himotoki
 import Nuke
 import RealmSwift
+import SVProgressHUD
 //po Realm.Configuration.defaultConfiguration.fileURL
 //FinderでShift+Cmd+gで絶対パスを指定
 
 
-class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, ArticleCellDelegate {
+class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate, UINavigationControllerDelegate, ArticleCellDelegate {
     @IBOutlet weak var tableView: UITableView!
     var searchBar: UISearchBar!
     var articles: [Article] = []
@@ -29,6 +30,21 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         searchBar.enablesReturnKeyAutomatically = true
         //tableViewに（Reusableな？）Cellを登録
         self.tableView.register(UINib(nibName: "ArticleCell", bundle: nil), forCellReuseIdentifier: "ArticleCell")
+        // BViewController自身をDelegate委託相手とする
+        navigationController?.delegate = self
+    }
+    
+    // UINavigationControllerDelegateのメソッド。遷移する直前の処理。
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        print(viewController)
+        // 遷移先が、OriginalViewControllerだったら……
+        if let controller = viewController as? OriginalTabBarController {
+            // インジケータを引っ込める
+            SVProgressHUD.dismiss()
+            
+            // API通信を中止させる
+            Session.cancelRequests(with: GetSearchRequest.self)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,6 +69,8 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     
     
     
+    
+    
     ///////////////////////////////////////////////////////
     // 各種メソッド
     ///////////////////////////////////////////////////////
@@ -66,17 +84,25 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
 
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
+        SVProgressHUD.show()
         let searchQuery: String = searchBar.text!
         
         Session.send(GetSearchRequest(query: searchQuery)) { [weak self] result in
             switch result {
             case .success(let response):
                 print("成功：\(response)")
+                SVProgressHUD.dismiss()
                 self?.articles = response.map { $0.toArticle() }
                 self?.tableView.reloadData()
                 
             case .failure(let error):
                 print("失敗：\(error)")
+                SVProgressHUD.dismiss()
+//                SVProgressHUD.showError(withStatus: "ネットワーク通信エラー")
+//                // エラー画面に遷移
+//                let errorViewController = self?.storyboard?.instantiateViewController(withIdentifier: "ErrorViewController") as! ErrorViewController
+//                self?.navigationController?.pushViewController(errorViewController, animated: true)
+                
             }
         }
     }
