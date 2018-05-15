@@ -45,19 +45,58 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         self.refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
         
-        // MARK: エラーView
+//        // MARK: エラーView
+//        // Viewを生成.
+//        myView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+//        // myViewの背景を緑色に設定.
+//        myView.backgroundColor = UIColor.green
+//        // 透明度を設定.
+//        myView.alpha = 0.5
+//        // 位置を中心に設定.
+//        myView.layer.position = CGPoint(x: self.view.frame.width/2, y: self.view.frame.height/2)
+//        // myViewを非表示.
+//        myView.isHidden = true
+//        // myViewをviewに追加.
+//        self.view.addSubview(myView)
+
+        
         // Viewを生成.
-        myView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        self.myView = UIView(frame: CGRect(x: 0, y: 0, width: 220, height: 135))
         // myViewの背景を緑色に設定.
-        myView.backgroundColor = UIColor.green
+        self.myView.backgroundColor = UIColor.init(red: 200, green: 200, blue: 200, alpha: 1.0)
         // 透明度を設定.
-        myView.alpha = 0.5
+        //                self?.myView.alpha = 0.85
         // 位置を中心に設定.
-        myView.layer.position = CGPoint(x: self.view.frame.width/2, y: self.view.frame.height/2)
-        // myViewを非表示.
-        myView.isHidden = true
+        self.myView.layer.position = CGPoint(x: (self.view.frame.width)/2, y: (self.view.frame.height)/2)
+        // 角丸
+        self.myView.layer.cornerRadius = 20.0
+        self.myView.isHidden = true
+        
+        // ボタンを生成
+        self.myButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
+        //                self?.myButton.backgroundColor = UIColor.red
+        self.myButton.layer.position = CGPoint(x: (self.myView.frame.width)/2, y: (self.myView.frame.height)-50)
+        self.myButton.setTitle("リトライ", for: .normal)
+        self.myButton.setTitleColor(UIColor.blue, for: .normal)
+        self.myButton.addTarget(self, action: #selector(self.onClickMyButton), for: .touchUpInside)
+        self.myButton.isHidden = true
+        
+        //ラベルを生成
+        self.myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
+        //                self?.myLabel.backgroundColor = UIColor.blue
+        self.myLabel.layer.position = CGPoint(x: (self.myView.frame.width)/2, y: (self.myView.frame.height)-100)
+        self.myLabel.textAlignment = NSTextAlignment.center
+        self.myLabel.text = "ネットワーク通信エラー"
+        self.myLabel.textColor = UIColor.black
+        self.myLabel.isHidden = true
+        
         // myViewをviewに追加.
-        self.view.addSubview(myView)
+        self.view.addSubview(self.myView)
+        // ボタンをviewに追加.
+        self.myView.addSubview(self.myButton)
+        // ラベルを追加
+        self.myView.addSubview(self.myLabel)
+
         
     }
     
@@ -93,44 +132,12 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                 
             case .failure(let error):
                 print("失敗：\(error)")
-//                SVProgressHUD.showError(withStatus: "ネットワーク通信エラー")
-                
                 SVProgressHUD.dismiss()
-                // Viewを生成.
-                self?.myView = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 150))
-                // myViewの背景を緑色に設定.
-                self?.myView.backgroundColor = UIColor.green
-                // 透明度を設定.
-                self?.myView.alpha = 0.5
-                // 位置を中心に設定.
-                self?.myView.layer.position = CGPoint(x: (self?.view.frame.width)!/2, y: (self?.view.frame.height)!/2)
+                self?.myView.isHidden = false
+                self?.myButton.isHidden = false
+                self?.myLabel.isHidden = false
                 
-                // ボタンを生成
-                self?.myButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
-                self?.myButton.backgroundColor = UIColor.red
-                self?.myButton.layer.position = CGPoint(x: (self?.myView.frame.width)!/2, y: (self?.myView.frame.height)!-50)
-                self?.myButton.setTitle("リトライ", for: .normal)
-                self?.myButton.setTitleColor(UIColor.blue, for: .normal)
-                self?.myButton.addTarget(self, action: #selector(self?.onClickMyButton), for: .touchUpInside)
-                
-                //ラベルを生成
-                self?.myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
-//                self?.myLabel.backgroundColor = UIColor.blue
-                self?.myLabel.layer.position = CGPoint(x: (self?.myView.frame.width)!/2, y: (self?.myView.frame.height)!-100)
-                self?.myLabel.textAlignment = NSTextAlignment.center
-                self?.myLabel.text = "読み込みに失敗しました"
-//                self?.myLabel.textColor = UIColor.white
-
-                
-                // myViewをviewに追加.
-                self?.view.addSubview((self?.myView)!)
-                
-                // ボタンをviewに追加.
-                self?.myView.addSubview((self?.myButton)!)
-                
-                // ラベルを追加
-                self?.myView.addSubview((self?.myLabel)!)
-
+               
             }
         }
     }
