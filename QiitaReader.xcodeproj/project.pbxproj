@@ -26,7 +26,6 @@
 		B06CFC0A20521EE100C55BB9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B06CFC0920521EE100C55BB9 /* Assets.xcassets */; };
 		B06CFC442052374000C55BB9 /* ReadLaterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B06CFC432052374000C55BB9 /* ReadLaterViewController.swift */; };
 		B07B5C6920AADD1A008A003F /* SessionRx.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07B5C6820AADD1A008A003F /* SessionRx.swift */; };
-		B07B5C6B20AADEC5008A003F /* ListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07B5C6A20AADEC5008A003F /* ListViewModel.swift */; };
 		B07B5C7120ABD714008A003F /* MakeAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B07B5C7020ABD714008A003F /* MakeAlertView.swift */; };
 		B0B131EF20529284009C2BD1 /* ic_new_releases_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B131EE20529284009C2BD1 /* ic_new_releases_white.png */; };
 		B0B131F120529296009C2BD1 /* ic_trending_up_white.png in Resources */ = {isa = PBXBuildFile; fileRef = B0B131F020529296009C2BD1 /* ic_trending_up_white.png */; };
@@ -61,7 +60,6 @@
 		B06CFC432052374000C55BB9 /* ReadLaterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadLaterViewController.swift; sourceTree = "<group>"; };
 		B07B5C2920AA8503008A003F /* QiitaReader-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QiitaReader-Bridging-Header.h"; sourceTree = "<group>"; };
 		B07B5C6820AADD1A008A003F /* SessionRx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRx.swift; sourceTree = "<group>"; };
-		B07B5C6A20AADEC5008A003F /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
 		B07B5C6C20ABC736008A003F /* RxPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RxPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B07B5C7020ABD714008A003F /* MakeAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeAlertView.swift; sourceTree = "<group>"; };
 		B0B131EE20529284009C2BD1 /* ic_new_releases_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_new_releases_white.png; sourceTree = "<group>"; };
@@ -110,7 +108,6 @@
 				B02BC23C208747E200322445 /* Article.swift */,
 				B07B5C6820AADD1A008A003F /* SessionRx.swift */,
 				B0C7A44220523C4A0066C01E /* NewViewController.swift */,
-				B07B5C6A20AADEC5008A003F /* ListViewModel.swift */,
 				916D264020566137007BC178 /* TrendViewController.swift */,
 				B04498502074D36100438B08 /* SearchViewController.swift */,
 				B06CFC432052374000C55BB9 /* ReadLaterViewController.swift */,
@@ -312,7 +309,6 @@
 				B02FDEDC208DEE7600FA83F9 /* OriginalTabBarController.swift in Sources */,
 				B04F80602068F5B600E43A62 /* ArticleCell.swift in Sources */,
 				B0C7A44320523C4A0066C01E /* NewViewController.swift in Sources */,
-				B07B5C6B20AADEC5008A003F /* ListViewModel.swift in Sources */,
 				B06CFC0320521EE100C55BB9 /* AppDelegate.swift in Sources */,
 				B02BC23B2087475D00322445 /* ArticleCellDelegate.swift in Sources */,
 				B0E87839208D92C200B10147 /* LoginViewController.swift in Sources */,
