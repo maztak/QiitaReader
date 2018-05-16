@@ -3,5 +3,12 @@
 import UIKit
 import RxSwift
 
-var str = "Hello, playground"
 
+
+//let a = Observable.just(1)
+//
+//a.subscribe(onNext: { (event) in
+//    print("流れたで:\(event)")
+//}, onError: { (error) in
+//    print("エラーやで:\(error)")
+//})

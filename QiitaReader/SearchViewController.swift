@@ -92,14 +92,10 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         // TODO: ObserbleZip関数で5回Sessionを送ってみる -
             Observable
                 .zip(
-                    // [[item, item, item], [item, item, item], [item, item, item]]
-                    Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 1)),
-                    Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 2)),
-                    Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 3))
-//                    Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 4)),
-//                    Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 5))
-                ) { $0 + $1 + $2 } //この時点で[item, item, item, item, item, item]
-                // Observable<Array>という1つのデータから、複数のObservable<SerchArticle>のデータにバラす（ラプルとかなじゃくRxデータとして）
+                    (1...5).map {Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: $0))}
+                    ) //{ $0 + $1 }
+                // Observable<Array>という1つのデータから、複数のObservable<SerchArticle>のデータにバラす（タプルとかなじゃくRxデータとして）
+                .flatMap { Observable.from($0) }
                 .flatMap { Observable.from($0) }
                 // SearchArticleをArticle型に変換
                 .map { $0.toArticle() }
