@@ -164,8 +164,6 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         self.myView = UIView(frame: CGRect(x: 0, y: 0, width: 220, height: 135))
         // myViewの背景を緑色に設定.
         self.myView.backgroundColor = UIColor.init(red: 200, green: 200, blue: 200, alpha: 1.0)
-        // 透明度を設定.
-        //                self?.myView.alpha = 0.85
         // 位置を中心に設定.
         self.myView.layer.position = CGPoint(x: (self.view.frame.width)/2, y: (self.view.frame.height)/2)
         // 角丸
@@ -174,7 +172,6 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         // ボタンを生成
         self.myButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
-        //                self?.myButton.backgroundColor = UIColor.red
         self.myButton.layer.position = CGPoint(x: (self.myView.frame.width)/2, y: (self.myView.frame.height)-50)
         self.myButton.setTitle("ログイン", for: .normal)
         self.myButton.setTitleColor(UIColor.blue, for: .normal)
@@ -183,7 +180,6 @@ class TrendViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         //ラベルを生成
         self.myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
-        //                self?.myLabel.backgroundColor = UIColor.blue
         self.myLabel.layer.position = CGPoint(x: (self.myView.frame.width)/2, y: (self.myView.frame.height)-100)
         self.myLabel.textAlignment = NSTextAlignment.center
         self.myLabel.text = "ログインしてください"

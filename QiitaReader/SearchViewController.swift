@@ -94,7 +94,9 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
             .zip([
                 Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 1)),
                 Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 2)),
-                Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 3))
+                Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 3)),
+                Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 4)),
+                Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 5))
                 ])
             .subscribe(onNext: { (response) in
                 print("onNextで流れてきたよ\(response)")
@@ -104,22 +106,9 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
                 self.tableView.reloadData()
             }, onError: { (error) in
                 print("errorが流れてきたよ")
+                SVProgressHUD.showError(withStatus: "ネットワーク通信エラー")
             }
         )
-
-//        Session.send(GetSearchRequest(query: searchQuery)) { [weak self] result in
-//            switch result {
-//            case .success(let response):
-//                print("成功：\(response)")
-//                SVProgressHUD.dismiss()
-//                self?.articles = response.map { $0.toArticle() }
-//                self?.tableView.reloadData()
-//
-//            case .failure(let error):
-//                print("失敗：\(error)")
-//                SVProgressHUD.dismiss()
-//            }
-//        }
     }
     
     

@@ -57,7 +57,7 @@ struct NewArticle: Himotoki.Decodable { //NewArticleOfNewItems
     
     static func decode(_ e: Extractor) throws -> NewArticle {
         return try NewArticle(
-            title: e <| "ttle",
+            title: e <| "title",
             authorName: e <| ["user", "id"],
             authorImageUrl: e <| ["user", "profile_image_url"],
             goodCnt: e <| "likes_count",
@@ -169,7 +169,7 @@ struct GetSearchRequest: QiitaRequest {
     var parameters: Any? {
         return [
             "page": page,
-            "per_page": 3,
+            "per_page": 100,
             "query": "title:\(query)"
         ]
     }
