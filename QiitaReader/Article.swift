@@ -57,7 +57,7 @@ struct NewArticle: Himotoki.Decodable { //NewArticleOfNewItems
     
     static func decode(_ e: Extractor) throws -> NewArticle {
         return try NewArticle(
-            title: e <| "title",
+            title: e <| "ttle",
             authorName: e <| ["user", "id"],
             authorImageUrl: e <| ["user", "profile_image_url"],
             goodCnt: e <| "likes_count",

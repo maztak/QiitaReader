@@ -24,9 +24,6 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     var myView: UIView!
     var myButton: UIButton!
     var myLabel: UILabel!
-    
-    
-    
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -41,43 +38,44 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         self.refreshControl.addTarget(self, action: #selector(refresh), for: UIControlEvents.valueChanged)
         self.tableView.addSubview(refreshControl)
         
-        // Viewを生成.
-        self.myView = UIView(frame: CGRect(x: 0, y: 0, width: 220, height: 135))
-        // myViewの背景を緑色に設定.
-        self.myView.backgroundColor = UIColor.init(red: 200, green: 200, blue: 200, alpha: 1.0)
-        // 透明度を設定.
-        //                self?.myView.alpha = 0.85
-        // 位置を中心に設定.
-        self.myView.layer.position = CGPoint(x: (self.view.frame.width)/2, y: (self.view.frame.height)/2)
-        // 角丸
-        self.myView.layer.cornerRadius = 20.0
-        self.myView.isHidden = true
+        makeAlertView(viewController: self)
+        //        // Viewを生成.
+        //        self.myView = UIView(frame: CGRect(x: 0, y: 0, width: 220, height: 135))
+        //        // myViewの背景を緑色に設定.
+        //        self.myView.backgroundColor = UIColor.init(red: 200, green: 200, blue: 200, alpha: 1.0)
+        //        // 透明度を設定.
+        //        //                self?.myView.alpha = 0.85
+        //        // 位置を中心に設定.
+        //        self.myView.layer.position = CGPoint(x: (self.view.frame.width)/2, y: (self.view.frame.height)/2)
+        //        // 角丸
+        //        self.myView.layer.cornerRadius = 20.0
+        //        self.myView.isHidden = true
+        //
+        //        // ボタンを生成
+        //        self.myButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
+        //        //                self?.myButton.backgroundColor = UIColor.red
+        //        self.myButton.layer.position = CGPoint(x: (self.myView.frame.width)/2, y: (self.myView.frame.height)-50)
+        //        self.myButton.setTitle("リトライ", for: .normal)
+        //        self.myButton.setTitleColor(UIColor.blue, for: .normal)
+        //        self.myButton.addTarget(self, action: #selector(self.onClickMyButton), for: .touchUpInside)
+        //        self.myButton.isHidden = true
+        //
+        //        //ラベルを生成
+        //        self.myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
+        //        //                self?.myLabel.backgroundColor = UIColor.blue
+        //        self.myLabel.layer.position = CGPoint(x: (self.myView.frame.width)/2, y: (self.myView.frame.height)-100)
+        //        self.myLabel.textAlignment = NSTextAlignment.center
+        //        self.myLabel.text = "ネットワーク通信エラー"
+        //        self.myLabel.textColor = UIColor.black
+        //        self.myLabel.isHidden = true
+        //
+//        // myViewをviewに追加.
+//        self.view.addSubview(self.myView!)
+//        // ボタンをviewに追加.
+//        self.myView?.addSubview(self.myButton!)
+//        // ラベルを追加
+//        self.myView?.addSubview(self.myLabel!)
         
-        // ボタンを生成
-        self.myButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
-        //                self?.myButton.backgroundColor = UIColor.red
-        self.myButton.layer.position = CGPoint(x: (self.myView.frame.width)/2, y: (self.myView.frame.height)-50)
-        self.myButton.setTitle("リトライ", for: .normal)
-        self.myButton.setTitleColor(UIColor.blue, for: .normal)
-        self.myButton.addTarget(self, action: #selector(self.onClickMyButton), for: .touchUpInside)
-        self.myButton.isHidden = true
-        
-        //ラベルを生成
-        self.myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
-        //                self?.myLabel.backgroundColor = UIColor.blue
-        self.myLabel.layer.position = CGPoint(x: (self.myView.frame.width)/2, y: (self.myView.frame.height)-100)
-        self.myLabel.textAlignment = NSTextAlignment.center
-        self.myLabel.text = "ネットワーク通信エラー"
-        self.myLabel.textColor = UIColor.black
-        self.myLabel.isHidden = true
-        
-        // myViewをviewに追加.
-        self.view.addSubview(self.myView)
-        // ボタンをviewに追加.
-        self.myView.addSubview(self.myButton)
-        // ラベルを追加
-        self.myView.addSubview(self.myLabel)
-
         
     }
     
@@ -100,7 +98,7 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
         SVProgressHUD.show()
         //RxSwiftを使って
         Session.rx_sendRequest(request: GetNewRequest())
-//            .map { $0.map{ $0.toArticle() } }
+            //            .map { $0.map{ $0.toArticle() } }
             .subscribe(onNext: { (response) in
                 print("onNext")
                 //subviewを消す
@@ -108,47 +106,90 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                 self.myView.isHidden = true
                 self.myButton.isHidden = true
                 self.myLabel.isHidden = true
-//                self.articles = response
+                //                self.articles = response
                 self.articles = response.map { $0.toArticle() }
                 self.tableView.reloadData()
             }, onError: { (error) in
                 print("error")
+                SVProgressHUD.dismiss()
+                self.myView.isHidden = false
+                self.myButton.isHidden = false
+                self.myLabel.isHidden = false
             }
-                )
+        )
         
         
         
         
         
         
-//        Session.send(GetNewRequest()) { [weak self] result in
-//            switch result {
-//            case .success(let response):
-//                print("成功：\(response)")
-//
-//
-//
-//
-//                //subviewを消す
-//                SVProgressHUD.dismiss()
-//                self?.myView.isHidden = true
-//                self?.myButton.isHidden = true
-//                self?.myLabel.isHidden = true
-//                //記事をmap
-//                self?.articles = response.map { $0.toArticle() }
-//                self?.tableView.reloadData()
-//
-//
-//            case .failure(let error):
-//                print("失敗：\(error)")
-//                SVProgressHUD.dismiss()
-//                self?.myView.isHidden = false
-//                self?.myButton.isHidden = false
-//                self?.myLabel.isHidden = false
-//            }
-//        }
+        //        Session.send(GetNewRequest()) { [weak self] result in
+        //            switch result {
+        //            case .success(let response):
+        //                print("成功：\(response)")
+        //
+        //
+        //
+        //
+        //                //subviewを消す
+        //                SVProgressHUD.dismiss()
+        //                self?.myView.isHidden = true
+        //                self?.myButton.isHidden = true
+        //                self?.myLabel.isHidden = true
+        //                //記事をmap
+        //                self?.articles = response.map { $0.toArticle() }
+        //                self?.tableView.reloadData()
+        //
+        //
+        //            case .failure(let error):
+        //                print("失敗：\(error)")
+        //                SVProgressHUD.dismiss()
+        //                self?.myView.isHidden = false
+        //                self?.myButton.isHidden = false
+        //                self?.myLabel.isHidden = false
+        //            }
+        //        }
     }
     
+    
+    func makeAlertView(viewController: NewViewController) {
+        // Viewを生成.
+        viewController.myView = UIView(frame: CGRect(x: 0, y: 0, width: 220, height: 135))
+        // myViewの背景を緑色に設定.
+        viewController.myView.backgroundColor = UIColor.init(red: 200, green: 200, blue: 200, alpha: 1.0)
+        // 透明度を設定.
+        //                viewController?.myView.alpha = 0.85
+        // 位置を中心に設定.
+        viewController.myView.layer.position = CGPoint(x: (viewController.view.frame.width)/2, y: (viewController.view.frame.height)/2)
+        // 角丸
+        viewController.myView.layer.cornerRadius = 20.0
+        viewController.myView.isHidden = true
+        
+        // ボタンを生成
+        viewController.myButton = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 30))
+        //                viewController?.myButton.backgroundColor = UIColor.red
+        viewController.myButton.layer.position = CGPoint(x: (viewController.myView.frame.width)/2, y: (viewController.myView.frame.height)-50)
+        viewController.myButton.setTitle("リトライ", for: .normal)
+        viewController.myButton.setTitleColor(UIColor.blue, for: .normal)
+        viewController.myButton.addTarget(viewController, action: #selector(viewController.onClickMyButton), for: .touchUpInside)
+        viewController.myButton.isHidden = true
+        
+        //ラベルを生成
+        viewController.myLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 30))
+        //                viewController?.myLabel.backgroundColor = UIColor.blue
+        viewController.myLabel.layer.position = CGPoint(x: (viewController.myView.frame.width)/2, y: (viewController.myView.frame.height)-100)
+        viewController.myLabel.textAlignment = NSTextAlignment.center
+        viewController.myLabel.text = "ネットワーク通信エラー"
+        viewController.myLabel.textColor = UIColor.black
+        viewController.myLabel.isHidden = true
+        
+        // myViewをviewに追加.
+        viewController.view.addSubview(viewController.myView)
+        // ボタンをviewに追加.
+        viewController.myView.addSubview(viewController.myButton)
+        // ラベルを追加
+        viewController.myView.addSubview(viewController.myLabel)
+    }
     
     /* リトライボタンイベント */
     @objc func onClickMyButton(sender: UIButton) {
