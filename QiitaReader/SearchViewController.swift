@@ -21,6 +21,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     @IBOutlet weak var tableView: UITableView!
     var searchBar: UISearchBar!
     var articles: [Article] = []
+    let disposeBag = DisposeBag()
     
     ////////////////////////////////////////////////////////////////////
     override func viewDidLoad() {
@@ -46,7 +47,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
             Session.cancelRequests(with: GetSearchRequest.self)
         }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -81,34 +82,40 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         getArticles()
     }
     
-
+    
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
         SVProgressHUD.show()
         let searchQuery: String = searchBar.text!
         
-        //RxSwiftを使って
+        // RxSwiftを使って
         // TODO: ObserbleZip関数で5回Sessionを送ってみる -
-        // SessionRxはノータッチ
-        Observable
-            .zip([
-                Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 1)),
-                Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 2)),
-                Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 3)),
-                Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 4)),
-                Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 5))
-                ])
-            .subscribe(onNext: { (response) in
-                print("onNextで流れてきたよ\(response)")
-                //subviewを消す
-                SVProgressHUD.dismiss()
-                self.articles = response.flatMap { $0.map { $0.toArticle() } }
-                self.tableView.reloadData()
-            }, onError: { (error) in
-                print("errorが流れてきたよ")
-                SVProgressHUD.showError(withStatus: "ネットワーク通信エラー")
-            }
-        )
+            Observable
+                .zip(
+                    // [[item, item, item], [item, item, item], [item, item, item]]
+                    Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 1)),
+                    Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 2)),
+                    Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 3))
+//                    Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 4)),
+//                    Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 5))
+                ) { $0 + $1 + $2 } //この時点で[item, item, item, item, item, item]
+                // Observable<Array>という1つのデータから、複数のObservable<SerchArticle>のデータにバラす（ラプルとかなじゃくRxデータとして）
+                .flatMap { Observable.from($0) }
+                // SearchArticleをArticle型に変換
+                .map { $0.toArticle() }
+                // 各Observable<Article>データをまとめて、1つのObservable<Array>というデータにする
+                .toArray()
+                //購読
+                .subscribe(
+                    onNext: { (response) in
+                        print("onNextで流れてきたよ\(response)")
+                        SVProgressHUD.dismiss()
+                        self.articles = response
+                        self.tableView.reloadData() },
+                    onError: { (error) in
+                        print("errorが流れてきたよ\(error)")
+                        SVProgressHUD.showError(withStatus: "ネットワーク通信エラー")})
+                .disposed(by: disposeBag)
     }
     
     
@@ -147,7 +154,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     }
     
     
- 
+    
     /*記事詳細detailViewに遷移させるメソッド*/
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailViewController = self.storyboard?.instantiateViewController(withIdentifier: "DetailViewController") as! DetailViewController
@@ -184,16 +191,16 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         //追加した記事をコンソールに出力（確認用）
         print(realmArticle)
     }
-
-
+    
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
 }
