@@ -86,7 +86,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         SVProgressHUD.show()
         let searchQuery: String = searchBar.text!
         
-        // MARK: ToDo: ObserbleZip関数で5回Sessionを送ってみる
+        // TODO: ObserbleZip関数で5回Sessionを送ってみる -
         // SessionRxはノータッチ
 
         Session.send(GetSearchRequest(query: searchQuery)) { [weak self] result in
@@ -101,10 +101,6 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
                 print("失敗：\(error)")
                 SVProgressHUD.dismiss()
 //                SVProgressHUD.showError(withStatus: "ネットワーク通信エラー")
-//                // エラー画面に遷移
-//                let errorViewController = self?.storyboard?.instantiateViewController(withIdentifier: "ErrorViewController") as! ErrorViewController
-//                self?.navigationController?.pushViewController(errorViewController, animated: true)
-                
             }
         }
     }
