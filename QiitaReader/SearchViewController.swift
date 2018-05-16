@@ -86,23 +86,37 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         SVProgressHUD.show()
         let searchQuery: String = searchBar.text!
         
+        
+        
         // TODO: ObserbleZip関数で5回Sessionを送ってみる -
         // SessionRxはノータッチ
-
-        Session.send(GetSearchRequest(query: searchQuery)) { [weak self] result in
-            switch result {
-            case .success(let response):
-                print("成功：\(response)")
+        
+        //RxSwiftを使って
+        Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery))
+            .subscribe(onNext: { (response) in
+                print("onNextで流れてきたよ")
+                //subviewを消す
                 SVProgressHUD.dismiss()
-                self?.articles = response.map { $0.toArticle() }
-                self?.tableView.reloadData()
-                
-            case .failure(let error):
-                print("失敗：\(error)")
-                SVProgressHUD.dismiss()
-//                SVProgressHUD.showError(withStatus: "ネットワーク通信エラー")
+                self.articles = response.map { $0.toArticle() }
+                self.tableView.reloadData()
+            }, onError: { (error) in
+                print("errorが流れてきたよ")
             }
-        }
+        )
+
+//        Session.send(GetSearchRequest(query: searchQuery)) { [weak self] result in
+//            switch result {
+//            case .success(let response):
+//                print("成功：\(response)")
+//                SVProgressHUD.dismiss()
+//                self?.articles = response.map { $0.toArticle() }
+//                self?.tableView.reloadData()
+//
+//            case .failure(let error):
+//                print("失敗：\(error)")
+//                SVProgressHUD.dismiss()
+//            }
+//        }
     }
     
     

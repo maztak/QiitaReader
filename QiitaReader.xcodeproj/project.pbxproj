@@ -61,6 +61,7 @@
 		B07B5C2920AA8503008A003F /* QiitaReader-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "QiitaReader-Bridging-Header.h"; sourceTree = "<group>"; };
 		B07B5C6820AADD1A008A003F /* SessionRx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionRx.swift; sourceTree = "<group>"; };
 		B07B5C6A20AADEC5008A003F /* ListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewModel.swift; sourceTree = "<group>"; };
+		B07B5C6C20ABC736008A003F /* RxPlayground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = RxPlayground.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		B0B131EE20529284009C2BD1 /* ic_new_releases_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_new_releases_white.png; path = img/ic_new_releases_white.png; sourceTree = "<group>"; };
 		B0B131F020529296009C2BD1 /* ic_trending_up_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_trending_up_white.png; path = img/ic_trending_up_white.png; sourceTree = "<group>"; };
 		B0B131F2205292A7009C2BD1 /* ic_access_time_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ic_access_time_white.png; path = img/ic_access_time_white.png; sourceTree = "<group>"; };
@@ -107,6 +108,7 @@
 				B02BC23C208747E200322445 /* Article.swift */,
 				B0C7A44220523C4A0066C01E /* NewViewController.swift */,
 				B07B5C6820AADD1A008A003F /* SessionRx.swift */,
+				B07B5C6C20ABC736008A003F /* RxPlayground.playground */,
 				B07B5C6A20AADEC5008A003F /* ListViewModel.swift */,
 				916D264020566137007BC178 /* TrendViewController.swift */,
 				B04498502074D36100438B08 /* SearchViewController.swift */,

@@ -99,19 +99,8 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     func getArticles() {
         SVProgressHUD.show()
         //RxSwiftを使って
-        
-        
-        
-//        let seq = Single.just(1)
-//
-//        seq.subscribe(onSuccess: { (event) in
-//            print("購読したよ？\(event)")
-//        }) { (error) in
-//            print("エラーだよ？\(error)")
-//        }
-        
         Session.rx_sendRequest(request: GetNewRequest())
-            .map { $0.map{ $0.toArticle() } }
+//            .map { $0.map{ $0.toArticle() } }
             .subscribe(onNext: { (response) in
                 print("onNext")
                 //subviewを消す
@@ -119,8 +108,8 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
                 self.myView.isHidden = true
                 self.myButton.isHidden = true
                 self.myLabel.isHidden = true
-                self.articles = response
-//                self.articles = response.map { $0.toArticle() }
+//                self.articles = response
+                self.articles = response.map { $0.toArticle() }
                 self.tableView.reloadData()
             }, onError: { (error) in
                 print("error")
