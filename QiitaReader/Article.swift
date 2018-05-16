@@ -161,13 +161,14 @@ struct TrendArticle: Himotoki.Decodable {
 struct GetSearchRequest: QiitaRequest {
     let query: String
     let path: String = "/api/v2/items"
+    let page: Int
     typealias Response = [SearchArticle]
     var method: HTTPMethod {
         return .get
     }
     var parameters: Any? {
         return [
-            "page": 1,
+            "page": page,
             "per_page": 3,
             "query": "title:\(query)"
         ]

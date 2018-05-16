@@ -12,6 +12,7 @@ import Himotoki
 import Nuke
 import RealmSwift
 import SVProgressHUD
+import RxSwift
 //po Realm.Configuration.defaultConfiguration.fileURL
 //FinderでShift+Cmd+gで絶対パスを指定
 
@@ -86,18 +87,20 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         SVProgressHUD.show()
         let searchQuery: String = searchBar.text!
         
-        
-        
+        //RxSwiftを使って
         // TODO: ObserbleZip関数で5回Sessionを送ってみる -
         // SessionRxはノータッチ
-        
-        //RxSwiftを使って
-        Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery))
+        Observable
+            .zip([
+                Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 1)),
+                Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 2)),
+                Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 3))
+                ])
             .subscribe(onNext: { (response) in
-                print("onNextで流れてきたよ")
+                print("onNextで流れてきたよ\(response)")
                 //subviewを消す
                 SVProgressHUD.dismiss()
-                self.articles = response.map { $0.toArticle() }
+                self.articles = response.flatMap { $0.map { $0.toArticle() } }
                 self.tableView.reloadData()
             }, onError: { (error) in
                 print("errorが流れてきたよ")
