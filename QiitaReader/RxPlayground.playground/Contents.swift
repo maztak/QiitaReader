@@ -12,3 +12,12 @@ import RxSwift
 //}, onError: { (error) in
 //    print("エラーやで:\(error)")
 //})
+
+Observable.zip(
+    Observable.from([1,2]),
+    Observable.from([3,4]),
+    Observable.from([5,6])
+) { $0 + $1 + $2 }
+    .subscribe(onNext: {
+        print($0) // 9 -> 12
+    })

@@ -87,13 +87,11 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
     func getArticles() {
         SVProgressHUD.show()
         let searchQuery: String = searchBar.text!
-        
-        // RxSwiftを使って
-        // TODO: ObserbleZip関数で5回Sessionを送ってみる -
+        // RxSwiftのObserbleZipオペレータを使って5回Sessionを送ってみる
             Observable
                 .zip(
-                    (1...5).map {Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: $0))}
-                    ) //{ $0 + $1 }
+                    (1...5).map { Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: $0)) }
+                    )
                 // Observable<Array>という1つのデータから、複数のObservable<SerchArticle>のデータにバラす（タプルとかなじゃくRxデータとして）
                 .flatMap { Observable.from($0) }
                 .flatMap { Observable.from($0) }
