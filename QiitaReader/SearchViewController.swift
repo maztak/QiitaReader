@@ -13,6 +13,7 @@ import Nuke
 import RealmSwift
 import SVProgressHUD
 import RxSwift
+import RxCocoa
 //po Realm.Configuration.defaultConfiguration.fileURL
 //FinderでShift+Cmd+gで絶対パスを指定
 
@@ -88,39 +89,31 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         SVProgressHUD.show()
         let searchQuery: String = searchBar.text!
         // RxSwiftのObserbleZipオペレータを使って5回Sessionを送ってみる
-            Single.zip(
-                Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 1)),
-                Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 2))
-            ) { (e1, e2) -> [SearchArticle] in
-                return e1 + e2
-                }
-                .map { $0.map { $0.toArticle() }}
-//        Observable
-//                .zip(
-//                    (1...5).map { Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: $0)) }
-//                    )
-                // <Array<Observable<Array<SearchArticle>>>
-                // Observable<Array>という1つのデータから、複数のObservable<SerchArticle>のデータにバラす（タプルとかなじゃくRxデータとして）
-//                .flatMap({ (selector) -> [SearchArticle] in
-//                    selector
-//                })
-//                .flatMap { Observable.from($0) }
-//                .flatMap { Observable.from($0) }
-//                // SearchArticleをArticle型に変換
-//                .map { $0.toArticle() }
-//                // 各Observable<Article>データをまとめて、1つのObservable<Array>というデータにする
-//                .toArray()
-                //購読
-                .subscribe(
-                    onSuccess: { (response) in
-                        print("onSuccessで流れてきたよ\(response)")
-                        SVProgressHUD.dismiss()
-                        self.articles = response
-                        self.tableView.reloadData() },
-                    onError: { (error) in
-                        print("errorが流れてきたよ\(error)")
-                        SVProgressHUD.showError(withStatus: "ネットワーク通信エラー")})
-                .disposed(by: disposeBag)
+        Single.zip(
+            Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 1)),
+            Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 2))
+        ) { (e1: [SearchArticle], e2: [SearchArticle]) -> [SearchArticle] in
+            return e1 + e2
+            }
+            .flatMap({ (selector) -> PrimitiveSequence<SingleTrait, [Article]> in
+                return Observable.from(selector)
+                    .map({ (value) -> Article in
+                        value.toArticle()
+                    })
+                    .toArray().asSingle()
+            })
+//            .map { $0.map { $0.toArticle() }}
+            //購読
+            .subscribe(
+                onSuccess: { (response) in
+                    print("onSuccessで流れてきたよ\(response)")
+                    SVProgressHUD.dismiss()
+                    self.articles = response
+                    self.tableView.reloadData() },
+                onError: { (error) in
+                    print("errorが流れてきたよ\(error)")
+                    SVProgressHUD.showError(withStatus: "ネットワーク通信エラー")})
+            .disposed(by: disposeBag)
     }
     
     
