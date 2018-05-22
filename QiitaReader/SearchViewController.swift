@@ -91,9 +91,12 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         // RxSwiftのObserbleZipオペレータを使って5回Sessionを送ってみる
         Single.zip(
             Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 1)),
-            Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 2))
-        ) { (e1: [SearchArticle], e2: [SearchArticle]) -> [SearchArticle] in
-            return e1 + e2
+            Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 2)),
+            Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 3)),
+            Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 4)),
+            Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 5))
+        ) { (e1,e2,e3,e4,e5)  -> [SearchArticle] in
+            return e1 + e2 + e3 + e4 + e5
             }
             .flatMap({ (selector) -> PrimitiveSequence<SingleTrait, [Article]> in
                 return Observable.from(selector)
@@ -102,7 +105,7 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
                     })
                     .toArray().asSingle()
             })
-//            .map { $0.map { $0.toArticle() }}
+            //.map { $0.map { $0.toArticle() }}
             //購読
             .subscribe(
                 onSuccess: { (response) in
