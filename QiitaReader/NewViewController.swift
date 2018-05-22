@@ -58,19 +58,18 @@ class NewViewController: UIViewController, UITableViewDelegate, UITableViewDataS
     /*JSON型のデータを取得し、structに変換、配列に格納するメソッド*/
     func getArticles() {
         SVProgressHUD.show()
-        
         //RxSwiftを使って
         Session.rx_sendRequest(request: GetNewRequest())
             .map { $0.map{ $0.toArticle() } }
-            .subscribe(onNext: { (response) in
-                print("onNext")
+            .subscribe(
+                onSuccess: { (response) in
+                print("onSuccess")
                 //subviewを消す
                 SVProgressHUD.dismiss()
                 self.myView.isHidden = true
                 self.myButton.isHidden = true
                 self.myLabel.isHidden = true
                 self.articles = response
-//                self.articles = response.map { $0.toArticle() }
                 self.tableView.reloadData()
             }, onError: { (error) in
                 print("error")

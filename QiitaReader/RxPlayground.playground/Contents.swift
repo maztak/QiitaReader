@@ -2,22 +2,32 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
+struct Student {
+    
+    var score: Variable<Int>
+}
 
-
-//let a = Observable.just(1)
-//
-//a.subscribe(onNext: { (event) in
-//    print("流れたで:\(event)")
-//}, onError: { (error) in
-//    print("エラーやで:\(error)")
-//})
-
-Observable.zip(
-    Observable.from([1,2]),
-    Observable.from([3,4]),
-    Observable.from([5,6])
-) { $0 + $1 + $2 }
-    .subscribe(onNext: {
-        print($0) // 9 -> 12
-    })
+do {
+    
+    let disposeBag = DisposeBag()
+    
+    // 1
+    let ryan = Student(score: Variable(80))
+    let charlotte = Student(score: Variable(90))
+    
+    // 2
+    let student = PublishSubject<Student>()
+    
+    // 3
+    student.asObservable()
+        .flatMap {
+            $0.score.asObservable()
+        }
+        // 4
+        .subscribe(onNext: {
+            print($0)
+        })
+        .disposed(by: disposeBag)
+}

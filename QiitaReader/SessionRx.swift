@@ -10,15 +10,17 @@ import APIKit
 import RxSwift
 
 extension Session {
-    func rx_sendRequest<T: Request>(request: T) -> Observable<T.Response> {
-        return Observable.create { observer in
+    func rx_sendRequest<T: Request>(request: T) -> Single<T.Response> {
+        return Single.create { observer in
             let task = self.send(request) { result in
                 switch result {
                 case .success(let res):
-                    observer.on(.next(res))
-                    observer.on(.completed)
+                    observer(.success(res))
+//                    observer.on(.next(res))
+//                    observer.on(.completed)
                 case .failure(let err):
-                    observer.onError(err)
+                    observer(.error(err))
+//                    observer.onError(err)
                 }
             }
             return Disposables.create {
@@ -27,7 +29,7 @@ extension Session {
         }
     }
     
-    class func rx_sendRequest<T: Request>(request: T) -> Observable<T.Response> {
+    class func rx_sendRequest<T: Request>(request: T) -> Single<T.Response> {
         return shared.rx_sendRequest(request: request)
     }
 }

@@ -88,21 +88,32 @@ class SearchViewController: UIViewController, UITableViewDelegate,UITableViewDat
         SVProgressHUD.show()
         let searchQuery: String = searchBar.text!
         // RxSwiftのObserbleZipオペレータを使って5回Sessionを送ってみる
-            Observable
-                .zip(
-                    (1...5).map { Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: $0)) }
-                    )
+            Single.zip(
+                Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 1)),
+                Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: 2))
+            ) { (e1, e2) -> [SearchArticle] in
+                return e1 + e2
+                }
+                .map { $0.map { $0.toArticle() }}
+//        Observable
+//                .zip(
+//                    (1...5).map { Session.rx_sendRequest(request: GetSearchRequest(query: searchQuery, page: $0)) }
+//                    )
+                // <Array<Observable<Array<SearchArticle>>>
                 // Observable<Array>という1つのデータから、複数のObservable<SerchArticle>のデータにバラす（タプルとかなじゃくRxデータとして）
-                .flatMap { Observable.from($0) }
-                .flatMap { Observable.from($0) }
-                // SearchArticleをArticle型に変換
-                .map { $0.toArticle() }
-                // 各Observable<Article>データをまとめて、1つのObservable<Array>というデータにする
-                .toArray()
+//                .flatMap({ (selector) -> [SearchArticle] in
+//                    selector
+//                })
+//                .flatMap { Observable.from($0) }
+//                .flatMap { Observable.from($0) }
+//                // SearchArticleをArticle型に変換
+//                .map { $0.toArticle() }
+//                // 各Observable<Article>データをまとめて、1つのObservable<Array>というデータにする
+//                .toArray()
                 //購読
                 .subscribe(
-                    onNext: { (response) in
-                        print("onNextで流れてきたよ\(response)")
+                    onSuccess: { (response) in
+                        print("onSuccessで流れてきたよ\(response)")
                         SVProgressHUD.dismiss()
                         self.articles = response
                         self.tableView.reloadData() },
